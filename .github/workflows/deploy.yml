@@ -3,7 +3,7 @@ name: Deploy to Server
 on:
   push:
     branches:
-      - main  # Укажите ветку, на которую необходимо реагировать
+      - dev  # Укажите ветку, на которую необходимо реагировать
 
 jobs:
   build-and-deploy:
@@ -24,6 +24,9 @@ jobs:
       - name: Build the project
         run: npm run build
 
+      - name: Clean target directory on server
+        run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY_LITTLEBEAR }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "rm -rf /var/www/littlebear-dev/*"
+
       - name: Deploy to server
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
@@ -33,5 +36,5 @@ jobs:
           REMOTE_HOST: ${{ secrets.SERVER_HOST }}
           REMOTE_USER: ${{ secrets.SERVER_USER }}
           REMOTE_PORT: "22"
-          TARGET: "/var/www/littlebear-app.online/"
+          TARGET: "/var/www/littlebear-dev/"
           SCRIPT_BEFORE: "ls"
