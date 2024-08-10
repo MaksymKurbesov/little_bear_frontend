@@ -24,11 +24,6 @@ const BEAR_BACKGROUNDS = [
   "background-image-main3",
 ];
 
-window.addEventListener("vite:preloadError", (event) => {
-  event.preventDefault();
-  window.location.reload(); // for example, refresh the page
-});
-
 const App = () => {
   const { user } = useTelegram();
   const {
