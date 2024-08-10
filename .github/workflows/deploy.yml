@@ -21,6 +21,16 @@ jobs:
       - name: Install dependencies
         run: npm install  # Или npm ci, если у вас есть package-lock.json
 
+      - name: Create SSH key file
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY_LITTLEBEAR }}" > /home/runner/.ssh/id_rsa
+          chmod 600 /home/runner/.ssh/id_rsa  
+
+      - name: Upload .env to CI server
+        run: scp -i ~/.ssh/id_rsa ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/var/www/littlebear-dev/.env /home/runner/work/little_bear_frontend/.env
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY_LITTLEBEAR }}
+
       - name: Build the project
         run: npm run build
 
