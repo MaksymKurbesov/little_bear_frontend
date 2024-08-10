@@ -24,6 +24,7 @@ jobs:
       - name: Create SSH key file
         run: |
           mkdir -p /home/runner/.ssh
+          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> /home/runner/.ssh/known_hosts
           echo "${{ secrets.SSH_PRIVATE_KEY_LITTLEBEAR }}" > /home/runner/.ssh/id_rsa
           chmod 600 /home/runner/.ssh/id_rsa  
 
