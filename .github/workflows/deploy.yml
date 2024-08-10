@@ -24,9 +24,6 @@ jobs:
       - name: Build the project
         run: npm run build
 
-#      - name: Clean target directory on server
-#        run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY_LITTLEBEAR }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "rm -rf /var/www/littlebear-dev/*"
-
       - name: Deploy to server
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
