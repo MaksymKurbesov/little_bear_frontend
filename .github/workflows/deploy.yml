@@ -30,6 +30,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY_LITTLEBEAR }}
           ARGS: "-avz --delete"
           SOURCE: "dist/"
+          EXCLUDE: ".env"
           REMOTE_HOST: ${{ secrets.SERVER_HOST }}
           REMOTE_USER: ${{ secrets.SERVER_USER }}
           REMOTE_PORT: "22"
