@@ -1,0 +1,52 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  /*position: relative;*/
+  overflow: hidden;
+  height: 100%;
+}
+
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-top-left-radius: 46px;
+  border-top-right-radius: 46px;
+}
+
+
+.daily-reward {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  z-index: 5;
+}
+
+.daily-reward-wrapper {
+  display: flex;
+  gap: 5px;
+  padding: 10px;
+  background-color: #272a2f;
+  border-radius: 8px;
+  position: relative;
+  align-items: center;
+}
+
+
+
+.main-image {
+  max-width: 60%;
+  user-select: none;
+}
+
+
+@media screen and (max-width: 385px) {
+  .main-image {
+    /*width: 150px;*/
+    max-width: 50%;
+  }
+}
+

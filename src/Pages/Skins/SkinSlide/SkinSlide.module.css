@@ -1,0 +1,248 @@
+.slide {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  padding: 25px 10px;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .01);
+}
+
+
+.slide::after {
+  position: absolute;
+  content: "";
+  top: 45%;
+  left: 50%;
+  z-index: -1;
+  height: 80%;
+  width: 65vw;
+  transform: translate(-50%, -50%)  translateZ(0);
+  filter: blur(10px);
+}
+
+
+.color-brown::after {
+  top: 45%;
+  height: 82%;
+  background: linear-gradient(
+          to left,
+          #ffe6ca,
+          #ffc994,
+          #ffe6ca,
+          #ffe6ca,
+          #ffe6ca,
+          #ffdbb2,
+          #ffbe74,
+          #ffcb8e,
+          #ffe6ca
+  );
+  background-size: 200% 200%;
+  animation: animateGlow 4.25s linear infinite;
+}
+
+.color-red::after {
+  top: 45%;
+  height: 82%;
+  background: linear-gradient(
+          to left,
+          #300703,
+          rgba(48, 7, 3, 1),
+          rgba(169, 27, 18, 1),
+          rgba(86, 19, 12, 1),
+          rgba(224, 53, 47, 1),
+          rgba(147, 0, 0, 1),
+          #c42d2d,
+          #3f100d,
+          #180200
+  );
+  background-size: 200% 200%;
+  animation: animateGlow 4.25s linear infinite;
+}
+
+.color-purple::after {
+  top: 45%;
+  height: 81%;
+  background: linear-gradient(
+          to left,
+          #c757ff,
+          #f957ff,
+          #a857ff,
+          rgb(143, 87, 255),
+          rgb(224, 87, 255),
+          rgb(255, 87, 241),
+          #e057ff,
+          #ae57ff,
+          #e957ff
+  );
+  background-size: 200% 200%;
+  animation: animateGlow 4.25s linear infinite;
+}
+
+.color-green::after {
+  top: 45%;
+  height: 81%;
+  background: linear-gradient(
+          to left,
+          #68ff57,
+          #19ff00,
+          #94fd8b,
+          #adffa4,
+          #14ab00,
+          #68ff57,
+          #49ff33,
+          #1bff00,
+          #68ff57
+  );
+  background-size: 200% 200%;
+  animation: animateGlow 4.25s linear infinite;
+}
+
+.color-white::after {
+  top: 45%;
+  height: 81%;
+  background: linear-gradient(
+          to left,
+          #e0e0e0,
+          #ffffff,
+          #b7b7b7,
+          #757575,
+          #969696,
+          #f1f1f1,
+          #484848,
+          #969696,
+          #eeeeee
+  );
+  background-size: 200% 200%;
+  animation: animateGlow 4.25s linear infinite;
+}
+
+
+.slide img {
+  margin: 0 auto 20px;
+  width: 40vh;
+}
+
+.info {
+  width: 60%;
+  text-align: center;
+}
+
+.experience {
+  font-size: 14px;
+}
+
+.unpacked {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.progress-bar {
+  position: relative;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  height: 15px;
+  border-radius: 25px;
+}
+
+.progress-bar div {
+  width: 50%;
+  height: 100%;
+  border-radius: 25px;
+}
+
+.color-brown .progress-bar > div {
+  --fill:
+          linear-gradient(rgba(226, 102, 76, 0.65), transparent),
+          repeating-linear-gradient(135deg, #ff9e6c 10px, #ffe5c8 15px);
+
+  background: var(--fill);
+  background-size: 200% 200%;
+  animation: gradientAnimation 5s linear infinite;
+  box-shadow: 0 0 7px 5px #ffc389;
+}
+
+.color-red .progress-bar > div {
+  --fill:
+          linear-gradient(rgba(226, 102, 76, 0.65), transparent),
+          repeating-linear-gradient(135deg, #d12d2d 10px, #ef5e85 15px);
+
+  background: var(--fill);
+  background-size: 200% 200%;
+  animation: gradientAnimation 5s linear infinite;
+  box-shadow: 0 0 7px 5px rgb(209, 45, 45);
+}
+
+
+
+.color-green .progress-bar > div {
+  --fill: linear-gradient(rgb(104, 255, 87), transparent),
+  repeating-linear-gradient(135deg, #9dff91 10px, #26a419 15px);
+
+
+  background: var(--fill);
+  background-size: 200% 200%;
+  animation: gradientAnimation 5s linear infinite;
+  box-shadow: 0 0 7px 5px rgb(0, 255, 52);
+}
+
+
+.color-purple .progress-bar > div{
+  --fill:
+          linear-gradient(rgba(255, 88, 250, 0.68), transparent),
+          repeating-linear-gradient(135deg, #c757ff 10px, #ee57ff 15px);
+
+
+  background: var(--fill);
+  background-size: 200% 200%;
+  animation: gradientAnimation 5s linear infinite;
+  box-shadow: 0 0 7px 5px rgb(185, 60, 248);
+
+}
+
+.color-white .progress-bar > div{
+  --fill:
+          linear-gradient(rgba(59, 59, 59, 0.65), transparent),
+          repeating-linear-gradient(135deg, #ffffff 10px, #858585 15px);
+
+  background: var(--fill);
+  background-size: 200% 200%;
+  animation: gradientAnimation 5s linear infinite;
+  box-shadow: 0 0 7px 5px rgb(231, 231, 231);
+}
+
+
+
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform: translate(-50%, -50%) rotate(360deg); } }
+
+@keyframes animateGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+
+@media screen and (max-width: 385px){
+  .slide img {
+    width: 34vh;
+  }
+
+  .slide::after {
+    width: 45vw;
+    height: 70%;
+    top: 44%;
+  }
+}

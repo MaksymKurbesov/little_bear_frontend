@@ -1,0 +1,56 @@
+
+.game-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  font-weight: bold;
+  min-height: 100vh;
+  max-width: 36rem;
+  width: 100%;
+  color: white;
+
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.background-image-main {
+  background-image: url("/bg-light.webp");
+  background-size: cover;
+}
+
+.background-image-main2 {
+  background-image: url("/bg2.jpg");
+  background-size: cover;
+}
+
+.background-image-main3 {
+  background-image: url("/bg3.webp");
+  background-size: cover;
+}
+
+.background-image-airdrop {
+  background-image: url('/airdrop-bg.png');
+  background-size: cover;
+  /*background-size: contain;*/
+  /*background-repeat: no-repeat;*/
+  /*background-position: center;*/
+}
+
+.background-image-skins {
+  background-image: none;
+}
+
+
+.top-glow {
+  box-shadow: 0 -26px 20px rgba(243, 186, 47, 0.3);
+}
+
+
+.point {
+  position: relative;
+  top: -20px;
+  z-index: 99;
+}
+

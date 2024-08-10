@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preload" href="./src/assets/RobotoCondensed-Regular.woff2" as="font" type="font/ttf" crossorigin>
+    <title>Little Bear</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="telegram-web-app.js"></script>
+    <script type="text/javascript">
+	    (function () {
+		    const tele = window.Telegram.WebApp;
+		    tele.ready()
+		    tele.expand();
+		    tele.setHeaderColor("#000000")
+		    tele.setBackgroundColor("#000000")
+		    tele.disableVerticalSwipes()
+	    })()
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

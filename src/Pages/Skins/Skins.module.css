@@ -1,0 +1,54 @@
+.system-levels {
+  /*background-color: black;*/
+  /*padding: 20px 10px;*/
+  flex-grow: 1;
+  font-family: RobotoCondensed;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-image: url('/wood-bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+  transition: 0.35s ease all;
+}
+
+
+.bg-skin-2 {
+  background-image: url('/bg2.png');
+}
+
+.bg-skin-3 {
+  background-image: url('/bg3.png');
+}
+
+.bg-skin-4 {
+  background-image: url('/bg4.png');
+}
+
+.bg-skin-5 {
+  background-image: url('/bg5.png');
+}
+
+.title-wrapper {
+  margin-top: 20px;
+}
+
+.system-levels h1 {
+  position: relative;
+  z-index: 5;
+}
+
+.subtitle {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.slider-wrapper {
+  flex-grow: 1;
+  /*height: 100%;*/
+}
+

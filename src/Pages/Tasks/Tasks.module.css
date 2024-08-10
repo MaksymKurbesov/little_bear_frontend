@@ -1,0 +1,23 @@
+.tasks {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 10px;
+  background: var(--gray);
+  flex-grow: 1;
+  font-weight: 400;
+  height: 100%;
+  font-family: RobotoCondensed;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+
+.no-task {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
