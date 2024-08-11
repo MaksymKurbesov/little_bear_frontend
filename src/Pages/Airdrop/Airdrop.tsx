@@ -4,7 +4,7 @@ import OrangeBearCoin from "../../images/orange-coin.webp";
 import AirdropLogo from "../../images/airdrop-logo.webp";
 import { useImagePreloader } from "../../hooks/useImagePreloader.ts";
 import LoadSpinning from "../../SharedUI/LoadSpinning/LoadSpinning.tsx";
-import BackgroundImage from "/airdrop-bg.png";
+import BackgroundImage from "/airdrop-bg.webp";
 import useCountdown from "../../hooks/useCountdown.ts";
 
 const imageUrls = [BackgroundImage, BearCoin, OrangeBearCoin, AirdropLogo];

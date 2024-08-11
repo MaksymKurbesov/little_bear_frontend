@@ -1,13 +1,13 @@
-import BearSkin1 from "../images/skins/timber.png";
-import BearSkin2 from "../images/skins/brickn.png";
-import BearSkin3 from "../images/skins/neyon.png";
-import BearSkin4 from "../images/skins/brizzy.png";
-import BearSkin5 from "../images/skins/aztron.png";
-import OpenedBearSkin1 from "../images/skins/timber.png";
-import OpenedBearSkin2 from "../images/skins/brickn-opened.png";
-import OpenedBearSkin3 from "../images/skins/neyon-opened.png";
-import OpenedBearSkin4 from "../images/skins/brizzy-opened.png";
-import OpenedBearSkin5 from "../images/skins/aztron-opened.png";
+import BearSkin1 from "../images/skins/timber.webp";
+import BearSkin2 from "../images/skins/brickn.webp";
+import BearSkin3 from "../images/skins/neyon.webp";
+import BearSkin4 from "../images/skins/brizzy.webp";
+import BearSkin5 from "../images/skins/aztron.webp";
+import OpenedBearSkin1 from "../images/skins/timber.webp";
+import OpenedBearSkin2 from "../images/skins/brickn-opened.webp";
+import OpenedBearSkin3 from "../images/skins/neyon-opened.webp";
+import OpenedBearSkin4 from "../images/skins/brizzy-opened.webp";
+import OpenedBearSkin5 from "../images/skins/aztron-opened.webp";
 
 export const POINTS_TO_ADD = [1, 3, 5, 7, 10];
 
