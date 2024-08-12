@@ -1,6 +1,7 @@
 import styles from "./Skins.module.css";
 import Slider from "./Slider/Slider.tsx";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const BACKGROUND = [
   "bg-skin-1",
@@ -12,14 +13,15 @@ const BACKGROUND = [
 
 const Skins = () => {
   const [currentSkin, setCurrentSkin] = useState(0);
+  const { t } = useTranslation();
 
   return (
     <div
       className={`${styles["system-levels"]} ${styles[BACKGROUND[currentSkin]]}`}
     >
       <div className={styles["title-wrapper"]}>
-        <h1 className={"page-title"}>Skin Gallery</h1>
-        <p className={styles["subtitle"]}>Unlock Your Style</p>
+        <h1 className={"page-title"}>{t("Skins.Title")}</h1>
+        <p className={styles["subtitle"]}>{t("Skins.Subtitle")}</p>
       </div>
 
       <div className={styles["slider-wrapper"]}>

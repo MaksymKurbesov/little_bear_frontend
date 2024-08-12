@@ -5,12 +5,14 @@ import PlayIcon from "../../icons/play.webp";
 import FrensIcon from "../../icons/frens.webp";
 import LeadersIcon from "../../icons/leadership.webp";
 import TasksIcon from "../../icons/tasks.webp";
+import { useTranslation } from "react-i18next";
 
 const Menu = () => {
   const location = useLocation();
   const isPlayPage = location.pathname === "/";
   const isAirdropPage = location.pathname === "/airdrop";
   const isSkinsPage = location.pathname === "/skins";
+  const { t } = useTranslation();
 
   const isTransparentMenu = isPlayPage || isAirdropPage;
 
@@ -26,7 +28,7 @@ const Menu = () => {
           }
         >
           <img src={PlayIcon} width={22} alt={""} height={32} />
-          <span>Bear</span>
+          <span>{t("Menu.Bear")}</span>
         </NavLink>
       </li>
       <li>
@@ -43,7 +45,7 @@ const Menu = () => {
             alt={""}
             className={`${styles["icon"]}`}
           />
-          <span>Tasks</span>
+          <span>{t("Menu.Tasks")}</span>
         </NavLink>
       </li>
       <li>
@@ -59,7 +61,7 @@ const Menu = () => {
             alt={""}
             className={`${styles["icon"]} ${styles["frens-icon"]}`}
           />
-          <span>Frens</span>
+          <span>{t("Menu.Frens")}</span>
         </NavLink>
       </li>
       <li>
@@ -76,7 +78,7 @@ const Menu = () => {
             alt={""}
             className={`${styles["icon"]}`}
           />
-          <span>Leaders</span>
+          <span>{t("Menu.Leaders")}</span>
         </NavLink>
       </li>
       <li>

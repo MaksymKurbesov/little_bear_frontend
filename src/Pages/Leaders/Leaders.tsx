@@ -9,6 +9,7 @@ import Background from "/leaders-bg.webp";
 import { ScrollRestoration } from "react-router-dom";
 import { useImagePreloader } from "../../hooks/useImagePreloader.ts";
 import LoadSpinning from "../../SharedUI/LoadSpinning/LoadSpinning.tsx";
+import { useTranslation } from "react-i18next";
 
 const imageUrls = [
   BronzeMedal,
@@ -35,6 +36,7 @@ const MOCK_LEADERS = [
 
 const Leaders = () => {
   const imagesLoaded = useImagePreloader(imageUrls);
+  const { t } = useTranslation();
 
   if (!imagesLoaded) {
     return (
@@ -47,8 +49,8 @@ const Leaders = () => {
   return (
     <>
       <div className={`${styles.leaders} main`}>
-        <h1 className={"page-title"}>Leaders</h1>
-        <p className={styles["subtitle"]}>Top Performers: Leading the Game</p>
+        <h1 className={"page-title"}>{t("Leaders.Title")}</h1>
+        <p className={styles["subtitle"]}>{t("Leaders.Subtitle")}</p>
         <div className={styles["top3"]}>
           <div className={styles["silver"]}>
             <div className={styles["leader-avatar"]}>
@@ -77,7 +79,8 @@ const Leaders = () => {
         </div>
         <ul className={styles["leaders-list"]}>
           <li className={styles["headers"]}>
-            <span>№</span> <p>Nickname</p> <p>Points</p>
+            <span>№</span> <p>{t("Leaders.Nickname")}</p>{" "}
+            <p>{t("Leaders.Points")}</p>
           </li>
           {MOCK_LEADERS.slice(3).map((leader, index) => {
             return (

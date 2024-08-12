@@ -21,10 +21,10 @@ const Settings = () => {
 
   return (
     <div className={styles["settings"]}>
-      <h1 className={"page-title"}>Settings</h1>
+      <h1 className={"page-title"}>{t("Settings")}</h1>
       <Select />
       <div className={styles["switch-wrapper"]}>
-        Haptic Feedback
+        {t("Settings.Haptic Feedback")}
         <label className={styles["switch"]}>
           <input
             type="checkbox"
@@ -35,7 +35,7 @@ const Settings = () => {
         </label>
       </div>
       <div className={styles["switch-wrapper"]}>
-        Bear animation
+        {t("Settings.Bear animation")}
         <label className={styles["switch"]}>
           <input type="checkbox" />
           <span className={`${styles["slider"]} ${styles["round"]}`}></span>
@@ -46,14 +46,14 @@ const Settings = () => {
           className={styles["link"]}
           href={"https://t.me/little_bear_official"}
         >
-          {t("Our channel")}
+          {t("Settings.Our channel")}
         </a>
         <a
           className={styles["link"]}
           target={"_blank"}
           href={"https://t.me/+uxQafEGkMLdjMDJi"}
         >
-          Our chat
+          {t("Settings.Our chat")}
         </a>
       </div>
     </div>

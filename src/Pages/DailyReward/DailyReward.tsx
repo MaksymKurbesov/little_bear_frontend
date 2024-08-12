@@ -6,9 +6,11 @@ import { userApi } from "../../main.tsx";
 import { ScrollRestoration } from "react-router-dom";
 import { useEffect } from "react";
 import { useAppState } from "../../Stores/AppStateContext.tsx";
+import { useTranslation } from "react-i18next";
 
 const DailyReward = () => {
   const { state, dispatch } = useAppState();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (state.user) {
@@ -21,10 +23,8 @@ const DailyReward = () => {
   return (
     <>
       <div className={styles["daily-reward"]}>
-        <h1 className={"page-title"}>Daily reward</h1>
-        <p className={styles["subtitle"]}>
-          Accrue coints for logging into the game daily without skipping
-        </p>
+        <h1 className={"page-title"}>{t("DailyReward")}</h1>
+        <p className={styles["subtitle"]}>{t("DailyReward.Subtitle")}</p>
         <ul className={styles["daily-list"]}>
           {DAILY_REWARDS.map((reward, index) => {
             if (!state.user) return;
@@ -36,7 +36,7 @@ const DailyReward = () => {
                 key={index}
                 className={` ${isActive ? styles["daily-item-active"] : styles["daily-item"]}`}
               >
-                Day {index + 1}
+                {t("Day")} {index + 1}
                 <img
                   src={dollarCoin}
                   alt="Dollar Coin"
@@ -53,7 +53,9 @@ const DailyReward = () => {
           }}
           className={`${styles["claim-button"]} ${state.user.hasClaimedToday ? styles["claim-button-disabled"] : ""}`}
         >
-          {state.user.hasClaimedToday ? "Come back tomorrow" : "Claim"}
+          {state.user.hasClaimedToday
+            ? t("DailyReward.ComebackTomorrow")
+            : t("DailyReward.Claim")}
         </button>
       </div>
       <ScrollRestoration />

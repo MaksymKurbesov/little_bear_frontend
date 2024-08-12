@@ -4,10 +4,12 @@ import styles from "../Header.module.css";
 import { NavLink } from "react-router-dom";
 import { dailyReward } from "../../../images";
 import { useAppState } from "../../../Stores/AppStateContext.tsx";
+import { useTranslation } from "react-i18next";
 
 const DailyRewardHeader = () => {
   const [dailyRewardTimeLeft, setDailyRewardTimeLeft] = useState("");
   const { state } = useAppState();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const updateCountdowns = () => {
@@ -35,9 +37,9 @@ const DailyRewardHeader = () => {
           className={styles["daily-icon"]}
         />
         <div className={styles["daily-text"]}>
-          <p>Daily reward</p>
+          <p>{t("DailyReward")}</p>
           {state.user.hasClaimedToday ? (
-            <p className={styles["claimed"]}>Claimed!</p>
+            <p className={styles["claimed"]}>{t("DailyReward.Claimed")}!</p>
           ) : (
             <p>{dailyRewardTimeLeft}</p>
           )}

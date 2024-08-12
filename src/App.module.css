@@ -31,7 +31,7 @@
 }
 
 .background-image-airdrop {
-  background-image: url('/airdrop-bg.png');
+  background-image: url('/airdrop-bg.webp');
   background-size: cover;
   /*background-size: contain;*/
   /*background-repeat: no-repeat;*/

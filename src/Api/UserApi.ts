@@ -91,6 +91,10 @@ class UserApi {
         referrals: arrayUnion(userRef),
         points: isPremium ? increment(2000) : increment(1000),
       });
+
+      await updateDoc(userRef, {
+        points: isPremium ? increment(2000) : increment(1000),
+      });
       console.log("Referral added successfully");
     } catch (error) {
       console.error("Error adding referral: ", error);

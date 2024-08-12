@@ -27,7 +27,7 @@ const options = [
 ];
 
 const Select = ({}) => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(options[1]);
 
@@ -41,7 +41,7 @@ const Select = ({}) => {
 
   return (
     <div className={styles["select"]} onClick={toggleDropdown}>
-      <p>Select language</p>
+      <p>{t("Settings.Select language")}</p>
       <span>{selectedOption && selectedOption.label}</span>
       <img
         className={styles["arrow-icon"]}
