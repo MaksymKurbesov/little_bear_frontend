@@ -1,11 +1,10 @@
-import { useEffect, useRef, useState } from "react";
-import { useAnimations, useGLTF } from "@react-three/drei";
-import { GLTFWithAnimations } from "../Pages/Main/Bear/Bear.tsx";
+import { useEffect, useRef } from "react";
+import { useGLTF, useAnimations } from "@react-three/drei";
 
-const BearDance2 = (props) => {
+const BearDance5 = (props) => {
   const group = useRef();
-  const { nodes, materials, animations } = useGLTF<GLTFWithAnimations>(
-    "/new_bear_model/2/optimized.glb",
+  const { nodes, materials, animations } = useGLTF(
+    "/new_bear_model/5/optimized.glb",
   );
 
   const { actions } = useAnimations(animations, group);
@@ -20,57 +19,57 @@ const BearDance2 = (props) => {
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">
         <group
-          name="Bear2"
-          position={[0.001, 0.25, 0]}
+          name="Stand"
+          position={[0.001, 0.336, 0]}
           rotation={[Math.PI / 2, 0, 0]}
           scale={0.25}
         >
           <skinnedMesh
             name="Bearbrick_Chest"
             geometry={nodes.Bearbrick_Chest.geometry}
-            material={materials["Material.001"]}
+            material={materials["Mat.006"]}
             skeleton={nodes.Bearbrick_Chest.skeleton}
             castShadow
           />
           <skinnedMesh
             name="Bearbrick_Head"
             geometry={nodes.Bearbrick_Head.geometry}
-            material={materials["Material.001"]}
+            material={materials["Mat.006"]}
             skeleton={nodes.Bearbrick_Head.skeleton}
             castShadow
           />
           <skinnedMesh
             name="Hand"
             geometry={nodes.Hand.geometry}
-            material={materials["Material.001"]}
+            material={materials["Mat.006"]}
             skeleton={nodes.Hand.skeleton}
             castShadow
           />
           <skinnedMesh
             name="Hand_1"
             geometry={nodes.Hand_1.geometry}
-            material={materials["Material.001"]}
+            material={materials["Mat.006"]}
             skeleton={nodes.Hand_1.skeleton}
             castShadow
           />
           <skinnedMesh
             name="Leg"
             geometry={nodes.Leg.geometry}
-            material={materials["Material.001"]}
+            material={materials["Mat.006"]}
             skeleton={nodes.Leg.skeleton}
             castShadow
           />
           <skinnedMesh
             name="Object002"
             geometry={nodes.Object002.geometry}
-            material={materials["Material.001"]}
+            material={materials["Mat.006"]}
             skeleton={nodes.Object002.skeleton}
             castShadow
           />
           <skinnedMesh
             name="Pelvis"
             geometry={nodes.Pelvis.geometry}
-            material={materials["Material.001"]}
+            material={materials["Mat.006"]}
             skeleton={nodes.Pelvis.skeleton}
             castShadow
           />
@@ -81,6 +80,6 @@ const BearDance2 = (props) => {
   );
 };
 
-export default BearDance2;
+export default BearDance5;
 
-useGLTF.preload("/new_bear_model/2/optimized.glb");
+useGLTF.preload("/new_bear_model/5/optimized.glb");

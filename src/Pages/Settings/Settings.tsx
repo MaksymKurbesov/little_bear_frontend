@@ -2,10 +2,10 @@ import styles from "./Settings.module.css";
 import Select from "../../SharedUI/Select/Select.tsx";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
+import {useAppState} from "../../Stores/AppStateContext.tsx";
 
 const Settings = () => {
   const { t } = useTranslation();
-
   const savedSetting = localStorage.getItem("vibrationEnabled") === "true";
   const [vibrationEnabled, setVibrationEnabled] = useState(savedSetting);
 
@@ -14,6 +14,7 @@ const Settings = () => {
     setVibrationEnabled(newSetting);
     localStorage.setItem("vibrationEnabled", newSetting);
   };
+
 
   useEffect(() => {
     setVibrationEnabled(savedSetting);

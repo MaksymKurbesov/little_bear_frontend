@@ -15,42 +15,55 @@ import { userApi } from "../../../main.tsx";
 const BearDance1 = lazy(() => import("../../../Bears3D/BearDance1.tsx"));
 const BearDance2 = lazy(() => import("../../../Bears3D/BearDance2.tsx"));
 const BearDance3 = lazy(() => import("../../../Bears3D/BearDance3.tsx"));
+const BearDance5 = lazy(() => import("../../../Bears3D/BearDance5.tsx"));
 const Stand1 = lazy(() => import("../../../SharedUI/Stands/Stand1.tsx"));
 const Stand2 = lazy(() => import("../../../SharedUI/Stands/Stand2.tsx"));
 const Stand3 = lazy(() => import("../../../SharedUI/Stands/Stand3.tsx"));
+const Stand5 = lazy(() => import("../../../SharedUI/Stands/Stand5.tsx"));
 import { v4 as uuidv4 } from "uuid";
 import LevelUp from "../../../SharedUI/LevelUp/LevelUp.tsx";
 import { POINTS_TO_ADD } from "../../../utils/consts.ts";
+import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
+import { AnimationAction, AnimationClip } from "three";
+
+export type GLTFWithAnimations = GLTF & {
+  animations: AnimationClip[];
+};
 
 const danceBearComponents = [
-  { level: 1, Component: BearDance1, Stand: Stand1, points: 1 },
-  { level: 2, Component: BearDance2, Stand: Stand2, points: 5 },
-  { level: 3, Component: BearDance3, Stand: Stand3, points: 17 },
+  { level: 1, Component: BearDance1, Stand: Stand1 },
+  { level: 2, Component: BearDance2, Stand: Stand2 },
+  { level: 3, Component: BearDance3, Stand: Stand3 },
+  { level: 4, Component: BearDance3, Stand: Stand3 },
+  { level: 5, Component: BearDance5, Stand: Stand5 },
 ];
 
-const Bear = ({}) => {
+const Bear = () => {
   const { state, dispatch } = useAppState();
   const { tg, user } = useTelegram();
-  const [action, setAction] = useState();
+  const [action, setAction] = useState<AnimationAction>();
   const [levelUpModal, setLevelUpModal] = useState(false);
+  const controlsRef = useRef();
 
   const clickedPointsRef = useRef(0);
 
-  const handleActionReady = useCallback((action) => {
+  const handleActionReady = useCallback((action: AnimationAction) => {
     setAction(action);
   }, []);
 
-  const sendPointsToServer = async () => {
-    if (clickedPointsRef.current <= 0 || !user) return;
+  const sendPointsToServer = async (pointsToSend) => {
+    console.log(pointsToSend, "pointsToSend sendPointsToServer");
+
+    if (pointsToSend <= 0 || !user) return;
 
     try {
+      if (!action) return;
+
       action.paused = true;
       const currentUserPoints = await userApi.sendPointsToServer(
         user.id,
-        clickedPointsRef.current,
+        pointsToSend,
       );
-
-      clickedPointsRef.current = 0;
 
       if (!currentUserPoints) {
         return;
@@ -61,25 +74,43 @@ const Bear = ({}) => {
       if (currentLevel > state.level) {
         setLevelUpModal(true);
         console.log(`Congratulations! You've reached Level ${currentLevel}`);
-        // Trigger any additional UI updates or notifications here
       }
     } catch (error) {
       console.error("Error sending points to server:", error);
     }
   };
 
-  const debouncedSendPointsToServer = useCallback(
-    debounce(() => {
-      sendPointsToServer();
-    }, 500),
-    [action],
-  );
+  const debouncedSendPointsToServer = useCallback(() => {
+    clearTimeout(debouncedSendPointsToServer.timeout);
+    debouncedSendPointsToServer.timeout = setTimeout(() => {
+      const pointsToSend = clickedPointsRef.current;
+      clickedPointsRef.current = 0; // Reset points before sending to avoid double-sending
+      sendPointsToServer(pointsToSend);
+    }, 500); // 500ms debounce
+  }, [action]);
+
+  // const debouncedSendPointsToServer = useCallback(
+  //   debounce(() => {
+  //     console.log(
+  //       clickedPointsRef.current,
+  //       "clickedPointsRef.current debounce",
+  //     );
+  //     sendPointsToServer().then(() => {
+  //       console.log(clickedPointsRef.current, "clickedPointsRef.current then");
+  //       clickedPointsRef.current = 0;
+  //     });
+  //   }, 1000),
+  //   [action],
+  // );
 
   const handleCardClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
+      if (!action) return;
+
       triggerVibration(tg);
 
-      clickedPointsRef.current += POINTS_TO_ADD[state.level - 1];
+      const pointsToAdd = POINTS_TO_ADD[state.level - 1];
+      clickedPointsRef.current += pointsToAdd;
 
       action.play();
 
@@ -90,14 +121,14 @@ const Bear = ({}) => {
       dispatch({
         type: "HANDLE_CARD_CLICK",
         payload: {
-          pointsToAdd: POINTS_TO_ADD[state.level - 1],
+          pointsToAdd: pointsToAdd,
           click: { id: uuidv4(), x: e.clientX, y: e.clientY },
         },
       });
 
       debouncedSendPointsToServer();
     },
-    [dispatch, action, tg, debouncedSendPointsToServer],
+    [dispatch, action, tg, state.level, debouncedSendPointsToServer],
   );
 
   return (
@@ -124,7 +155,11 @@ const Bear = ({}) => {
         >
           <Canvas shadows camera={{ position: [0, 1.1, 5] }}>
             <Lights>
-              <group position={[0, -0.4, 3.2]} scale={0.47}>
+              <group
+                position={[0, -0.4, 3.2]}
+                rotation={[0, 0, 0]}
+                scale={0.47}
+              >
                 <group position={[0, -0.1, 0]}>
                   {danceBearComponents.map(({ level, Component, Stand }) => {
                     return (
@@ -155,27 +190,30 @@ const Bear = ({}) => {
         {/*  <div className={styles["buttons"]}>*/}
         {/*    <button*/}
         {/*      onClick={() => {*/}
-        {/*        setDance(1);*/}
+        {/*        // setDance(1);*/}
         {/*        dispatch({ type: "SET_SKIN_NUMBER", payload: 0 });*/}
+        {/*        dispatch({ type: "SET_USER_LEVEL", payload: 1 });*/}
         {/*      }}*/}
         {/*    >*/}
         {/*      Dance 1*/}
         {/*    </button>*/}
         {/*    <button*/}
         {/*      onClick={() => {*/}
-        {/*        setDance(2);*/}
+        {/*        // setDance(2);*/}
         {/*        dispatch({ type: "SET_SKIN_NUMBER", payload: 1 });*/}
+        {/*        dispatch({ type: "SET_USER_LEVEL", payload: 2 });*/}
         {/*      }}*/}
         {/*    >*/}
         {/*      Dance 2*/}
         {/*    </button>*/}
         {/*    <button*/}
         {/*      onClick={() => {*/}
-        {/*        setDance(3);*/}
+        {/*        // setDance(5);*/}
         {/*        dispatch({ type: "SET_SKIN_NUMBER", payload: 2 });*/}
+        {/*        dispatch({ type: "SET_USER_LEVEL", payload: 3 });*/}
         {/*      }}*/}
         {/*    >*/}
-        {/*      Dance 3*/}
+        {/*      Dance 5*/}
         {/*    </button>*/}
         {/*  </div>*/}
         {/*</div>*/}

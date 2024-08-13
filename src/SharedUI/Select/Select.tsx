@@ -4,6 +4,9 @@ import { useState } from "react";
 import RuFlag from "../../icons/ru.svg";
 import EnFlag from "../../icons/en.svg";
 import { useTranslation } from "react-i18next";
+import {userApi} from "../../main.tsx";
+import {useAppState} from "../../Stores/AppStateContext.tsx";
+import {getSelectOptionByLanguage} from "../../utils/helpers.ts";
 
 const options = [
   {
@@ -26,17 +29,25 @@ const options = [
   },
 ];
 
-const Select = ({}) => {
+const Select = () => {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(options[1]);
+  const { state } = useAppState();
+  const [selectedOption, setSelectedOption] = useState(getSelectOptionByLanguage(state.user.settings.language, options));
+
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
-  const handleOptionClick = (option) => {
+  const handleOptionClick = async (option) => {
     setSelectedOption(option);
     setIsOpen(false);
     i18n.changeLanguage(option.value);
+    console.log(state.user.id, 'state.user.id')
+    await userApi.updateUser(state.user.id.toString(), {
+      settings: {
+        language: option.value
+      }
+    })
   };
 
   return (
