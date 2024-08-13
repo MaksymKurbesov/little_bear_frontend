@@ -30,6 +30,7 @@ export interface IUser {
   points: number;
   referrals: IReferral[];
   hasClaimedToday: boolean;
+  settings?: any;
 }
 
 class UserApi {

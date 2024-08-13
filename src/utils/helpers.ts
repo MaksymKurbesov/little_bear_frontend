@@ -31,8 +31,8 @@ export const calculateTimeLeft = () => {
 };
 
 export const getSelectOptionByLanguage = (language, options) => {
-  return options.filter(option => option.value === language)[0];
-}
+  return options.filter((option) => option.value === language)[0];
+};
 
 export const debounce = (func, delay) => {
   let timeoutId;
@@ -70,6 +70,9 @@ export const generateUserData = (username: string, id: number): IUser => {
     points: 0,
     referrals: [],
     hasClaimedToday: false,
+    settings: {
+      language: "en",
+    },
   };
 };
 
