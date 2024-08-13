@@ -44,10 +44,10 @@ const Select = () => {
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   const handleOptionClick = async (option) => {
+    console.log("new update");
     setSelectedOption(option);
     setIsOpen(false);
     i18n.changeLanguage(option.value);
-    console.log(state.user.id, "state.user.id");
     await userApi.updateUser(state.user.id.toString(), {
       settings: {
         language: option.value,
