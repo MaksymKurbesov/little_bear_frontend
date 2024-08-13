@@ -51,40 +51,57 @@ const Bear = () => {
     setAction(action);
   }, []);
 
-  const sendPointsToServer = async () => {
-    if (clickedPointsRef.current <= 0 || !user || !action) return;
+  const sendPointsToServer = async (pointsToSend) => {
+    console.log(pointsToSend, "pointsToSend sendPointsToServer");
+
+    if (pointsToSend <= 0 || !user) return;
 
     try {
+      if (!action) return;
+
       action.paused = true;
       const currentUserPoints = await userApi.sendPointsToServer(
         user.id,
-        clickedPointsRef.current,
+        pointsToSend,
       );
 
       if (!currentUserPoints) {
         return;
       }
 
-      clickedPointsRef.current = 0;
-
       const currentLevel = getLevelByPoints(currentUserPoints);
 
       if (currentLevel > state.level) {
         setLevelUpModal(true);
         console.log(`Congratulations! You've reached Level ${currentLevel}`);
-        // Trigger any additional UI updates or notifications here
       }
     } catch (error) {
       console.error("Error sending points to server:", error);
     }
   };
 
-  const debouncedSendPointsToServer = useCallback(
-    debounce(() => {
-      sendPointsToServer();
-    }, 500),
-    [action],
-  );
+  const debouncedSendPointsToServer = useCallback(() => {
+    clearTimeout(debouncedSendPointsToServer.timeout);
+    debouncedSendPointsToServer.timeout = setTimeout(() => {
+      const pointsToSend = clickedPointsRef.current;
+      clickedPointsRef.current = 0; // Reset points before sending to avoid double-sending
+      sendPointsToServer(pointsToSend);
+    }, 500); // 500ms debounce
+  }, [action]);
+
+  // const debouncedSendPointsToServer = useCallback(
+  //   debounce(() => {
+  //     console.log(
+  //       clickedPointsRef.current,
+  //       "clickedPointsRef.current debounce",
+  //     );
+  //     sendPointsToServer().then(() => {
+  //       console.log(clickedPointsRef.current, "clickedPointsRef.current then");
+  //       clickedPointsRef.current = 0;
+  //     });
+  //   }, 1000),
+  //   [action],
+  // );
 
   const handleCardClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
@@ -93,7 +110,6 @@ const Bear = () => {
       triggerVibration(tg);
 
       const pointsToAdd = POINTS_TO_ADD[state.level - 1];
-
       clickedPointsRef.current += pointsToAdd;
 
       action.play();
@@ -112,7 +128,7 @@ const Bear = () => {
 
       debouncedSendPointsToServer();
     },
-    [dispatch, action, tg, debouncedSendPointsToServer, state.level],
+    [dispatch, action, tg, state.level, debouncedSendPointsToServer],
   );
 
   return (

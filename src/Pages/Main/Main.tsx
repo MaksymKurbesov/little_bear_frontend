@@ -4,7 +4,7 @@ import { useAppState } from "../../Stores/AppStateContext.tsx";
 import Bear from "./Bear/Bear.tsx";
 import { POINTS_TO_ADD } from "../../utils/consts.ts";
 import Points from "./Points/Points.tsx";
-import FPSStats from "react-fps-stats";
+// import FPSStats from "react-fps-stats";
 
 const Main = () => {
   const { state, dispatch } = useAppState();
@@ -41,7 +41,7 @@ const Main = () => {
           +{POINTS_TO_ADD[state.level - 1]}
         </div>
       ))}
-      <FPSStats top="10px" right="10px" />
+      {/*<FPSStats top="10px" right="10px" />*/}
     </div>
   );
 };
