@@ -21,12 +21,23 @@
 }
 
 .background-image-main2 {
-  background-image: url("/bg2.jpg");
+  background-image: url("/bg2.webp");
   background-size: cover;
 }
 
 .background-image-main3 {
   background-image: url("/bg3.webp");
+  background-size: cover;
+}
+
+.background-image-main4 {
+  background-image: url("/bg3.webp");
+  background-size: cover;
+  background-position: top;
+}
+
+.background-image-main5 {
+  background-image: url("/bg5.webp");
   background-size: cover;
 }
 

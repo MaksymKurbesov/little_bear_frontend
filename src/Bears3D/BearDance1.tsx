@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useAnimations, useGLTF } from "@react-three/drei";
+import { GLTFWithAnimations } from "../Pages/Main/Bear/Bear.tsx";
 
 const BearDance1 = (props) => {
   const group = useRef();
@@ -7,15 +8,16 @@ const BearDance1 = (props) => {
     "/new_bear_model/1/optimized.glb",
   );
 
-  const { actions } = useAnimations(animations, group);
+  const { actions } = useAnimations<GLTFWithAnimations>(animations, group);
 
   useEffect(() => {
-    if (actions) {
-      const action = Object.values(actions)[0];
-      action.play();
-      action.paused = true;
-      props.handleActionReady(action);
-    }
+    const action = Object.values(actions)[0];
+    if (!action) return;
+
+    action.play();
+    action.paused = true;
+
+    props.handleActionReady(action);
   }, []);
 
   return (

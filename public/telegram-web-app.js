@@ -2183,7 +2183,7 @@
     }
     if (buttons.length > 3) {
       console.error(
-        "[Telegram.WebApp] Popup should not have more than 3 buttons",
+        "[Telegram.WebApp] Popup should not have more than 5 buttons",
       );
       throw Error("WebAppPopupParamInvalid");
     }

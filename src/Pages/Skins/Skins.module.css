@@ -6,7 +6,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  background-image: url('/wood-bg.png');
+  background-image: url('/bg1-skin.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center top;
@@ -15,19 +15,19 @@
 
 
 .bg-skin-2 {
-  background-image: url('/bg2.png');
+  background-image: url('/bg2-skin.png');
 }
 
 .bg-skin-3 {
-  background-image: url('/bg3.png');
+  background-image: url('/bg3-skin.webp');
 }
 
 .bg-skin-4 {
-  background-image: url('/bg4.png');
+  background-image: url('/bg4-skin.webp');
 }
 
 .bg-skin-5 {
-  background-image: url('/bg5.png');
+  background-image: url('/bg5-skin.png');
 }
 
 .title-wrapper {

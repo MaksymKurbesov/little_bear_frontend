@@ -30,6 +30,10 @@ export const calculateTimeLeft = () => {
   return `${paddedHours}:${paddedMinutes}`;
 };
 
+export const getSelectOptionByLanguage = (language, options) => {
+  return options.filter(option => option.value === language)[0];
+}
+
 export const debounce = (func, delay) => {
   let timeoutId;
 
@@ -126,7 +130,7 @@ export const simulateLoadingProgress = (callback) => {
       // Вызываем callback с текущим значением прогресса
       callback(progress);
 
-      // Проверяем, если прошло больше 3 секунд
+      // Проверяем, если прошло больше 5 секунд
       if (remainingTime <= 0) {
         clearInterval(interval);
         callback(100); // Устанавливаем прогресс на 100% по завершении
