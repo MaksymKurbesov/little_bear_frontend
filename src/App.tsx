@@ -41,6 +41,8 @@ const App = () => {
   const backgroundClassName = BACKGROUND_MAP[location.pathname];
   const bearBackgroundCN = BEAR_BACKGROUNDS[state.level - 1];
 
+  console.log(userData, "userData in app general");
+
   const [isLoadingScreen, setIsLoadingScreen] = useState(true);
   const [videoIsEnd, setVideoIsEnd] = useState(false);
 
@@ -55,6 +57,8 @@ const App = () => {
         i18n.changeLanguage(userData.settings.language);
       });
     }
+
+    console.log(error, "error");
 
     if (error && error.data === "Document does not exist") {
       const refID = getLittleBearId(location.search) || "";

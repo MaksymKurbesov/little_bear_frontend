@@ -30,6 +30,8 @@ class UserService {
     await userApi.addUser(registeredUser);
     this.dispatch({ type: "SET_USER", payload: registeredUser });
 
+    console.log(referralId, "referralId");
+
     if (referralId) {
       await userApi.addReferral(user.id.toString(), referralId, isPremium);
       this.dispatch({
