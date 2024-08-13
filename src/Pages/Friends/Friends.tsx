@@ -1,22 +1,26 @@
 import styles from "./Friends.module.css";
 import CopyIcon from "../../icons/copy.svg";
+import CheckIcon from "../../icons/check.svg";
 import InviteUserIcon from "../../icons/invite-user.svg";
 import HighGiftIcon from "../../images/gift-icon-high.webp";
 import LowGiftIcon from "../../images/gift-icon-low.webp";
 import { useTelegram } from "../../hooks/useTelegram.ts";
-import { ScrollRestoration, useOutletContext } from "react-router-dom";
+import { ScrollRestoration } from "react-router-dom";
 import { getLevelByPoints } from "../../utils/helpers.ts";
 import { useAppState } from "../../Stores/AppStateContext.tsx";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 
 const Friends = () => {
   const { tg } = useTelegram();
   const { state } = useAppState();
   const { t } = useTranslation();
+  const [coppied, setCoppied] = useState(false);
 
   const copyToClipboard = () => {
     if (!state.user) return;
 
+    setCoppied(true);
     navigator.clipboard.writeText(
       `https://t.me/little_bear_tap_bot/little_bear?startapp=little_bear_id=${state.user.id}`,
     );
@@ -96,7 +100,7 @@ const Friends = () => {
             <img src={InviteUserIcon} alt={""} width={15} />
           </button>
           <button className={styles["copy-button"]} onClick={copyToClipboard}>
-            <img src={CopyIcon} alt={""} width={20} />
+            <img src={coppied ? CheckIcon : CopyIcon} alt={""} width={20} />
           </button>
         </div>
       </div>

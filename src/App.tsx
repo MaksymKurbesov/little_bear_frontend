@@ -12,7 +12,7 @@ import { getLittleBearId } from "./utils/helpers.ts";
 import RegisteredModal from "./SharedUI/RegisteredModal/RegisteredModal.tsx";
 
 import UserService from "./Services/UserService.ts";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 const BACKGROUND_MAP = {
   "/airdrop": "background-image-airdrop",
@@ -52,7 +52,7 @@ const App = () => {
     if (userData) {
       userService.setUserData(userData).then(() => {
         setUserIsRegistered(true);
-        i18n.changeLanguage(userData.settings.language)
+        i18n.changeLanguage(userData.settings.language);
       });
     }
 

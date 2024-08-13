@@ -6,8 +6,6 @@ const SkinSlide = ({ skin, currentPoints, level, isActive }) => {
   const isPreviuosSkin = skin.id < level + 1;
   const isNextSkin = skin.id > level + 1;
 
-  console.log(isActive, "isActive");
-
   return (
     <div className={`${styles["slide"]} ${styles[skin.colorCN]}`}>
       <img

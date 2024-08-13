@@ -19,8 +19,6 @@ const Slider = ({ currentSkin, setCurrentSkin }) => {
   const [isEnd, setIsEnd] = useState(false);
   const [swiper, setSwiper] = useState<Swiper>();
 
-  console.log(currentSkin, "currentSkin");
-
   useEffect(() => {
     if (!swiper) return;
 
@@ -54,8 +52,6 @@ const Slider = ({ currentSkin, setCurrentSkin }) => {
   //       <LoadSpinning />
   //     </div>
   //   );
-
-  console.log(state.level, "state.level");
 
   return (
     <Swiper
