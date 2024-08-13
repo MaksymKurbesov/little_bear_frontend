@@ -52,8 +52,6 @@ const Bear = () => {
   }, []);
 
   const sendPointsToServer = async (pointsToSend) => {
-    console.log(pointsToSend, "pointsToSend sendPointsToServer");
-
     if (pointsToSend <= 0 || !user) return;
 
     try {

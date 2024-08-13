@@ -4,7 +4,6 @@ import {
   calculateProgressBar,
   getLevelByPoints,
 } from "../../../utils/helpers.ts";
-import { useAppState } from "../../../Stores/AppStateContext.tsx";
 
 const ProgressBar = ({ points }) => {
   const level = getLevelByPoints(points);
