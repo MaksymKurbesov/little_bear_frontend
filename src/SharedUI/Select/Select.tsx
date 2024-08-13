@@ -33,8 +33,11 @@ const Select = () => {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const { state } = useAppState();
+  const languageOption = state.user.settings
+    ? state.user.settings.language
+    : "en";
   const [selectedOption, setSelectedOption] = useState(
-    getSelectOptionByLanguage(state.user.settings.language, options),
+    getSelectOptionByLanguage(languageOption, options),
   );
 
   const toggleDropdown = () => setIsOpen(!isOpen);

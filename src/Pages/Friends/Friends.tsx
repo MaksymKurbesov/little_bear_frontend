@@ -14,6 +14,14 @@ const Friends = () => {
   const { state } = useAppState();
   const { t } = useTranslation();
 
+  const copyToClipboard = () => {
+    if (!state.user) return;
+
+    navigator.clipboard.writeText(
+      `https://t.me/little_bear_tap_bot/little_bear?startapp=little_bear_id=${state.user.id}`,
+    );
+  };
+
   const handleInviteClick = () => {
     if (!state.user) return;
 
@@ -87,7 +95,7 @@ const Friends = () => {
             {t("Invite.Button")}{" "}
             <img src={InviteUserIcon} alt={""} width={15} />
           </button>
-          <button className={styles["copy-button"]}>
+          <button className={styles["copy-button"]} onClick={copyToClipboard}>
             <img src={CopyIcon} alt={""} width={20} />
           </button>
         </div>
