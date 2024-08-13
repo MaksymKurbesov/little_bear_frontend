@@ -32,7 +32,7 @@ const Header = ({ pathname }) => {
           <div className={styles["info-wrapper"]}>
             <p>{state.user.username}</p>
             <NavLink to={"/skins"}>
-              <ProgressBar points={state.points} />
+              <ProgressBar points={state.user.points} />
             </NavLink>
           </div>
         </div>

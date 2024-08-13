@@ -24,7 +24,7 @@ const Main = () => {
 
   return (
     <div className={styles["main"]}>
-      <Points points={state.points} />
+      <Points points={state.user!.points} />
       <Bear />
 
       {state.clicks.map((click) => (

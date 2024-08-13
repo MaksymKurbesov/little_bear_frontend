@@ -136,11 +136,11 @@ const Bear = () => {
           onCollectHandler={() => {
             dispatch({
               type: "SET_USER_LEVEL",
-              payload: getLevelByPoints(state.points),
+              payload: getLevelByPoints(state.user!.points),
             });
             setLevelUpModal(false);
           }}
-          level={getLevelByPoints(state.points)}
+          level={getLevelByPoints(state.user!.points)}
         />
       ) : null}
       <div className={styles["main-image-wrapper"]} onClick={handleCardClick}>

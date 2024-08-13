@@ -10,7 +10,7 @@ class UserService {
   }
 
   async setUserData(userData: IUser): Promise<void> {
-    this.dispatch({ type: "SET_POINTS", payload: userData.points });
+    this.dispatch({ type: "SET_USER_POINTS", payload: userData.points });
     this.dispatch({ type: "SET_USER", payload: userData });
     this.dispatch({
       type: "SET_USER_LEVEL",
@@ -32,7 +32,10 @@ class UserService {
 
     if (referralId) {
       await userApi.addReferral(user.id.toString(), referralId, isPremium);
-      this.dispatch({ type: "ADD_POINTS", payload: isPremium ? 2000 : 1000 });
+      this.dispatch({
+        type: "ADD_USER_POINTS",
+        payload: isPremium ? 2000 : 1000,
+      });
     }
   }
 }

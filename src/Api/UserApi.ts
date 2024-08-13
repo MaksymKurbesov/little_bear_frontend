@@ -198,7 +198,7 @@ class UserApi {
       });
 
       dispatch({
-        type: "SET_POINTS",
+        type: "SET_USER_POINTS",
         payload: newTotalPoints,
       });
 

@@ -6,7 +6,7 @@ interface State {
   earnedPoints: number;
   clickedPoints: number;
   clicks: { id: number; x: number; y: number }[];
-  points: number;
+  // points: number;
   user: IUser | null;
   hasClaimedToday: boolean;
   currentSkin: number;
@@ -18,7 +18,7 @@ const initialState: State = {
   earnedPoints: 0,
   clickedPoints: 0,
   clicks: [],
-  points: 0,
+  // points: 0,
   user: null,
   hasClaimedToday: false,
   currentSkin: 0,
@@ -28,11 +28,11 @@ const initialState: State = {
 type Action =
   | { type: "SET_DAILY_REWARD_TIME_LEFT"; payload: string }
   | { type: "ADD_CLICKED_POINTS"; payload: number }
-  | { type: "ADD_POINTS"; payload: number }
+  | { type: "ADD_USER_POINTS"; payload: number }
   | { type: "ADD_CLICK"; payload: { id: number; x: number; y: number } }
   | { type: "REMOVE_CLICK"; payload: number } // Новый тип действия для удаления клика
   | { type: "RESET_CLICKED_POINTS" }
-  | { type: "SET_POINTS"; payload: number }
+  | { type: "SET_USER_POINTS"; payload: number }
   | { type: "SET_USER"; payload: IUser }
   | { type: "SET_USER_LEVEL"; payload: number }
   | { type: "SET_SKIN_NUMBER"; payload: number }
@@ -51,16 +51,28 @@ const reducer = (state: State, action: Action): State => {
       return { ...state, dailyRewardTimeLeft: action.payload };
     case "ADD_CLICKED_POINTS":
       return { ...state, clickedPoints: state.clickedPoints + action.payload };
-    case "ADD_POINTS":
-      return { ...state, points: state.points + action.payload };
+    case "ADD_USER_POINTS":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          points: state.user!.points + action.payload,
+        } as IUser,
+      };
     case "ADD_CLICK":
       return { ...state, clicks: [...state.clicks, action.payload] };
     case "RESET_CLICKED_POINTS":
       return { ...state, clickedPoints: 0 };
     case "SET_USER_LEVEL":
       return { ...state, level: action.payload };
-    case "SET_POINTS":
-      return { ...state, points: action.payload };
+    case "SET_USER_POINTS":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          points: action.payload,
+        } as IUser,
+      };
     case "REMOVE_CLICK":
       return {
         ...state,
@@ -79,8 +91,11 @@ const reducer = (state: State, action: Action): State => {
     case "HANDLE_CARD_CLICK":
       return {
         ...state,
+        user: {
+          ...state.user,
+          points: state.user!.points + action.payload.pointsToAdd,
+        } as IUser,
         clickedPoints: state.clickedPoints + action.payload.pointsToAdd,
-        points: state.points + action.payload.pointsToAdd,
         clicks: [...state.clicks, action.payload.click],
       };
     default:

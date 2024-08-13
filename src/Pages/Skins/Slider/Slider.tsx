@@ -72,7 +72,7 @@ const Slider = ({ currentSkin, setCurrentSkin }) => {
           <SwiperSlide key={index}>
             <SkinSlide
               skin={skin}
-              currentPoints={state.points}
+              currentPoints={state.user!.points}
               level={state.level}
               isActive={currentSkin === index}
             />
