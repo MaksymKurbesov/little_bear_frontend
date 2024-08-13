@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import TurnOnSoundIcon from "../../icons/turn-on-sound.svg";
 import TurnOffSoundIcon from "../../icons/turn-off-sound.svg";
 
-const StartBearVideo = ({ setUserIsRegistered, setVideoIsEnd }) => {
+const StartBearVideo = ({ setUserIsRegistered, setVideoIsEnd, refetch }) => {
   const videoRef = useRef(null);
   const [muted, setMuted] = useState(true);
 
@@ -32,6 +32,7 @@ const StartBearVideo = ({ setUserIsRegistered, setVideoIsEnd }) => {
               setVideoIsEnd(true);
               setUserIsRegistered(true);
             }, 100);
+            refetch();
           }}
           src={StartVideo}
           autoPlay

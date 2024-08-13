@@ -62,7 +62,6 @@ const App = () => {
       const isPremium = !!user.is_premium;
       userService.registerUser(user, refID, isPremium).then(() => {
         setUserIsRegistered(false);
-        refetch();
       });
     }
   }, [user, userData, dispatch, error, location.search]);
@@ -76,6 +75,7 @@ const App = () => {
       <StartBearVideo
         setUserIsRegistered={setUserIsRegistered}
         setVideoIsEnd={setVideoIsEnd}
+        refetch={refetch}
       />
     );
   }
