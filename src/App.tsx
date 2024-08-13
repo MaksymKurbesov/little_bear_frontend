@@ -32,6 +32,7 @@ const App = () => {
     data: userData,
     error,
     isLoading,
+    refetch,
   } = useGetUserQuery(user?.id, {
     skip: !user?.id,
   });
@@ -40,8 +41,6 @@ const App = () => {
   const location = useLocation();
   const backgroundClassName = BACKGROUND_MAP[location.pathname];
   const bearBackgroundCN = BEAR_BACKGROUNDS[state.level - 1];
-
-  console.log(userData, "userData in app general");
 
   const [isLoadingScreen, setIsLoadingScreen] = useState(true);
   const [videoIsEnd, setVideoIsEnd] = useState(false);
@@ -58,13 +57,12 @@ const App = () => {
       });
     }
 
-    console.log(error, "error");
-
     if (error && error.data === "Document does not exist") {
       const refID = getLittleBearId(location.search) || "";
       const isPremium = !!user.is_premium;
       userService.registerUser(user, refID, isPremium).then(() => {
         setUserIsRegistered(false);
+        refetch();
       });
     }
   }, [user, userData, dispatch, error, location.search]);
