@@ -33,21 +33,17 @@ const Select = () => {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const { state } = useAppState();
-
-  const languageOption = state.user.settings
-    ? state.user.settings.language
-    : options[1].value;
   const [selectedOption, setSelectedOption] = useState(
-    getSelectOptionByLanguage(languageOption, options),
+    getSelectOptionByLanguage(state.user.settings.language, options),
   );
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   const handleOptionClick = async (option) => {
-    console.log("new update");
     setSelectedOption(option);
     setIsOpen(false);
     i18n.changeLanguage(option.value);
+    console.log(state.user.id, "state.user.id");
     await userApi.updateUser(state.user.id.toString(), {
       settings: {
         language: option.value,
