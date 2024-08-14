@@ -11,7 +11,6 @@ import TelegramIcon from "../../images/telegram-icon.webp";
 import XIcon from "../../images/x-icon.webp";
 import X2Icon from "../../images/x2-icon.webp";
 import { userApi } from "../../main.tsx";
-import { useEffect } from "react";
 
 const ICON_MAP: { [key: string]: string } = {
   telegram: TelegramIcon,
