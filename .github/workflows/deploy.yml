@@ -44,4 +44,3 @@ jobs:
           REMOTE_PORT: "22"
           TARGET: "/var/www/littlebear-app.online/"
           SCRIPT_BEFORE: "ls"
- 

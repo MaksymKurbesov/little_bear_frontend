@@ -31,7 +31,11 @@ const BEAR_BACKGROUNDS = [
 const App = () => {
   const { user } = useTelegram();
   const { i18n } = useTranslation();
-  const { data: userData, error } = useGetUserQuery(user?.id, {
+  const {
+    data: userData,
+    error,
+    refetch,
+  } = useGetUserQuery(user?.id, {
     skip: !user?.id,
   });
   const { state, dispatch } = useAppState();
@@ -59,7 +63,9 @@ const App = () => {
       const refID = getLittleBearId(location.search) || "";
       const isPremium = !!user.is_premium;
       setUserIsRegistered(false);
-      userService.registerUser(user, refID, isPremium);
+      userService.registerUser(user, refID, isPremium).then(() => {
+        refetch();
+      });
     }
   }, [user, userData, dispatch, error, location.search]);
 
