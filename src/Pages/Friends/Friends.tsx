@@ -50,7 +50,7 @@ const Friends = () => {
               <h3>{t("Invite.InviteAFriend")}</h3>
               <div className={styles["text-wrapper"]}>
                 <p className={styles["description"]}>
-                  <span>+1,000</span> <span>{t("Invite.Bonus1")}</span>
+                  <span>+1,500</span> <span>{t("Invite.Bonus1")}</span>
                 </p>
               </div>
             </div>
@@ -61,7 +61,7 @@ const Friends = () => {
               <h3>{t("Invite.InviteAFriendWithPremium")}</h3>
               <div className={styles["text-wrapper"]}>
                 <p className={styles["description"]}>
-                  <span>+2,000</span> <span>{t("Invite.Bonus2")}</span>
+                  <span>+4,000</span> <span>{t("Invite.Bonus2")}</span>
                 </p>
               </div>
             </div>

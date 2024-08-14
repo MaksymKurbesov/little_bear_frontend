@@ -21,3 +21,39 @@
   justify-content: center;
   flex-grow: 1;
 }
+
+.tasks > button:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.task {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.task > img {
+  width: 37px;
+}
+
+.task > div > p {
+  font-size: 14px;
+}
+
+.completed {
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--orange);
+}
+
+.reward {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  font-weight: 600;
+}

@@ -30,12 +30,7 @@ const BEAR_BACKGROUNDS = [
 const App = () => {
   const { user } = useTelegram();
   const { i18n } = useTranslation();
-  const {
-    data: userData,
-    error,
-    isLoading,
-    refetch,
-  } = useGetUserQuery(user?.id, {
+  const { data: userData, error } = useGetUserQuery(user?.id, {
     skip: !user?.id,
   });
   const { state, dispatch } = useAppState();
@@ -45,7 +40,7 @@ const App = () => {
   const bearBackgroundCN = BEAR_BACKGROUNDS[state.level - 1];
 
   const [isLoadingScreen, setIsLoadingScreen] = useState(true);
-  const [videoIsEnd, setVideoIsEnd] = useState(false);
+  // const [videoIsEnd, setVideoIsEnd] = useState(false);
 
   useEffect(() => {
     if (!user || !user.username) return;
@@ -72,21 +67,21 @@ const App = () => {
     return <LoadingScreen setIsLoadingScreen={setIsLoadingScreen} />;
   }
 
-  if (!userIsRegistered && !userData) {
-    return (
-      <StartBearVideo
-        setUserIsRegistered={setUserIsRegistered}
-        setVideoIsEnd={setVideoIsEnd}
-        refetch={refetch}
-      />
-    );
-  }
+  // if (!userIsRegistered && !userData) {
+  //   return (
+  //     <StartBearVideo
+  //       setUserIsRegistered={setUserIsRegistered}
+  //       setVideoIsEnd={setVideoIsEnd}
+  //       refetch={refetch}
+  //     />
+  //   );
+  // }
 
   return (
     <div
       className={`${styles["game-wrapper"]} ${styles[backgroundClassName]} ${styles[bearBackgroundCN]}`}
     >
-      {videoIsEnd && <RegisteredModal />}
+      {!userIsRegistered ? <RegisteredModal /> : null}
       <Header pathname={location.pathname} />
       <Outlet />
       <Menu />

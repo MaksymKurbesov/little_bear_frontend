@@ -4,6 +4,7 @@ import { useAppState } from "../../Stores/AppStateContext.tsx";
 import Bear from "./Bear/Bear.tsx";
 import { POINTS_TO_ADD } from "../../utils/consts.ts";
 import Points from "./Points/Points.tsx";
+import LoadSpinning from "../../SharedUI/LoadSpinning/LoadSpinning.tsx";
 // import FPSStats from "react-fps-stats";
 
 const Main = () => {
@@ -14,17 +15,17 @@ const Main = () => {
     dispatch({ type: "REMOVE_CLICK", payload: id });
   }, []);
 
-  // if (!imagesLoaded) {
-  //   return (
-  //     <div className={"suspense"}>
-  //       <LoadSpinning />
-  //     </div>
-  //   );
-  // }
+  if (!state.user) {
+    return (
+      <div className={"suspense"}>
+        <LoadSpinning />
+      </div>
+    );
+  }
 
   return (
     <div className={styles["main"]}>
-      <Points points={state.user!.points} />
+      <Points points={state.user.points} />
       <Bear />
 
       {state.clicks.map((click) => (

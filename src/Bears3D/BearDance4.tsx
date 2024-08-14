@@ -24,9 +24,9 @@ const BearDance4 = (props) => {
       <group name="Scene">
         <group
           name="4BEAR4"
-          position={[0.001, 0.106, 0]}
+          position={[0.001, 0.35, 0]}
           rotation={[Math.PI / 2, 0, 0]}
-          scale={0.25}
+          scale={0.265}
         >
           <skinnedMesh
             name="Bearbrick_Chest"

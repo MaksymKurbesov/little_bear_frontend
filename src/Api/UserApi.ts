@@ -90,15 +90,60 @@ class UserApi {
 
       await updateDoc(referralUserRef, {
         referrals: arrayUnion(userRef),
-        points: isPremium ? increment(2000) : increment(1000),
+        points: isPremium ? increment(4000) : increment(1500),
       });
 
       await updateDoc(userRef, {
-        points: isPremium ? increment(2000) : increment(1000),
+        points: isPremium ? increment(4000) : increment(1500),
       });
       console.log("Referral added successfully");
     } catch (error) {
       console.error("Error adding referral: ", error);
+    }
+  }
+
+  async completeUserTask(userId: number, taskId: string, reward: number) {
+    const userRef = doc(db, "users", userId.toString());
+
+    try {
+      const userSnap = await getDoc(userRef);
+
+      if (userSnap.exists()) {
+        const userData = userSnap.data();
+
+        let userTasks = userData.tasks || [];
+
+        // Ищем задачу в массиве
+        const existingTaskIndex = userTasks.findIndex(
+          (task: any) => task.id === taskId,
+        );
+
+        if (existingTaskIndex > -1) {
+          // Обновляем существующую задачу
+          userTasks[existingTaskIndex].completed = true;
+          userTasks[existingTaskIndex].completionDate =
+            new Date().toISOString();
+        } else {
+          // Добавляем новую задачу в массив
+          userTasks.push({
+            id: taskId,
+            completed: true,
+            completionDate: new Date().toISOString(),
+          });
+        }
+
+        // Обновляем документ пользователя в Firestore
+        await updateDoc(userRef, {
+          tasks: userTasks,
+          points: increment(reward),
+        });
+
+        console.log("Task completed successfully.");
+      } else {
+        console.error("User document not found.");
+      }
+    } catch (error) {
+      console.error("Error completing task:", error);
     }
   }
 

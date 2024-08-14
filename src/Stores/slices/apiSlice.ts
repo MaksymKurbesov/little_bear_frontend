@@ -1,7 +1,14 @@
 // src/apiSlice.ts
 import { createApi } from "@reduxjs/toolkit/query/react";
 import firestoreBaseQuery from "../../firestoreBaseQuery.ts";
-import { getDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  onSnapshot,
+} from "firebase/firestore";
+import { db } from "../../main.tsx";
 
 // Define a service using a base URL and expected endpoints
 export const apiSlice = createApi({
@@ -22,6 +29,54 @@ export const apiSlice = createApi({
         return response;
       },
     }),
+
+    getUserOnSnapshot: builder.query<any, string>({
+      queryFn: (userId) => {
+        return new Promise((resolve) => {
+          const userDocRef = doc(db, "users", userId.toString());
+
+          const unsubscribe = onSnapshot(userDocRef, (docSnapshot) => {
+            if (docSnapshot.exists()) {
+              resolve({ data: docSnapshot.data() });
+            } else {
+              resolve({ error: { message: "User not found" } });
+            }
+          });
+
+          // Возвращаем функцию отписки, чтобы можно было отписаться от обновлений при необходимости
+          return () => unsubscribe();
+        });
+      },
+    }),
+
+    getLeaderboard: builder.query<any, void>({
+      queryFn: async () => {
+        try {
+          const leaderboardRef = collection(db, "leaderboard");
+          const leaderboardSnapshot = await getDocs(leaderboardRef);
+          const leaderboardData = leaderboardSnapshot.docs.map((doc) =>
+            doc.data(),
+          );
+          return { data: leaderboardData };
+        } catch (error) {
+          return { error };
+        }
+      },
+    }),
+
+    getTasks: builder.query<any, void>({
+      queryFn: async () => {
+        try {
+          const tasksRef = collection(db, "tasks");
+          const tasksSnapshot = await getDocs(tasksRef);
+          const tasksData = tasksSnapshot.docs.map((doc) => doc.data());
+          return { data: tasksData };
+        } catch (error) {
+          return { error };
+        }
+      },
+    }),
+
     addUser: builder.mutation<any, Partial<any>>({
       query: (user) => ({
         url: "users",
@@ -41,5 +96,11 @@ export const apiSlice = createApi({
 });
 
 // Export hooks for usage in functional components, which are auto-generated based on the defined endpoints
-export const { useGetUserQuery, useAddUserMutation, useUpdateUserMutation } =
-  apiSlice;
+export const {
+  useGetUserQuery,
+  useGetUserOnSnapshotQuery,
+  useAddUserMutation,
+  useUpdateUserMutation,
+  useGetLeaderboardQuery,
+  useGetTasksQuery,
+} = apiSlice;

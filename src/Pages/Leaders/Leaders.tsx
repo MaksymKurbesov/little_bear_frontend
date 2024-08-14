@@ -10,6 +10,8 @@ import { ScrollRestoration } from "react-router-dom";
 import { useImagePreloader } from "../../hooks/useImagePreloader.ts";
 import LoadSpinning from "../../SharedUI/LoadSpinning/LoadSpinning.tsx";
 import { useTranslation } from "react-i18next";
+import { useGetLeaderboardQuery } from "../../Stores/slices/apiSlice.ts";
+import { useAppState } from "../../Stores/AppStateContext.tsx";
 
 const imageUrls = [
   BronzeMedal,
@@ -21,22 +23,19 @@ const imageUrls = [
   Leader3,
 ];
 
-const MOCK_LEADERS = [
-  { nickname: "DayEither8913", points: 1245774 },
-  { nickname: "forever_pretty1", points: 956000 },
-  { nickname: "morriartie", points: 674833 },
-  { nickname: "firmament42", points: 554343 },
-  { nickname: "TheTrollinator777", points: 312554 },
-  { nickname: "Dave-C", points: 297543 },
-  { nickname: "AlphaOwn", points: 157343 },
-  { nickname: "PostNutRagrets", points: 80053 },
-  { nickname: "Drostan_", points: 55551 },
-  { nickname: "Argon288", points: 43544 },
-];
-
 const Leaders = () => {
   const imagesLoaded = useImagePreloader(imageUrls);
   const { t } = useTranslation();
+  const { state } = useAppState();
+
+  const {
+    data: leaderboard,
+    error,
+    isLoading,
+    refetch,
+  } = useGetLeaderboardQuery(state.user?.id, {
+    skip: !state.user?.id,
+  });
 
   if (!imagesLoaded) {
     return (
@@ -54,27 +53,45 @@ const Leaders = () => {
         <div className={styles["top3"]}>
           <div className={styles["silver"]}>
             <div className={styles["leader-avatar"]}>
-              <img src={Leader1} alt={""} width={85} height={85} />
+              <div
+                className={`${styles["generated-avatar"]} ${styles["generated-avatar3"]}`}
+              >
+                {leaderboard[0].leaderboard[1].username[0]}
+              </div>
               <img src={SilverMedal} alt={""} width={90} />
             </div>
-            <p className={styles["leader-nickname"]}>forever_pretty1</p>
-            <span>956000</span>
+            <p className={styles["leader-nickname"]}>
+              {leaderboard[0].leaderboard[1].username}
+            </p>
+            <span>{leaderboard[0].leaderboard[1].points}</span>
           </div>
           <div className={styles["gold"]}>
             <div className={styles["leader-avatar"]}>
-              <img src={Leader2} alt={""} width={85} height={85} />
+              <div
+                className={`${styles["generated-avatar"]} ${styles["generated-avatar1"]}`}
+              >
+                {leaderboard[0].leaderboard[0].username[0]}
+              </div>
               <img src={GoldMedal} alt={""} width={90} />
             </div>
-            <p className={styles["leader-nickname"]}>DayEither8913</p>
-            <span>1245774</span>
+            <p className={styles["leader-nickname"]}>
+              {leaderboard[0].leaderboard[0].username}
+            </p>
+            <span>{leaderboard[0].leaderboard[0].points}</span>
           </div>
           <div className={styles["bronze"]}>
             <div className={styles["leader-avatar"]}>
-              <img src={Leader3} alt={""} width={85} height={85} />
+              <div
+                className={`${styles["generated-avatar"]} ${styles["generated-avatar2"]}`}
+              >
+                {leaderboard[0].leaderboard[2].username[0]}
+              </div>
               <img src={BronzeMedal} alt={""} width={90} />
             </div>
-            <p className={styles["leader-nickname"]}>morriartie</p>
-            <span>674833</span>
+            <p className={styles["leader-nickname"]}>
+              {leaderboard[0].leaderboard[2].username}
+            </p>
+            <span>{leaderboard[0].leaderboard[2].points}</span>
           </div>
         </div>
         <ul className={styles["leaders-list"]}>
@@ -82,10 +99,10 @@ const Leaders = () => {
             <span>№</span> <p>{t("Leaders.Nickname")}</p>{" "}
             <p>{t("Leaders.Points")}</p>
           </li>
-          {MOCK_LEADERS.slice(3).map((leader, index) => {
+          {leaderboard[0].leaderboard.slice(3).map((leader, index) => {
             return (
               <li key={index}>
-                <span>{index + 4}</span> <p>{leader.nickname}</p>{" "}
+                <span>{index + 4}</span> <p>{leader.username}</p>{" "}
                 <p>{leader.points}</p>
               </li>
             );

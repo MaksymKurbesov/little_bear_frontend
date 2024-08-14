@@ -173,7 +173,7 @@ const Bear = () => {
                   })}
                 </group>
 
-                <OrbitControls ref={controlsRef} />
+                {/*<OrbitControls ref={controlsRef} />*/}
               </group>
             </Lights>
           </Canvas>
