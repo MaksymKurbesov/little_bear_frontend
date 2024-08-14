@@ -3,7 +3,7 @@ name: Deploy to Server
 on:
   push:
     branches:
-      - dev  # Укажите ветку, на которую необходимо реагировать
+      - main  # Укажите ветку, на которую необходимо реагировать
 
 jobs:
   build-and-deploy:
@@ -42,5 +42,6 @@ jobs:
           REMOTE_HOST: ${{ secrets.SERVER_HOST }}
           REMOTE_USER: ${{ secrets.SERVER_USER }}
           REMOTE_PORT: "22"
-          TARGET: "/var/www/littlebear-dev/"
+          TARGET: "/var/www/littlebear-app.online/"
           SCRIPT_BEFORE: "ls"
+ 
