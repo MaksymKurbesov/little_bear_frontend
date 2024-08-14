@@ -65,7 +65,7 @@ const Tasks = () => {
             key={task.id}
             className={styles["task"]}
           >
-            <img src={ICON_MAP[task.type]} alt={""} />
+            <img src={ICON_MAP[task.type]} alt={""} height={40} />
             <div>
               <p>{task.description}</p>
               {data.tasks && filteredTask?.completed ? (

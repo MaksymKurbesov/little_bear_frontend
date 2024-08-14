@@ -1,8 +1,8 @@
 import styles from "./RegisteredModal.module.css";
-const RegisteredModal = () => {
-  const closeHandler = (e) => {
-    e.target.parentElement.parentElement.remove();
-  };
+const RegisteredModal = ({ closeHandler }) => {
+  // const closeHandler = (e) => {
+  //   e.target.parentElement.parentElement.remove();
+  // };
 
   return (
     <div className={styles["registered-modal-wrapper"]}>

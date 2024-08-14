@@ -13,6 +13,7 @@ import RegisteredModal from "./SharedUI/RegisteredModal/RegisteredModal.tsx";
 
 import UserService from "./Services/UserService.ts";
 import { useTranslation } from "react-i18next";
+import LoadSpinning from "./SharedUI/LoadSpinning/LoadSpinning.tsx";
 
 const BACKGROUND_MAP = {
   "/airdrop": "background-image-airdrop",
@@ -57,9 +58,8 @@ const App = () => {
     if (error && error.data === "Document does not exist") {
       const refID = getLittleBearId(location.search) || "";
       const isPremium = !!user.is_premium;
-      userService.registerUser(user, refID, isPremium).then(() => {
-        setUserIsRegistered(false);
-      });
+      setUserIsRegistered(false);
+      userService.registerUser(user, refID, isPremium);
     }
   }, [user, userData, dispatch, error, location.search]);
 
@@ -77,11 +77,23 @@ const App = () => {
   //   );
   // }
 
+  if (!state.user) {
+    return (
+      <div className={"suspense"}>
+        <LoadSpinning />
+      </div>
+    );
+  }
+
   return (
     <div
       className={`${styles["game-wrapper"]} ${styles[backgroundClassName]} ${styles[bearBackgroundCN]}`}
     >
-      {!userIsRegistered ? <RegisteredModal /> : null}
+      <div key={"register-modal"}>
+        {!userIsRegistered ? (
+          <RegisteredModal closeHandler={() => setUserIsRegistered(true)} />
+        ) : null}
+      </div>
       <Header pathname={location.pathname} />
       <Outlet />
       <Menu />
