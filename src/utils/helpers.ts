@@ -58,7 +58,7 @@ export const throttle = (func, limit) => {
 
 export const getLevelByPoints = (points: number) => {
   const newLevel = levelThresholds.findIndex((threshold) => points < threshold);
-  return newLevel >= 0 ? newLevel : levelThresholds.length - 1;
+  return newLevel >= 0 ? newLevel : levelThresholds.length;
 };
 
 export const generateUserData = (username: string, id: number): IUser => {

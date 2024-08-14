@@ -23,6 +23,8 @@ const BEAR_BACKGROUNDS = [
   "background-image-main",
   "background-image-main2",
   "background-image-main3",
+  "background-image-main4",
+  "background-image-main5",
 ];
 
 const App = () => {

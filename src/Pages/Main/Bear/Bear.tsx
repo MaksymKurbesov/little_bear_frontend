@@ -15,10 +15,12 @@ import { userApi } from "../../../main.tsx";
 const BearDance1 = lazy(() => import("../../../Bears3D/BearDance1.tsx"));
 const BearDance2 = lazy(() => import("../../../Bears3D/BearDance2.tsx"));
 const BearDance3 = lazy(() => import("../../../Bears3D/BearDance3.tsx"));
+const BearDance4 = lazy(() => import("../../../Bears3D/BearDance4.tsx"));
 const BearDance5 = lazy(() => import("../../../Bears3D/BearDance5.tsx"));
 const Stand1 = lazy(() => import("../../../SharedUI/Stands/Stand1.tsx"));
 const Stand2 = lazy(() => import("../../../SharedUI/Stands/Stand2.tsx"));
 const Stand3 = lazy(() => import("../../../SharedUI/Stands/Stand3.tsx"));
+const Stand4 = lazy(() => import("../../../SharedUI/Stands/Stand4.tsx"));
 const Stand5 = lazy(() => import("../../../SharedUI/Stands/Stand5.tsx"));
 import { v4 as uuidv4 } from "uuid";
 import LevelUp from "../../../SharedUI/LevelUp/LevelUp.tsx";
@@ -34,7 +36,7 @@ const danceBearComponents = [
   { level: 1, Component: BearDance1, Stand: Stand1 },
   { level: 2, Component: BearDance2, Stand: Stand2 },
   { level: 3, Component: BearDance3, Stand: Stand3 },
-  { level: 4, Component: BearDance3, Stand: Stand3 },
+  { level: 4, Component: BearDance4, Stand: Stand4 },
   { level: 5, Component: BearDance5, Stand: Stand5 },
 ];
 
@@ -171,7 +173,7 @@ const Bear = () => {
                   })}
                 </group>
 
-                {/*<OrbitControls ref={controlsRef} />*/}
+                <OrbitControls ref={controlsRef} />
               </group>
             </Lights>
           </Canvas>
