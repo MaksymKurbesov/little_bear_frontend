@@ -46,7 +46,6 @@ const Select = () => {
     setSelectedOption(option);
     setIsOpen(false);
     i18n.changeLanguage(option.value);
-    console.log("last version");
     await userApi.updateUser(state.user.id.toString(), {
       settings: {
         language: option.value,

@@ -72,7 +72,7 @@ class UserApi {
       const userDoc = await getDoc(userRef);
 
       if (userDoc.exists()) {
-        return userDoc.data().points;
+        return userDoc.data().points; //
       }
     } catch (error) {
       console.error("Error get user points: ", error);
@@ -157,7 +157,7 @@ class UserApi {
           throw new Error("Документ не существует!");
         }
 
-        newCount = docSnap.data().points + clickedPoints;
+        newCount = docSnap.data().points + clickedPoints; //
         transaction.update(userRef, { points: newCount });
         console.log(`sending on server ${newCount}`);
       });
@@ -203,7 +203,7 @@ class UserApi {
     const localDateString = today.toLocaleDateString("en-CA");
 
     const rewardPoints = DAILY_REWARDS_BY_DAY[user.consecutiveDays]; // Логика начисления очков
-    const newTotalPoints = user.points + rewardPoints;
+    const newTotalPoints = user.points + rewardPoints; //
 
     const dailyRewardDocRef = doc(
       db,

@@ -38,8 +38,6 @@ const Tasks = () => {
     );
   }
 
-  console.log(data.tasks, "data");
-
   return (
     <div className={styles["tasks"]}>
       <h1 className={"page-title"}>{t("Tasks.Title")}</h1>

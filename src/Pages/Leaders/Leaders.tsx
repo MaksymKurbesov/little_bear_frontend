@@ -37,7 +37,7 @@ const Leaders = () => {
     skip: !state.user?.id,
   });
 
-  if (!imagesLoaded) {
+  if (!imagesLoaded || isLoading) {
     return (
       <div className={"suspense"}>
         <LoadSpinning />
