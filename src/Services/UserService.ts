@@ -34,7 +34,7 @@ class UserService {
       await userApi.addReferral(user.id.toString(), referralId, isPremium);
       this.dispatch({
         type: "ADD_USER_POINTS",
-        payload: isPremium ? 4000 : 1500,
+        payload: isPremium ? 14000 : 7500,
       });
     }
   }

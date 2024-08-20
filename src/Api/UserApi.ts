@@ -90,11 +90,11 @@ class UserApi {
 
       await updateDoc(referralUserRef, {
         referrals: arrayUnion(userRef),
-        points: isPremium ? increment(4000) : increment(1500),
+        points: isPremium ? increment(14000) : increment(7500),
       });
 
       await updateDoc(userRef, {
-        points: isPremium ? increment(4000) : increment(1500),
+        points: isPremium ? increment(14000) : increment(7500),
       });
       console.log("Referral added successfully");
     } catch (error) {
