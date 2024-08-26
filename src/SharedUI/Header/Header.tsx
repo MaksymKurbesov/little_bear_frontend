@@ -3,13 +3,16 @@ import Settings from "../../icons/Settings";
 import LittleBearIcon from "../../images/little-bear-icon.png";
 import { NavLink } from "react-router-dom";
 import ProgressBar from "./ProgressBar/ProgressBar.tsx";
-import DailyRewardHeader from "./DailyRewardHeader/DailyRewardHeader.tsx";
 import { useAppState } from "../../Stores/AppStateContext.tsx";
+import { useTranslation } from "react-i18next";
+import NewsIcon from "../../icons/news-icon.svg?react";
+import News from "../../Pages/News/News.tsx";
 
 const Header = ({ pathname }) => {
   const isPlayPage = pathname === "/";
   const isAirdropPage = pathname === "/airdrop";
   const { state } = useAppState();
+  const { t } = useTranslation();
 
   const isTransparentMenu = isPlayPage || isAirdropPage;
 
@@ -37,8 +40,12 @@ const Header = ({ pathname }) => {
           </div>
         </div>
       </div>
+      <NavLink className={styles["news"]} to={"/news"}>
+        <img src={NewsIcon} alt={""} width={15} />
+        <div>{t("News")}</div>
+      </NavLink>
 
-      <DailyRewardHeader />
+      {/*<DailyRewardHeader />*/}
 
       <NavLink to={"/settings"}>
         <div className={styles["settings"]}>

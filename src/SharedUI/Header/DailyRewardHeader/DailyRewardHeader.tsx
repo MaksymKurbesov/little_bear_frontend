@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { calculateTimeLeft } from "../../../utils/helpers.ts";
-import styles from "../Header.module.css";
+import styles from "./DailyRewardHeader.module.css";
 import { NavLink } from "react-router-dom";
 import { dailyReward } from "../../../images";
 import { useAppState } from "../../../Stores/AppStateContext.tsx";

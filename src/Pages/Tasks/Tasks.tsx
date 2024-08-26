@@ -11,6 +11,7 @@ import TelegramIcon from "../../images/telegram-icon.webp";
 import XIcon from "../../images/x-icon.webp";
 import X2Icon from "../../images/x2-icon.webp";
 import { userApi } from "../../main.tsx";
+import DailyRewardHeader from "../../SharedUI/Header/DailyRewardHeader/DailyRewardHeader.tsx";
 
 const ICON_MAP: { [key: string]: string } = {
   telegram: TelegramIcon,
@@ -42,6 +43,7 @@ const Tasks = () => {
     <div className={styles["tasks"]}>
       <h1 className={"page-title"}>{t("Tasks.Title")}</h1>
       <p className={styles["subtitle"]}>{t("Tasks.Subtitle")}</p>
+      <DailyRewardHeader />
       {allTasks.map((task) => {
         const filteredTask =
           data.tasks &&

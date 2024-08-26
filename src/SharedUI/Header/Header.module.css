@@ -49,6 +49,21 @@
   border-radius: 10px;
 }
 
+.news {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*opacity: 0.75;*/
+  font-size: 12px;
+  gap: 5px;
+  font-weight: 500;
+  background: rgba(28, 31, 36, 0.75);
+  padding: 5px 15px;
+  border-radius: 8px;
+  height: 35px;
+  margin-right: 10px;
+}
+
 
 .additional-button {
   display: flex;
@@ -78,49 +93,6 @@
 }
 
 
-.daily-reward {
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding: 4px 7px;
-  z-index: 5;
-  font-size: 10px;
-  min-width: 110px;
-  margin-right: 15px;
-  background-color: rgba(28, 31, 36, 0.75);
-  border-radius: 8px;
-}
-
-.daily-reward-link {
-  display: flex;
-  gap: 7px;
-  align-items: center;
-}
-
-.dot {
-  width: 4px;
-  height: 4px;
-  background-color: white;
-  border-radius: 50%;
-  position: absolute;
-  bottom: 9px;
-  right: 9px;
-  animation: blink 1s infinite;
-}
-
-.daily-icon {
-  width: 22px;
-}
-
-.daily-text p:first-child {
-  opacity: 0.45;
-  line-height: 1;
-}
-
-.claimed {
-  color: var(--orange);
-}
-
 .settings {
   display: flex;
   align-items: center;
@@ -133,16 +105,3 @@
   border-radius: 10px;
 }
 
-@keyframes blink {
-  0% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}

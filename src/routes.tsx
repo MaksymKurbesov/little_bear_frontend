@@ -12,6 +12,8 @@ import {
   TasksPage,
 } from "./lazyImports.ts";
 import LoadSpinning from "./SharedUI/LoadSpinning/LoadSpinning.tsx";
+import News from "./Pages/News/News.tsx";
+import OneNews from "./Pages/OneNews/OneNews.tsx";
 
 const routes = createBrowserRouter([
   {
@@ -73,6 +75,24 @@ const routes = createBrowserRouter([
             <DailyRewardPage />
           </Suspense>
         ),
+      },
+      {
+        path: "/news",
+        element: (
+          <Suspense
+            fallback={
+              <div className={"suspense"}>
+                <LoadSpinning />
+              </div>
+            }
+          >
+            <News />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/news/:newsId",
+        element: <OneNews />,
       },
       {
         path: "/airdrop",

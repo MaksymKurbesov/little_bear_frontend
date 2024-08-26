@@ -1,0 +1,33 @@
+.one-news {
+  flex-grow: 1;
+  background: var(--gray);
+  padding: 20px;
+}
+
+.back-button {
+  transform: rotateZ(90deg);
+  margin-bottom: 20px;
+}
+
+.one-news > img {
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.one-news h1 {
+  font-size: 20px;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.one-news p {
+  opacity: 0.3;
+  font-weight: 400;
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+
+.one-news span {
+  color: var(--orange);
+  font-size: 12px;
+}
