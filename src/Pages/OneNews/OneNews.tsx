@@ -1,25 +1,26 @@
 import styles from "./OneNews.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import { NEWS } from "../News/News.tsx";
+
 import ArrowIcon from "../../icons/arrow.svg";
+import { formatFirebaseTimestamp } from "../../utils/helpers.ts";
 
 const OneNews = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const currentNews = NEWS.filter((news) => news.link === location.pathname)[0];
+  const { image, title, paragraphs, date } = location.state.currentNews;
 
   return (
     <div className={styles["one-news"]}>
       <button onClick={() => navigate(-1)} className={styles["back-button"]}>
         <img src={ArrowIcon} width={25} alt={""} />
       </button>
-      <img src={currentNews.image} alt={""} />
-      <h1>{currentNews.title}</h1>
-      {currentNews.paragraphs.map((paragraph) => {
+      <img src={image} alt={""} />
+      <h1>{title}</h1>
+      {paragraphs.map((paragraph) => {
         return <p key={paragraph}>{paragraph}</p>;
       })}
-      <span>{currentNews.date}</span>
+      <span>{formatFirebaseTimestamp(date)}</span>
     </div>
   );
 };

@@ -143,6 +143,17 @@ export const simulateLoadingProgress = (callback) => {
   ); // Интервал от 200 до 500 мс
 };
 
+export const sortByFirebaseTimestamp = (arr: { date: any }[]) => {
+  return arr.sort((a, b) => {
+    // Преобразуем Firebase Timestamp в миллисекунды
+    const dateA = a.date.seconds * 1000 + a.date.nanoseconds / 1000000;
+    const dateB = b.date.seconds * 1000 + b.date.nanoseconds / 1000000;
+
+    // Сравниваем даты
+    return dateB - dateA;
+  });
+};
+
 export const formatFirebaseTimestamp = (timestamp) => {
   // Convert the Firebase timestamp to a JavaScript Date object
   const date = timestamp.toDate();
