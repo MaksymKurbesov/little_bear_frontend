@@ -47,7 +47,7 @@ const Lights = ({ children }) => {
       {/*/>*/}
       <directionalLight
         castShadow
-        intensity={1}
+        intensity={0.5}
         position={[0, -1, 6]}
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}

@@ -17,11 +17,13 @@ const BearDance2 = lazy(() => import("../../../Bears3D/BearDance2.tsx"));
 const BearDance3 = lazy(() => import("../../../Bears3D/BearDance3.tsx"));
 const BearDance4 = lazy(() => import("../../../Bears3D/BearDance4.tsx"));
 const BearDance5 = lazy(() => import("../../../Bears3D/BearDance5.tsx"));
+const BearDance6 = lazy(() => import("../../../Bears3D/BearDance6.tsx"));
 const Stand1 = lazy(() => import("../../../SharedUI/Stands/Stand1.tsx"));
 const Stand2 = lazy(() => import("../../../SharedUI/Stands/Stand2.tsx"));
 const Stand3 = lazy(() => import("../../../SharedUI/Stands/Stand3.tsx"));
 const Stand4 = lazy(() => import("../../../SharedUI/Stands/Stand4.tsx"));
 const Stand5 = lazy(() => import("../../../SharedUI/Stands/Stand5.tsx"));
+const Stand6 = lazy(() => import("../../../SharedUI/Stands/Stand6.tsx"));
 import { v4 as uuidv4 } from "uuid";
 import LevelUp from "../../../SharedUI/LevelUp/LevelUp.tsx";
 import { POINTS_TO_ADD } from "../../../utils/consts.ts";
@@ -37,7 +39,7 @@ const danceBearComponents = [
   { level: 2, Component: BearDance2, Stand: Stand2 },
   { level: 3, Component: BearDance3, Stand: Stand3 },
   { level: 4, Component: BearDance4, Stand: Stand4 },
-  { level: 5, Component: BearDance5, Stand: Stand5 },
+  { level: 5, Component: BearDance6, Stand: Stand6 },
 ];
 
 const Bear = () => {
@@ -59,7 +61,17 @@ const Bear = () => {
     try {
       if (!action) return;
 
-      action.paused = true;
+      const isLitvinBear = Array.isArray(action);
+
+      if (isLitvinBear) {
+        action[0].paused = true;
+        action[1].paused = true;
+        action[2].paused = true;
+        action[3].paused = true;
+      } else {
+        action.paused = true;
+      }
+
       const currentUserPoints = await userApi.sendPointsToServer(
         user.id,
         pointsToSend,
@@ -89,20 +101,6 @@ const Bear = () => {
     }, 500); // 500ms debounce
   }, [action]);
 
-  // const debouncedSendPointsToServer = useCallback(
-  //   debounce(() => {
-  //     console.log(
-  //       clickedPointsRef.current,
-  //       "clickedPointsRef.current debounce",
-  //     );
-  //     sendPointsToServer().then(() => {
-  //       console.log(clickedPointsRef.current, "clickedPointsRef.current then");
-  //       clickedPointsRef.current = 0;
-  //     });
-  //   }, 1000),
-  //   [action],
-  // );
-
   const handleCardClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       if (!action) return;
@@ -112,10 +110,26 @@ const Bear = () => {
       const pointsToAdd = POINTS_TO_ADD[state.level - 1];
       clickedPointsRef.current += pointsToAdd;
 
-      action.play();
+      const isLitvinBear = Array.isArray(action);
 
-      if (action.paused) {
-        action.paused = false;
+      if (isLitvinBear) {
+        action[0].play();
+        action[1].play();
+        action[2].play();
+        action[3].play();
+      } else {
+        action.play();
+      }
+
+      if (isLitvinBear) {
+        action[0].paused = false;
+        action[1].paused = false;
+        action[2].paused = false;
+        action[3].paused = false;
+      } else {
+        if (action.paused) {
+          action.paused = false;
+        }
       }
 
       dispatch({
