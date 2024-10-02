@@ -1,0 +1,65 @@
+.fortune-wheel-rules {
+  flex-grow: 1;
+  background-image: url("/fortune-wheel-rules.webp");
+  background-size: contain;
+  background-position: top;
+  background-attachment: fixed;
+  position: relative;
+  overflow: auto;
+  padding: 20px;
+}
+
+.content {
+  position: relative;
+  z-index: 3;
+
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(1px);
+  z-index: 1;
+}
+
+.content h1 {
+  font-size: 22px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 40px;
+  opacity: 0.6;
+  text-align: center;
+}
+
+.content ul li {
+  /*overflow: scroll;*/
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.content > ul > li:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.content ul li p {
+  opacity: 0.6;
+}
+
+.content ul li span {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.main-prizes, .participate {
+  opacity: 0.6;
+}

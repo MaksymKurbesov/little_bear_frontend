@@ -16,7 +16,6 @@ class UserService {
       type: "SET_USER_LEVEL",
       payload: getLevelByPoints(userData.points),
     });
-    await userApi.checkDailyReward(userData.id.toString(), this.dispatch);
   }
 
   async registerUser(

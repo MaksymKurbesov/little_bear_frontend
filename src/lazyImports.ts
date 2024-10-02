@@ -17,3 +17,5 @@ export const TasksPage = lazy(() => import("./Pages/Tasks/Tasks.tsx"));
 export const SettingsPage = lazy(() => import("./Pages/Settings/Settings.tsx"));
 
 export const SkinsPage = lazy(() => import("./Pages/Skins/Skins.tsx"));
+
+export const MarketPage = lazy(() => import("./Pages/Market/Market.tsx"));

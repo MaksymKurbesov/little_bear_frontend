@@ -5,15 +5,26 @@ import { NavLink } from "react-router-dom";
 import { dailyReward } from "../../../images";
 import { useAppState } from "../../../Stores/AppStateContext.tsx";
 import { useTranslation } from "react-i18next";
+import { userApi } from "../../../main.tsx";
 
 const DailyRewardHeader = () => {
-  const [dailyRewardTimeLeft, setDailyRewardTimeLeft] = useState("");
   const { state } = useAppState();
+  const [dailyRewardTimeLeft, setDailyRewardTimeLeft] = useState("");
   const { t } = useTranslation();
+  const [isClaimedToday, setIsClaimedToday] = useState(false);
 
   useEffect(() => {
     const updateCountdowns = () => {
       setDailyRewardTimeLeft(calculateTimeLeft());
+    };
+
+    const fetchClaimedToday = async () => {
+      const isClaimed = await userApi.checkIfUserMissedToday(
+        String(state.user.id),
+        "ticketRewards",
+      );
+
+      setIsClaimedToday(isClaimed);
     };
 
     updateCountdowns();
@@ -29,7 +40,7 @@ const DailyRewardHeader = () => {
   return (
     <div className={styles["daily-reward"]}>
       <NavLink to={"/daily-reward"} className={styles["daily-reward-link"]}>
-        {!state.user.hasClaimedToday && <div className={styles["dot"]}></div>}
+        {!isClaimedToday && <div className={styles["dot"]}></div>}
 
         <img
           src={dailyReward}
@@ -38,8 +49,8 @@ const DailyRewardHeader = () => {
         />
         <div className={styles["daily-text"]}>
           <p>{t("DailyReward")}</p>
-          {state.user.hasClaimedToday ? (
-            <p className={styles["claimed"]}>{t("DailyReward.Claimed")}!</p>
+          {isClaimedToday ? (
+            <p className={styles["claimed"]}>{t("Reward.Claimed")}!</p>
           ) : (
             <p>{dailyRewardTimeLeft}</p>
           )}

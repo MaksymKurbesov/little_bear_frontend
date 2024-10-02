@@ -1,14 +1,19 @@
 import styles from "./Main.module.css";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useAppState } from "../../Stores/AppStateContext.tsx";
 import Bear from "./Bear/Bear.tsx";
 import { POINTS_TO_ADD } from "../../utils/consts.ts";
 import Points from "./Points/Points.tsx";
 import LoadSpinning from "../../SharedUI/LoadSpinning/LoadSpinning.tsx";
+import { NavLink } from "react-router-dom";
+import MarketButton from "/market.png";
+import Energy from "./Energy/Energy.tsx";
+import LuckyDance from "./LuckyDance/LuckyDance.tsx";
 // import FPSStats from "react-fps-stats";
 
 const Main = () => {
   const { state, dispatch } = useAppState();
+  const [promoIsOpen, setPromoIsOpen] = useState(false);
   // const imagesLoaded = useImagePreloader([BackgroundImage, BearIcon]);
 
   const handleAnimationEnd = useCallback((id: number) => {
@@ -25,8 +30,28 @@ const Main = () => {
 
   return (
     <div className={styles["main"]}>
-      <Points points={state.user.points} />
-      <Bear />
+      {/*<Points points={state.user.points} />*/}
+      {/*<Energy />*/}
+      {/*<Bear />*/}
+
+      <div
+        className={styles["promo-button"]}
+        onClick={() => setPromoIsOpen(true)}
+      >
+        <p>Lucky Dance</p>
+        <span>06:12:46</span>
+      </div>
+      <NavLink to={"/fortune-wheel"}>Fortune Wheel</NavLink>
+
+      <LuckyDance
+        promoIsOpen={promoIsOpen}
+        closeHandler={() => setPromoIsOpen(false)}
+      />
+
+      {/*<NavLink to={"/market"} className={styles["market-button"]}>*/}
+      {/*  <img src={MarketButton} alt={""} width={40} />*/}
+      {/*  <span>Магазин</span>*/}
+      {/*</NavLink>*/}
 
       {state.clicks.map((click) => (
         <div

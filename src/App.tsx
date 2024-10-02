@@ -69,10 +69,13 @@ const App = () => {
     }
   }, [user, userData, dispatch, error, location.search]);
 
-  if (isLoadingScreen) {
-    return <LoadingScreen setIsLoadingScreen={setIsLoadingScreen} />;
-  }
+  // COMMENT FOR DEV //
+  // if (isLoadingScreen) {
+  //   return <LoadingScreen setIsLoadingScreen={setIsLoadingScreen} />;
+  // }
+  // COMMENT FOR DEV //
 
+  // TROUBLE WITH VIDEO
   // if (!userIsRegistered && !userData) {
   //   return (
   //     <StartBearVideo

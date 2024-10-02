@@ -8,6 +8,8 @@ import OpenedBearSkin2 from "../images/skins/brickn-opened.webp";
 import OpenedBearSkin3 from "../images/skins/neyon-opened.webp";
 import OpenedBearSkin4 from "../images/skins/brizzy-opened.webp";
 import OpenedBearSkin5 from "../images/skins/aztron-opened.webp";
+import DollarIcon from "../images/dollar-coin2.webp";
+import TicketIcon from "/ticket.webp";
 
 export const POINTS_TO_ADD = [1, 3, 5, 7, 10];
 
@@ -55,16 +57,169 @@ export const SKINS = [
 ];
 
 export const DAILY_REWARDS = [
-  `10`,
-  `50`,
-  `100`,
-  `300`,
-  `500`,
-  `1000`,
-  `2000`,
-  `3000`,
-  `5000`,
-  `10000`,
+  {
+    reward: 10,
+    icon: DollarIcon,
+  },
+  {
+    reward: 50,
+    icon: DollarIcon,
+  },
+  {
+    reward: 100,
+    icon: DollarIcon,
+  },
+  {
+    reward: 300,
+    icon: DollarIcon,
+  },
+  {
+    reward: 500,
+    icon: DollarIcon,
+  },
+  {
+    reward: 1000,
+    icon: DollarIcon,
+  },
+  {
+    reward: 2000,
+    icon: DollarIcon,
+  },
+  {
+    reward: 3000,
+    icon: DollarIcon,
+  },
+  {
+    reward: 5000,
+    icon: DollarIcon,
+  },
+  {
+    reward: 10000,
+    icon: DollarIcon,
+  },
+];
+
+export const TICKET_REWARDS = [
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
+  {
+    reward: 1,
+    icon: TicketIcon,
+  },
 ];
 
 export const DAILY_REWARDS_BY_DAY: { [key: string]: number } = {

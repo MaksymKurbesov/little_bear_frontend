@@ -29,6 +29,7 @@ import LevelUp from "../../../SharedUI/LevelUp/LevelUp.tsx";
 import { POINTS_TO_ADD } from "../../../utils/consts.ts";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { AnimationAction, AnimationClip } from "three";
+import eventEmitter from "../../../utils/eventEmitter.ts";
 
 export type GLTFWithAnimations = GLTF & {
   animations: AnimationClip[];
@@ -76,6 +77,7 @@ const Bear = () => {
         user.id,
         pointsToSend,
       );
+      eventEmitter.emit("externalClick");
 
       if (!currentUserPoints) {
         return;
@@ -139,6 +141,8 @@ const Bear = () => {
           click: { id: uuidv4(), x: e.clientX, y: e.clientY },
         },
       });
+
+      eventEmitter.emit("localEnergy");
 
       debouncedSendPointsToServer();
     },

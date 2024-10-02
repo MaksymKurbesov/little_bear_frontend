@@ -7,6 +7,7 @@ import {
   FriendsPage,
   LeadersPage,
   MainPage,
+  MarketPage,
   SettingsPage,
   SkinsPage,
   TasksPage,
@@ -14,6 +15,8 @@ import {
 import LoadSpinning from "./SharedUI/LoadSpinning/LoadSpinning.tsx";
 import News from "./Pages/News/News.tsx";
 import OneNews from "./Pages/OneNews/OneNews.tsx";
+import FortuneWheel from "./Pages/FortuneWheel/FortuneWheel.tsx";
+import FortuneWheelRules from "./Pages/FortuneWheelRules/FortuneWheelRules.tsx";
 
 const routes = createBrowserRouter([
   {
@@ -147,6 +150,48 @@ const routes = createBrowserRouter([
             }
           >
             <SkinsPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/market",
+        element: (
+          <Suspense
+            fallback={
+              <div className={"suspense"}>
+                <LoadSpinning />
+              </div>
+            }
+          >
+            <MarketPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/fortune-wheel",
+        element: (
+          <Suspense
+            fallback={
+              <div className={"suspense"}>
+                <LoadSpinning />
+              </div>
+            }
+          >
+            <FortuneWheel />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/fortune-wheel-rules",
+        element: (
+          <Suspense
+            fallback={
+              <div className={"suspense"}>
+                <LoadSpinning />
+              </div>
+            }
+          >
+            <FortuneWheelRules />
           </Suspense>
         ),
       },

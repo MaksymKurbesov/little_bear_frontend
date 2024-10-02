@@ -55,7 +55,10 @@ body {
   line-height: 1.2;
 }
 
-.suspense { flex-grow: 1}
+.suspense {
+  flex-grow: 1;
+  background: var(--gray)
+}
 
 @keyframes float {
     0% {

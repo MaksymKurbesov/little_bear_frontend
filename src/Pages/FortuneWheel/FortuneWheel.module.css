@@ -1,0 +1,24 @@
+.fortune-wheel {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-image: url('/fortune-wheel-background.webp');
+  background-position: center -150px;
+  background-size: 100%;
+}
+
+.fortune-wheel > div {
+  display: flex;
+  flex-grow: 1 !important;
+}
+
+.fortune-wheel > div > div {
+  height: 70vh !important;
+}
+
+.spin-button {
+  background: green;
+  padding: 10px;
+  width: 100px;
+  margin: 0 auto;
+}

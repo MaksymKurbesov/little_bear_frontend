@@ -56,6 +56,15 @@ export const throttle = (func, limit) => {
   };
 };
 
+export function isObject(value) {
+  const type = typeof value;
+  return value != null && (type === "object" || type === "function");
+}
+
+export const randomIntFromInterval = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
 export const getLevelByPoints = (points: number) => {
   const newLevel = levelThresholds.findIndex((threshold) => points < threshold);
   return newLevel >= 0 ? newLevel : levelThresholds.length;

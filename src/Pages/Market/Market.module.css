@@ -1,0 +1,57 @@
+.market {
+  flex-grow: 1;
+  background: var(--gray);
+  padding: 30px 20px;
+  font-weight: 500;
+}
+
+.market h1 {
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.market ul {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 15px;
+  column-gap: 10px;
+  font-size: 14px;
+}
+
+.market ul li {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.market ul li img {
+  margin-bottom: 10px;
+}
+
+.title {
+  margin-bottom: 20px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.price {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.price span {
+  font-size: 12px;
+  opacity: 0.15;
+  font-weight: 400;
+  margin-bottom: 2px;
+}
+
+.buy-button {
+  background: var(--orange);
+  padding: 0 20px;
+  border-radius: 5px;
+}
