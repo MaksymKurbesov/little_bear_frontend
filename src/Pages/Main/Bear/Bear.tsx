@@ -39,7 +39,7 @@ const danceBearComponents = [
   { level: 2, Component: BearDance2, Stand: Stand2 },
   { level: 3, Component: BearDance3, Stand: Stand3 },
   { level: 4, Component: BearDance4, Stand: Stand4 },
-  { level: 5, Component: BearDance6, Stand: Stand6 },
+  { level: 5, Component: BearDance5, Stand: Stand5 },
 ];
 
 const Bear = () => {
