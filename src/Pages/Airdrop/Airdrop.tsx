@@ -46,36 +46,7 @@ const Airdrop = () => {
         />
       </div>
       <div className={styles["countdown-wrapper"]}>
-        <p className={styles["remaining-text"]}>
-          Time remaining until the airdrop
-        </p>
-
-        <div className={styles["countdown"]}>
-          <div className={styles["dig"]}>
-            <div>
-              <p>{days}</p>
-            </div>
-            <span>days</span>
-          </div>
-          <div className={styles["dig"]}>
-            <div>
-              <p>{hours}</p>
-            </div>
-            <span>hours</span>
-          </div>
-          <div className={styles["dig"]}>
-            <div>
-              <p>{minutes}</p>
-            </div>
-            <span>minutes</span>
-          </div>
-          <div className={styles["dig"]}>
-            <div>
-              <p>{seconds}</p>
-            </div>
-            <span>seconds</span>
-          </div>
-        </div>
+        <p className={styles["soon"]}>SOON!</p>
       </div>
     </div>
   );
