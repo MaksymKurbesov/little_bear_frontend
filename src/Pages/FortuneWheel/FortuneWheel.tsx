@@ -1,15 +1,34 @@
 import styles from "./FortuneWheel.module.css";
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import SilverTicket from "/silver-ticket.webp";
 import GoldTicket from "/gold-ticket.webp";
 import FortuneWheel3D from "./FortuneWheel3D.tsx";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useThree } from "@react-three/fiber";
+import { useAppState } from "../../Stores/AppStateContext.tsx";
+import { AnimationAction } from "three";
+import {
+  OrbitControls,
+  PerformanceMonitor,
+  PerspectiveCamera,
+  useHelper,
+} from "@react-three/drei";
+import * as THREE from "three";
+import CameraHelper from "./CameraHelper.tsx";
+import { Perf } from "r3f-perf";
 
 const FortuneWheel = () => {
   const [rotationSpeed, setRotationSpeed] = useState(0);
   const [winningSegment, setWinningSegment] = useState(null);
+  const { state } = useAppState();
+  const [action, setAction] = useState<AnimationAction>();
 
   const wheelRef = useRef();
+
+  const [dpr, setDpr] = useState(1.5);
+
+  const handleActionReady = useCallback((action: AnimationAction) => {
+    setAction(action);
+  }, []);
 
   const resetWheelRotation = () => {
     if (wheelRef.current) {
@@ -26,31 +45,44 @@ const FortuneWheel = () => {
     <>
       <div className={styles["tickets"]}>
         <div>
-          <img src={SilverTicket} width={35} />
-          <span>0</span>
+          <img src={SilverTicket} width={35} alt={""} />
+          <span>{state.user.silverTickets}</span>
         </div>
         <div>
-          <img src={GoldTicket} width={35} />
-          <span>0</span>
+          <img src={GoldTicket} width={35} alt={""} />
+          <span>{state.user.goldTickets}</span>
         </div>
       </div>
       <div className={styles["fortune-wheel"]}>
         <Canvas
           shadows
-          dpr={[1, 2]}
-          onCreated={(state) => console.log(state.camera)}
-          camera={{ position: [0, -0.2, 2] }}
+          dpr={dpr}
+
+          // camera={{ position: [0, -0.2, 2.5], near: 0.01, far: 10000 }}
+          // camera={{ position: [0, 0, 0] }}
         >
+          <Perf position="top-left" />
+          <CameraHelper />
           <FortuneWheel3D
             setWinningSegment={setWinningSegment}
             rotationSpeed={rotationSpeed}
             setRotationSpeed={setRotationSpeed}
+            handleActionReady={handleActionReady}
           />
         </Canvas>
         <button
           onClick={() => {
             resetWheelRotation();
-            spinWheel();
+            action.paused = false;
+            setTimeout(() => {
+              spinWheel();
+            }, 850);
+
+            setTimeout(() => {
+              action.stop();
+              action.play();
+              action.paused = true;
+            }, 2000);
           }}
           className={styles["spin-button"]}
         >

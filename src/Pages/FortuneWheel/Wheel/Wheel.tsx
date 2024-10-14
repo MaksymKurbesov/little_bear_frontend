@@ -53,14 +53,12 @@ const Wheel = forwardRef((props, ref) => {
     return segments[segmentIndex];
   }
 
-  useFrame(() => {
+  useFrame((state, delta) => {
     if (wheelRef.current) {
       if (rotationSpeed > 0) {
         setIsRunning(true);
         wheelRef.current.rotation.y -= rotationSpeed * 0.01;
-
-        setRotationSpeed((speed) => Math.max(speed - 0.01, 0));
-        setIsRunning(true);
+        setRotationSpeed((speed) => Math.max(speed - delta, 0));
       } else if (rotationSpeed <= 0 && isRunning) {
         setIsRunning(false);
         const finalSegment = getWinningSegment(wheelRef.current.rotation.y);
