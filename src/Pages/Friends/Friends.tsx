@@ -22,7 +22,7 @@ const Friends = () => {
 
     setCoppied(true);
     navigator.clipboard.writeText(
-      `https://t.me/little_bear_tap_bot/little_bear?startapp=little_bear_id=${state.user.id}`,
+      `https://t.me/little_bear_app_bot/little_bear?startapp=little_bear_id=${state.user.id}`,
     );
   };
 
