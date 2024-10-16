@@ -29,7 +29,7 @@ const Friends = () => {
   const handleInviteClick = () => {
     if (!state.user) return;
 
-    const inviteUrl = `https://t.me/share/url?text=Invite%20your%20friends&url=t.me/little_bear_tap_bot/little_bear?startapp=little_bear_id=${state.user.id}`;
+    const inviteUrl = `https://t.me/share/url?text=Invite%20your%20friends&url=t.me/little_bear_app_bot/little_bear?startapp=little_bear_id=${state.user.id}`;
 
     tg.openTelegramLink(inviteUrl);
   };
