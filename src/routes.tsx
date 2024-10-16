@@ -15,7 +15,7 @@ import {
 import LoadSpinning from "./SharedUI/LoadSpinning/LoadSpinning.tsx";
 import News from "./Pages/News/News.tsx";
 import OneNews from "./Pages/OneNews/OneNews.tsx";
-import FortuneWheel from "./Pages/FortuneWheel/FortuneWheel.tsx";
+import FortuneWheel from "./Pages/FortuneWheel/FortunePage.tsx";
 import FortuneWheelRules from "./Pages/FortuneWheelRules/FortuneWheelRules.tsx";
 
 const routes = createBrowserRouter([

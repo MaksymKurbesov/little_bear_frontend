@@ -30,9 +30,9 @@ const Main = () => {
 
   return (
     <div className={styles["main"]}>
-      {/*<Points points={state.user.points} />*/}
+      <Points points={state.user.points} />
       {/*<Energy />*/}
-      {/*<Bear />*/}
+      <Bear />
 
       <div
         className={styles["promo-button"]}

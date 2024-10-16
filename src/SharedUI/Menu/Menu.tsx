@@ -27,7 +27,7 @@ const Menu = () => {
             isPending ? styles["pending"] : isActive ? styles["active"] : ""
           }
         >
-          <img src={PlayIcon} width={22} alt={""} height={32} />
+          <img src={PlayIcon} width={21} alt={""} height={32} />
           <span>{t("Menu.Bear")}</span>
         </NavLink>
       </li>

@@ -14,6 +14,7 @@ import RegisteredModal from "./SharedUI/RegisteredModal/RegisteredModal.tsx";
 import UserService from "./Services/UserService.ts";
 import { useTranslation } from "react-i18next";
 import LoadSpinning from "./SharedUI/LoadSpinning/LoadSpinning.tsx";
+import { userApi } from "./main.tsx";
 
 const BACKGROUND_MAP = {
   "/airdrop": "background-image-airdrop",
@@ -31,15 +32,11 @@ const BEAR_BACKGROUNDS = [
 const App = () => {
   const { user } = useTelegram();
   const { i18n } = useTranslation();
-  const {
-    data: userData,
-    error,
-    refetch,
-  } = useGetUserQuery(user?.id, {
-    skip: !user?.id,
-  });
   const { state, dispatch } = useAppState();
-  const [userIsRegistered, setUserIsRegistered] = useState<boolean>(false);
+  const [userIsRegistered, setUserIsRegistered] = useState<boolean | null>(
+    null,
+  );
+  const [showStartPopup, setShowStartPopup] = useState(false);
   const location = useLocation();
   const backgroundClassName = BACKGROUND_MAP[location.pathname];
   const bearBackgroundCN = BEAR_BACKGROUNDS[state.level - 1];
@@ -48,26 +45,24 @@ const App = () => {
   // const [videoIsEnd, setVideoIsEnd] = useState(false);
 
   useEffect(() => {
-    if (!user || !user.username) return;
+    if (!user) return;
+
+    if (state.user) {
+      i18n.changeLanguage(state.user.settings.language);
+    }
 
     const userService = new UserService(dispatch);
 
-    if (userData) {
-      userService.setUserData(userData).then(() => {
-        setUserIsRegistered(true);
-        i18n.changeLanguage(userData.settings.language);
-      });
-    }
-
-    if (error && error.data === "Document does not exist") {
-      const refID = getLittleBearId(location.search) || "";
-      const isPremium = !!user.is_premium;
-      setUserIsRegistered(false);
-      userService.registerUser(user, refID, isPremium).then(() => {
-        refetch();
-      });
-    }
-  }, [user, userData, dispatch, error, location.search]);
+    userApi.checkUserExists(user.id).then((isExist) => {
+      if (!isExist) {
+        const refID = getLittleBearId(location.search) || "";
+        const isPremium = !!user.is_premium;
+        setUserIsRegistered(false);
+        userService.registerUser(user, refID, isPremium);
+      }
+    });
+  }, [user, dispatch, location.search]);
+  // }, [user, userData, dispatch, error, location.search]);
 
   // COMMENT FOR DEV //
   // if (isLoadingScreen) {
@@ -98,11 +93,11 @@ const App = () => {
     <div
       className={`${styles["game-wrapper"]} ${styles[backgroundClassName]} ${styles[bearBackgroundCN]}`}
     >
-      <div key={"register-modal"}>
-        {!userIsRegistered ? (
-          <RegisteredModal closeHandler={() => setUserIsRegistered(true)} />
-        ) : null}
-      </div>
+      {/*<div key={"register-modal"}>*/}
+      {!userIsRegistered ? (
+        <RegisteredModal closeHandler={() => setUserIsRegistered(true)} />
+      ) : null}
+      {/*</div>*/}
       <Header pathname={location.pathname} />
       <Outlet />
       <Menu />

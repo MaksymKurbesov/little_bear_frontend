@@ -99,128 +99,60 @@ export const DAILY_REWARDS = [
   },
 ];
 
-export const TICKET_REWARDS = [
+export const SEGMENTS = [
   {
-    reward: 1,
-    icon: TicketIcon,
+    name: "30000 BEAR TOKEN",
+    value: "30",
+    chance: 11,
   },
   {
-    reward: 1,
-    icon: TicketIcon,
+    name: "Серебрянный билет",
+    value: "silver_ticket",
+    chance: 15,
   },
   {
-    reward: 1,
-    icon: TicketIcon,
+    name: "20000 BEAR TOKEN",
+    value: "20",
+    chance: 16,
   },
   {
-    reward: 1,
-    icon: TicketIcon,
+    name: "Золотой билет",
+    value: "gold_ticket",
+    chance: 10,
   },
   {
-    reward: 1,
-    icon: TicketIcon,
+    name: "10000 BEAR TOKEN",
+    value: "10",
+    chance: 11,
   },
   {
-    reward: 1,
-    icon: TicketIcon,
+    name: "Скин 'Mafia Little Bear'",
+    value: "bear",
+    chance: 5,
   },
   {
-    reward: 1,
-    icon: TicketIcon,
+    name: "50000 BEAR TOKEN",
+    value: "50",
+    chance: 11,
   },
   {
-    reward: 1,
-    icon: TicketIcon,
+    name: "Золотой билет",
+    value: "gold_ticket",
+    chance: 10,
   },
   {
-    reward: 1,
-    icon: TicketIcon,
+    name: "40000 BEAR TOKEN",
+    value: "40",
+    chance: 16,
   },
   {
-    reward: 1,
-    icon: TicketIcon,
-  },
-  {
-    reward: 1,
-    icon: TicketIcon,
-  },
-  {
-    reward: 1,
-    icon: TicketIcon,
-  },
-  {
-    reward: 1,
-    icon: TicketIcon,
-  },
-  {
-    reward: 1,
-    icon: TicketIcon,
-  },
-  {
-    reward: 1,
-    icon: TicketIcon,
-  },
-  {
-    reward: 1,
-    icon: TicketIcon,
-  },
-  {
-    reward: 1,
-    icon: TicketIcon,
-  },
-  {
-    reward: 1,
-    icon: TicketIcon,
-  },
-  {
-    reward: 1,
-    icon: TicketIcon,
-  },
-  {
-    reward: 1,
-    icon: TicketIcon,
-  },
-  {
-    reward: 1,
-    icon: TicketIcon,
-  },
-  {
-    reward: 1,
-    icon: TicketIcon,
-  },
-  {
-    reward: 1,
-    icon: TicketIcon,
-  },
-  {
-    reward: 1,
-    icon: TicketIcon,
-  },
-  {
-    reward: 1,
-    icon: TicketIcon,
-  },
-  {
-    reward: 1,
-    icon: TicketIcon,
-  },
-  {
-    reward: 1,
-    icon: TicketIcon,
-  },
-  {
-    reward: 1,
-    icon: TicketIcon,
-  },
-  {
-    reward: 1,
-    icon: TicketIcon,
-  },
-  {
-    reward: 1,
-    icon: TicketIcon,
+    name: "Серебрянный билет",
+    value: "silver_ticket",
+    chance: 15,
   },
 ];
+
+export const TICKET_REWARDS = [];
 
 export const DAILY_REWARDS_BY_DAY: { [key: string]: number } = {
   0: 10,

@@ -1,5 +1,12 @@
-import React, { createContext, useContext, useReducer, ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  useReducer,
+  ReactNode,
+  useEffect,
+} from "react";
 import { IUser } from "../Api/UserApi.ts";
+import { subscribeToUserChanges } from "../Api/UserSubscriber.ts";
 
 interface State {
   dailyRewardTimeLeft: string;
@@ -109,12 +116,22 @@ const AppStateContext = createContext<
 
 interface AppStateProviderProps {
   children: ReactNode;
+  userId: number;
 }
 
 export const AppStateProvider: React.FC<AppStateProviderProps> = ({
+  userId,
   children,
 }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    if (!userId) return;
+
+    const unsubscribe = subscribeToUserChanges(userId, dispatch);
+
+    return () => unsubscribe();
+  }, [userId]);
 
   return (
     <AppStateContext.Provider value={{ state, dispatch }}>

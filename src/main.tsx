@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 import store from "./Stores/store.ts";
 import { AppStateProvider } from "./Stores/AppStateContext.tsx";
 import "./i18n";
+import FortuneWheelApi from "./Api/FortuneWheel.ts";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -23,11 +24,15 @@ const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app);
 export const userApi = new UserApi();
+export const fortuneWheelApi = new FortuneWheelApi();
+
+const tg = window.Telegram.WebApp;
+const telegramUserID = tg.initDataUnsafe.user.id;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   // <React.StrictMode>
   <Provider store={store}>
-    <AppStateProvider>
+    <AppStateProvider userId={telegramUserID}>
       <RouterProvider router={routes} />
     </AppStateProvider>
   </Provider>,

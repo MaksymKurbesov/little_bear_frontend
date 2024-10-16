@@ -1,37 +1,23 @@
-import { useGLTF } from "@react-three/drei";
-import { forwardRef, useImperativeHandle, useRef, useState } from "react";
-import { useFrame } from "@react-three/fiber";
-import { useSpring } from "react-spring";
+import { GradientTexture, useGLTF } from "@react-three/drei";
+import { forwardRef, useImperativeHandle, useMemo, useRef } from "react";
+import * as THREE from "three";
+import { animated } from "@react-spring/three";
 
-const segments = [
-  "30000 BEAR TOKEN",
-  "Серебрянный билет",
-  "20000 BEAR TOKEN",
-  "Золотой билет",
-  "10000  BEAR TOKEN",
-  "Скин 'Mafia Little Bear'",
-  "50000  BEAR TOKEN",
-  "Золотой билет",
-  "40000  BEAR TOKEN",
-  "Серебрянный билет",
-];
-
-const Wheel = forwardRef((props, ref) => {
-  const { nodes, materials } = useGLTF("/wheel2.glb");
-  const {
-    numSegments,
-    rotationSpeed,
-    // totalRotation,
-    // setTotalRotation,
-    setRotationSpeed,
-    setWinningSegment,
-  } = props;
-
+const Wheel = forwardRef(({ animatedRotation }, ref) => {
   const wheelRef = useRef();
-  const [isRunning, setIsRunning] = useState(false);
+  const wheelLightsRef = useRef();
+  const { nodes, materials } = useGLTF("/wheel/untitled.gltf");
 
-  // const segmentAngle = (Math.PI * 2) / numSegments;
-  const segmentAngle = 360 / numSegments;
+  const gradientTexture = useMemo(
+    () => (
+      <GradientTexture
+        stops={[0, 0.7, 1]}
+        colors={["#000000", "#b02a2a", "#a42222"]}
+        size={1024}
+      />
+    ),
+    [],
+  );
 
   useImperativeHandle(ref, () => ({
     current: wheelRef.current,
@@ -42,104 +28,127 @@ const Wheel = forwardRef((props, ref) => {
     },
   }));
 
-  function getWinningSegment(rotationAngle) {
-    const rotationAngleInDegrees = rotationAngle * (180 / Math.PI);
-    const initialOffset = 0; // смещение угла в градусах
-    const adjustedAngle = (rotationAngleInDegrees + initialOffset) % 360;
-
-    const normalizedAngle = (adjustedAngle + 360) % 360;
-    const segmentIndex = Math.floor(normalizedAngle / segmentAngle);
-
-    return segments[segmentIndex];
-  }
-
-  useFrame((state, delta) => {
-    if (wheelRef.current) {
-      if (rotationSpeed > 0) {
-        setIsRunning(true);
-        wheelRef.current.rotation.y -= rotationSpeed * 0.01;
-        setRotationSpeed((speed) => Math.max(speed - delta, 0));
-      } else if (rotationSpeed <= 0 && isRunning) {
-        setIsRunning(false);
-        const finalSegment = getWinningSegment(wheelRef.current.rotation.y);
-        setWinningSegment(finalSegment);
-      }
-    }
-  });
-
   return (
-    <group
-      {...props}
-      // dispose={null}
-      position={[-0.4, 0, -1.5]}
-      rotation={[0, 0, 0]}
-    >
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Oil_Tank_1.geometry}
-        material={materials["Mat.5"]}
-        position={[0, 0.19, 0.164]}
-        rotation={[-Math.PI, 0, 0]}
-        scale={0.01}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Sphere_4.geometry}
-        material={materials.MoneyBag}
-        position={[-0.023, -1.264, 0.675]}
-        rotation={[Math.PI / 2, 0, 0]}
-        scale={0.01}
-      />
+    <group dispose={null}>
       <group
-        position={[0.185, 0.123, 0.153]}
+        position={[0, 0.256, 0]}
         rotation={[Math.PI / 2, 0, 0]}
         scale={0.01}
       >
-        <mesh
+        <animated.mesh
+          // ref={wheelRef}
+          // onClick={spinWheel}
           castShadow
           receiveShadow
-          geometry={nodes.Mesh015.geometry}
-          material={materials["Mat.2"]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Mesh015_1.geometry}
-          material={materials["Mat.1"]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Mesh015_2.geometry}
-          material={materials.Mat}
-        />
-      </group>
-      <group
-        position={[0, 0.175, 0.126]}
-        rotation={[Math.PI / 2, 0, 0]}
-        scale={0.01}
-        ref={wheelRef}
-      >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Mesh016.geometry}
+          geometry={nodes.Wheel001.geometry}
           material={materials["Mat.7"]}
-        />
+          position={[-20.31, -13.526, 8.053]}
+          rotation={animatedRotation}
+        ></animated.mesh>
         <mesh
           castShadow
-          receiveShadow
-          geometry={nodes.Mesh016_1.geometry}
+          geometry={nodes.Arrow.geometry}
           material={materials["Mat.2"]}
+          position={[-20.221, 0.766, -91.89]}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.Mesh016_2.geometry}
-          material={materials.Mat}
+          geometry={nodes.Money_bags.geometry}
+          material={materials.MoneyBag}
+          position={[-22.637, 40.763, 151.991]}
         />
+        <mesh
+          castShadow
+          geometry={nodes.Spheres_Spin.geometry}
+          position={[16.641, -16.993, -129.931]}
+        >
+          <meshStandardMaterial emissive="orange" emissiveIntensity={2} />
+        </mesh>
+        <mesh
+          geometry={nodes.Stoika.geometry}
+          material={materials["Mat.5"]}
+          position={[-1.764, -10.426, -58.778]}
+        />
+
+        {/*S S S S S S S*/}
+        <mesh
+          castShadow
+          geometry={nodes.Stoika005.geometry}
+          position={[-1.764, -10.426, -58.778]}
+        >
+          <meshBasicMaterial>{gradientTexture}</meshBasicMaterial>
+        </mesh>
+        {/*P P P P P*/}
+        <mesh
+          castShadow
+          geometry={nodes.Stoika003.geometry}
+          position={[-1.764, -10.426, -58.778]}
+        >
+          <meshBasicMaterial>{gradientTexture}</meshBasicMaterial>
+        </mesh>
+        {/*I I I I I I I I I I*/}
+        <mesh
+          castShadow
+          geometry={nodes.Stoika001.geometry}
+          material={nodes.Stoika005.material}
+          position={[-1.764, -10.426, -58.778]}
+        >
+          <meshBasicMaterial>{gradientTexture}</meshBasicMaterial>
+        </mesh>
+        {/*N N N N N */}
+        <mesh
+          castShadow
+          geometry={nodes.Stoika002.geometry}
+          position={[-1.764, -10.426, -58.778]}
+        >
+          <meshBasicMaterial>{gradientTexture}</meshBasicMaterial>
+        </mesh>
+        {/*ARROW*/}
+        <mesh
+          castShadow
+          geometry={nodes.Stoika004.geometry}
+          position={[-1.764, -10.426, -58.778]}
+        >
+          <meshBasicMaterial>{gradientTexture}</meshBasicMaterial>
+        </mesh>
+
+        <mesh
+          receiveShadow
+          geometry={nodes.Stoika006.geometry}
+          material={new THREE.MeshStandardMaterial({ color: "#181818" })}
+          position={[-1.764, -10.426, -58.778]}
+        />
+        <mesh
+          geometry={nodes.Stoika007.geometry}
+          material={materials["center circle"]}
+          position={[-1.764, -10.426, -58.778]}
+        />
+        <group>
+          <mesh
+            geometry={nodes.Spheres_Wheel.geometry}
+            material={materials["Mat.2"]}
+            position={[-20.31, -5.647, 8.053]}
+            ref={wheelLightsRef}
+          />
+
+          <mesh
+            castShadow
+            geometry={nodes.Wheel.geometry}
+            material={materials.Mat}
+            position={[-20.31, -13.526, 8.053]}
+          />
+        </group>
+
+        {/*<mesh*/}
+        {/*  ref={wheelRef}*/}
+        {/*  castShadow*/}
+        {/*  receiveShadow*/}
+        {/*  geometry={nodes.Wheel001.geometry}*/}
+        {/*  material={materials["Mat.7"]}*/}
+        {/*  position={[-20.31, -13.526, 8.053]}*/}
+        {/*  rotation={[0, 0, 0]}*/}
+        {/*/>*/}
       </group>
     </group>
   );
@@ -147,4 +156,4 @@ const Wheel = forwardRef((props, ref) => {
 
 export default Wheel;
 
-useGLTF.preload("/wheel2.glb");
+useGLTF.preload("/wheel/untitled.gltf");

@@ -272,11 +272,6 @@ class UserApi {
         },
       });
 
-      dispatch({
-        type: "SET_USER_POINTS",
-        payload: newTotalPoints,
-      });
-
       console.log("Reward claimed successfully");
     } catch (err) {
       console.error("Failed to claim reward:", err);
@@ -344,6 +339,13 @@ class UserApi {
 
     return consecutiveDays;
   };
+
+  async checkUserExists(userId: number) {
+    const userDocRef = doc(db, "users", String(userId));
+    const userDoc = await getDoc(userDocRef);
+
+    return userDoc.exists();
+  }
 
   async claimTicket(user: any, dispatch: any) {
     if (!user) return;

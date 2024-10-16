@@ -1,4 +1,4 @@
-import { levelThresholds } from "./consts.ts";
+import { levelThresholds, SEGMENTS } from "./consts.ts";
 import { IUser } from "../Api/UserApi.ts";
 
 export const calculateTimeLeft = () => {
@@ -41,6 +41,30 @@ export const debounce = (func, delay) => {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => func.apply(this, args), delay);
   };
+};
+
+export const chooseSegment = () => {
+  const random = Math.random() * 100;
+  let accumulatedChance = 0;
+
+  for (const segment of SEGMENTS) {
+    accumulatedChance += segment.chance;
+    if (random < accumulatedChance) {
+      return segment;
+    }
+  }
+
+  return null;
+};
+
+export const getWinningSegment = (rotationAngle) => {
+  const numSegments = 10;
+  const segmentAngle = 360 / numSegments;
+
+  const rotationAngleInDegrees = (rotationAngle * 180) / Math.PI;
+  const adjustedAngle = ((rotationAngleInDegrees % 360) + 360) % 360; // Нормализуем угол в пределах 0-360
+  const segmentIndex = Math.floor(adjustedAngle / segmentAngle);
+  return SEGMENTS[segmentIndex];
 };
 
 export const throttle = (func, limit) => {
