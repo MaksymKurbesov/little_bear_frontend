@@ -8,7 +8,7 @@ import { useGetUserQuery } from "./Stores/slices/apiSlice.ts";
 import { useAppState } from "./Stores/AppStateContext.tsx";
 import StartBearVideo from "./Pages/StartBearVideo/StartBearVideo.tsx";
 import LoadingScreen from "./Pages/LoadingScreen/LoadingScreen.tsx";
-import { getLittleBearId } from "./utils/helpers.ts";
+import { getLevelByPoints, getLittleBearId } from "./utils/helpers.ts";
 import RegisteredModal from "./SharedUI/RegisteredModal/RegisteredModal.tsx";
 
 import UserService from "./Services/UserService.ts";
@@ -21,48 +21,60 @@ const BACKGROUND_MAP = {
   "/skins": "background-image-skins",
 };
 
-const BEAR_BACKGROUNDS = [
-  "background-image-main",
-  "background-image-main2",
-  "background-image-main3",
-  "background-image-main4",
-  "background-image-main5",
-];
+const BEAR_BACKGROUNDS = {
+  timber: "background-image-main",
+  brickn: "background-image-main2",
+  aztron: "background-image-main3",
+  brizzy: "background-image-main4",
+  neyon: "background-image-main5",
+};
 
 const App = () => {
   const { user } = useTelegram();
   const { i18n } = useTranslation();
   const { state, dispatch } = useAppState();
-  const [userIsRegistered, setUserIsRegistered] = useState<boolean | null>(
-    null,
-  );
   const [showStartPopup, setShowStartPopup] = useState(false);
+  const [currentUserLevel, setCurrentUserLevel] = useState(0);
+  const [currentUserSkin, setCurrentUserSkin] = useState("timber");
+
+  const [bgSkin, setbgSkin] = useState("");
   const location = useLocation();
   const backgroundClassName = BACKGROUND_MAP[location.pathname];
-  const bearBackgroundCN = BEAR_BACKGROUNDS[state.level - 1];
+  const bearBackgroundCN = BEAR_BACKGROUNDS[currentUserSkin];
+
+  console.log(state.user?.skin, "state.user.skin");
 
   const [isLoadingScreen, setIsLoadingScreen] = useState(true);
   // const [videoIsEnd, setVideoIsEnd] = useState(false);
 
   useEffect(() => {
-    if (!user) return;
+    if (!user || !state.user) return;
+
+    if (state.user.skin) {
+      setCurrentUserSkin(state.user.skin);
+      setbgSkin(BEAR_BACKGROUNDS[state.user.skin]);
+    } else {
+      const currentLevel = getLevelByPoints(state.user.points);
+      const currentBg = Object.values(BEAR_BACKGROUNDS)[currentLevel - 1];
+      setbgSkin(currentBg);
+    }
 
     if (state.user) {
       i18n.changeLanguage(state.user.settings.language);
+      setCurrentUserLevel(getLevelByPoints(state.user.points));
     }
 
     const userService = new UserService(dispatch);
 
     userApi.checkUserExists(user.id).then((isExist) => {
       if (!isExist) {
+        setShowStartPopup(true);
         const refID = getLittleBearId(location.search) || "";
         const isPremium = !!user.is_premium;
-        setUserIsRegistered(false);
         userService.registerUser(user, refID, isPremium);
       }
     });
-  }, [user, dispatch, location.search]);
-  // }, [user, userData, dispatch, error, location.search]);
+  }, [user, state.user, dispatch, location.search]);
 
   // COMMENT FOR DEV //
   // if (isLoadingScreen) {
@@ -91,13 +103,11 @@ const App = () => {
 
   return (
     <div
-      className={`${styles["game-wrapper"]} ${styles[backgroundClassName]} ${styles[bearBackgroundCN]}`}
+      className={`${styles["game-wrapper"]} ${styles[bgSkin]} ${styles[bearBackgroundCN]}`}
     >
-      {/*<div key={"register-modal"}>*/}
-      {!userIsRegistered ? (
-        <RegisteredModal closeHandler={() => setUserIsRegistered(true)} />
-      ) : null}
-      {/*</div>*/}
+      {showStartPopup && (
+        <RegisteredModal closeHandler={() => setShowStartPopup(false)} />
+      )}
       <Header pathname={location.pathname} />
       <Outlet />
       <Menu />

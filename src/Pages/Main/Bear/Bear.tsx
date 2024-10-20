@@ -1,6 +1,13 @@
 import styles from "./Bear.module.css";
 import { Canvas } from "@react-three/fiber";
-import React, { lazy, Suspense, useCallback, useRef, useState } from "react";
+import React, {
+  lazy,
+  Suspense,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useAppState } from "../../../Stores/AppStateContext.tsx";
 import LoadSpinning from "../../../SharedUI/LoadSpinning/LoadSpinning.tsx";
 import { useTelegram } from "../../../hooks/useTelegram.ts";
@@ -36,11 +43,11 @@ export type GLTFWithAnimations = GLTF & {
 };
 
 const danceBearComponents = [
-  { level: 1, Component: BearDance1, Stand: Stand1 },
-  { level: 2, Component: BearDance2, Stand: Stand2 },
-  { level: 3, Component: BearDance3, Stand: Stand3 },
-  { level: 4, Component: BearDance4, Stand: Stand4 },
-  { level: 5, Component: BearDance6, Stand: Stand6 },
+  { level: 1, Component: BearDance1, Stand: Stand1, name: "timber" },
+  { level: 2, Component: BearDance2, Stand: Stand2, name: "brickn" },
+  { level: 3, Component: BearDance3, Stand: Stand3, name: "aztron" },
+  { level: 4, Component: BearDance4, Stand: Stand4, name: "brizzy" },
+  { level: 5, Component: BearDance5, Stand: Stand5, name: "neyon" },
 ];
 
 const Bear = () => {
@@ -49,8 +56,25 @@ const Bear = () => {
   const [action, setAction] = useState<AnimationAction>();
   const [levelUpModal, setLevelUpModal] = useState(false);
   const controlsRef = useRef();
+  const [currentUserLevel, setCurrentUserLevel] = useState(0);
+  const [currentSkin, setCurrentSkin] = useState("");
 
   const clickedPointsRef = useRef(0);
+
+  useEffect(() => {
+    if (!state.user) return;
+
+    const level = getLevelByPoints(state.user.points);
+    setCurrentUserLevel(level);
+    if (state.user.skin) {
+      setCurrentSkin(state.user.skin);
+    } else {
+      const bearComponent = danceBearComponents.find(
+        (item) => item.level === level,
+      );
+      setCurrentSkin(bearComponent.name);
+    }
+  }, []);
 
   const handleActionReady = useCallback((action: AnimationAction) => {
     setAction(action);
@@ -83,11 +107,14 @@ const Bear = () => {
         return;
       }
 
-      const currentLevel = getLevelByPoints(currentUserPoints);
+      const newLevel = getLevelByPoints(currentUserPoints);
 
-      if (currentLevel > state.level) {
+      if (currentUserLevel < newLevel) {
         setLevelUpModal(true);
-        console.log(`Congratulations! You've reached Level ${currentLevel}`);
+        setCurrentUserLevel(newLevel);
+        console.log(
+          `Congratulations! You've reached Level ${currentUserLevel}`,
+        );
       }
     } catch (error) {
       console.error("Error sending points to server:", error);
@@ -156,10 +183,10 @@ const Bear = () => {
           onCollectHandler={() => {
             if (!state.user) return;
 
-            dispatch({
-              type: "SET_USER_LEVEL",
-              payload: getLevelByPoints(state.user.points),
-            });
+            // dispatch({
+            //   type: "SET_USER_LEVEL",
+            //   payload: getLevelByPoints(state.user.points),
+            // });
             setLevelUpModal(false);
           }}
           level={getLevelByPoints(state.user.points)}
@@ -181,16 +208,18 @@ const Bear = () => {
                 scale={0.47}
               >
                 <group position={[0, -0.1, 0]}>
-                  {danceBearComponents.map(({ level, Component, Stand }) => {
-                    return (
-                      state.level === level && (
+                  {danceBearComponents.map(
+                    ({ level, name, Component, Stand }) => {
+                      if (currentSkin !== name) return;
+
+                      return (
                         <React.Fragment key={level}>
                           <Component handleActionReady={handleActionReady} />
                           <Stand />
                         </React.Fragment>
-                      )
-                    );
-                  })}
+                      );
+                    },
+                  )}
                 </group>
 
                 {/*<OrbitControls ref={controlsRef} />*/}
@@ -198,45 +227,6 @@ const Bear = () => {
             </Lights>
           </Canvas>
         </Suspense>
-        {/*<div className={styles["buttons-wrapper"]}>*/}
-        {/*  <button*/}
-        {/*    onClick={() => {*/}
-        {/*      controlsRef.current.reset();*/}
-        {/*    }}*/}
-        {/*    className={styles["reset-camera"]}*/}
-        {/*  >*/}
-        {/*    Reset camera*/}
-        {/*  </button>*/}
-        {/*  <div className={styles["buttons"]}>*/}
-        {/*    <button*/}
-        {/*      onClick={() => {*/}
-        {/*        // setDance(1);*/}
-        {/*        dispatch({ type: "SET_SKIN_NUMBER", payload: 0 });*/}
-        {/*        dispatch({ type: "SET_USER_LEVEL", payload: 1 });*/}
-        {/*      }}*/}
-        {/*    >*/}
-        {/*      Dance 1*/}
-        {/*    </button>*/}
-        {/*    <button*/}
-        {/*      onClick={() => {*/}
-        {/*        // setDance(2);*/}
-        {/*        dispatch({ type: "SET_SKIN_NUMBER", payload: 1 });*/}
-        {/*        dispatch({ type: "SET_USER_LEVEL", payload: 2 });*/}
-        {/*      }}*/}
-        {/*    >*/}
-        {/*      Dance 2*/}
-        {/*    </button>*/}
-        {/*    <button*/}
-        {/*      onClick={() => {*/}
-        {/*        // setDance(5);*/}
-        {/*        dispatch({ type: "SET_SKIN_NUMBER", payload: 2 });*/}
-        {/*        dispatch({ type: "SET_USER_LEVEL", payload: 3 });*/}
-        {/*      }}*/}
-        {/*    >*/}
-        {/*      Dance 5*/}
-        {/*    </button>*/}
-        {/*  </div>*/}
-        {/*</div>*/}
       </div>
     </>
   );

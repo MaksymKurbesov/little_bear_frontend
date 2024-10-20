@@ -10,7 +10,7 @@ import CoinIcon from "../../images/default-coin-small.webp";
 import TelegramIcon from "../../images/telegram-icon.webp";
 import XIcon from "../../images/x-icon.webp";
 import X2Icon from "../../images/x2-icon.webp";
-import { userApi } from "../../main.tsx";
+import { tasksApi, userApi } from "../../main.tsx";
 import DailyRewardHeader from "../../SharedUI/Header/DailyRewardHeader/DailyRewardHeader.tsx";
 
 const ICON_MAP: { [key: string]: string } = {
@@ -54,7 +54,7 @@ const Tasks = () => {
             onClick={() => {
               window.open(task.target, "_blank");
               setTimeout(() => {
-                userApi
+                tasksApi
                   .completeUserTask(state.user.id, task.id, task.reward)
                   .then(() => {
                     refetch();

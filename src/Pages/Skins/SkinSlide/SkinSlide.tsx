@@ -1,15 +1,22 @@
 import styles from "./SkinSlide.module.css";
+import { userApi } from "../../../main.tsx";
 
-const SkinSlide = ({ skin, currentPoints, level, isActive }) => {
+const SkinSlide = ({
+  skin,
+  currentPoints,
+  level,
+  index,
+  onSelectHandler,
+  userSkinName,
+}) => {
   const progress = (currentPoints / skin.requiredPoints) * 100;
   const isCurrentSkin = skin.id === level + 1;
-  const isPreviuosSkin = skin.id < level + 1;
   const isNextSkin = skin.id > level + 1;
 
   return (
     <div className={`${styles["slide"]} ${styles[skin.colorCN]}`}>
       <img
-        src={isPreviuosSkin ? skin.openedImage : skin.image}
+        src={index < level ? skin.openedImage : skin.image}
         alt={""}
         width={220}
         loading="lazy"
@@ -27,11 +34,19 @@ const SkinSlide = ({ skin, currentPoints, level, isActive }) => {
           </>
         )}
       </div>
-      {isPreviuosSkin && <p className={styles["unpacked"]}>Unpacked!</p>}
+      {/*{isPreviuosSkin && <p className={styles["unpacked"]}>Unpacked!</p>}*/}
       {isNextSkin && (
         <p className={styles["experience"]}>from {skin.requiredPoints}</p>
       )}
-      <div className="swiper-lazy-preloader"></div>
+      {index < level && (
+        <button
+          onClick={onSelectHandler}
+          className={`${styles["select-button"]} ${userSkinName === skin.name ? styles["selected-button"] : ""}`}
+        >
+          {userSkinName === skin.name ? "Selected" : "Select"}
+        </button>
+      )}
+      {/*<div className="swiper-lazy-preloader"></div>*/}
     </div>
   );
 };

@@ -42,6 +42,14 @@
           url("./assets/RobotoCondensed-Black.woff2") format("woff2")
 }
 
+
+@font-face {
+  font-family: "Bunya";
+  src:
+          url("./assets/BunyaPersonalLight.ttf") format("truetype")
+}
+
+
 body {
     font-family: "RobotoCondensed", sans-serif;
 }

@@ -18,14 +18,14 @@ const DailyRewardHeader = () => {
       setDailyRewardTimeLeft(calculateTimeLeft());
     };
 
-    const fetchClaimedToday = async () => {
-      const isClaimed = await userApi.checkIfUserMissedToday(
-        String(state.user.id),
-        "ticketRewards",
-      );
-
-      setIsClaimedToday(isClaimed);
-    };
+    // const fetchClaimedToday = async () => {
+    //   const isClaimed = await userApi.checkIfUserMissedToday(
+    //     String(state.user.id),
+    //     "ticketRewards",
+    //   );
+    //
+    //   setIsClaimedToday(isClaimed);
+    // };
 
     updateCountdowns();
     const interval = setInterval(updateCountdowns, 60000); // Update every minute

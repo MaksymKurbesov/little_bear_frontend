@@ -24,8 +24,6 @@ const FortuneWheel = () => {
     setAction(action);
   }, []);
 
-  console.log(wheelRotation, "wheelRotation");
-
   const { rotation } = useSpring({
     rotation: [0, wheelRotation, 0],
     config: {
@@ -37,8 +35,6 @@ const FortuneWheel = () => {
     },
     onRest: () => {
       setIsSpinning(false);
-
-      console.log(winningSegment, "winningSegment");
 
       if (winningSegment.value === "silver_ticket") {
         fortuneWheelApi.addSilverTicket(String(state.user.id));
@@ -54,7 +50,6 @@ const FortuneWheel = () => {
 
   const spinWheel = () => {
     const result = chooseSegment();
-    console.log(result, "result");
 
     if (result) {
       setIsSpinning(true);
@@ -86,7 +81,7 @@ const FortuneWheel = () => {
       </div>
       <div className={styles["fortune-wheel"]}>
         <Canvas shadows dpr={[1, 2]}>
-          <Perf matrixUpdate deepAnalyze={true} position="top-left" />
+          {/*<Perf matrixUpdate deepAnalyze={true} position="top-left" />*/}
           <CameraHelper />
           <FortuneScene
             animatedRotation={rotation}

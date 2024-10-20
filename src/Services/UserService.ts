@@ -22,6 +22,8 @@ class UserService {
 
     if (referralId) {
       await userApi.addReferral(user.id.toString(), referralId, isPremium);
+
+      // MAYBE NEED DELETE
       this.dispatch({
         type: "ADD_USER_POINTS",
         payload: isPremium ? 14000 : 7500,

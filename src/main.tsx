@@ -10,6 +10,8 @@ import store from "./Stores/store.ts";
 import { AppStateProvider } from "./Stores/AppStateContext.tsx";
 import "./i18n";
 import FortuneWheelApi from "./Api/FortuneWheel.ts";
+import Tasks from "./Pages/Tasks/Tasks.tsx";
+import TasksApi from "./Api/TasksApi.ts";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -24,6 +26,7 @@ const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app);
 export const userApi = new UserApi();
+export const tasksApi = new TasksApi();
 export const fortuneWheelApi = new FortuneWheelApi();
 
 const tg = window.Telegram.WebApp;

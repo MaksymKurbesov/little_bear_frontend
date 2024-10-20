@@ -35,6 +35,7 @@ export interface IUser {
   lastTicketClaimedDate?: string;
   ticketConsecutiveDays?: number | FieldValue;
   hasClaimedTicketToday?: boolean;
+  skin?: string;
 }
 
 class UserApi {
@@ -60,6 +61,18 @@ class UserApi {
     }
   }
 
+  async setUserSkin(userId, skin) {
+    try {
+      const userRef = doc(this.userCollection, String(userId));
+      await updateDoc(userRef, {
+        skin,
+      });
+      console.log("UserService updated successfully");
+    } catch (error) {
+      console.error("Error set user skin: ", error);
+    }
+  }
+
   async deleteUser(userId: string): Promise<void> {
     try {
       const userRef = doc(this.userCollection, userId);
@@ -67,19 +80,6 @@ class UserApi {
       console.log("UserService deleted successfully");
     } catch (error) {
       console.error("Error deleting user: ", error);
-    }
-  }
-
-  async getUserPoints(userId: string): Promise<void> {
-    try {
-      const userRef = doc(this.userCollection, userId);
-      const userDoc = await getDoc(userRef);
-
-      if (userDoc.exists()) {
-        return userDoc.data().points; //
-      }
-    } catch (error) {
-      console.error("Error get user points: ", error);
     }
   }
 
@@ -103,51 +103,6 @@ class UserApi {
       console.log("Referral added successfully");
     } catch (error) {
       console.error("Error adding referral: ", error);
-    }
-  }
-
-  async completeUserTask(userId: number, taskId: string, reward: number) {
-    const userRef = doc(db, "users", userId.toString());
-
-    try {
-      const userSnap = await getDoc(userRef);
-
-      if (userSnap.exists()) {
-        const userData = userSnap.data();
-
-        let userTasks = userData.tasks || [];
-
-        // Ищем задачу в массиве
-        const existingTaskIndex = userTasks.findIndex(
-          (task: any) => task.id === taskId,
-        );
-
-        if (existingTaskIndex > -1) {
-          // Обновляем существующую задачу
-          userTasks[existingTaskIndex].completed = true;
-          userTasks[existingTaskIndex].completionDate =
-            new Date().toISOString();
-        } else {
-          // Добавляем новую задачу в массив
-          userTasks.push({
-            id: taskId,
-            completed: true,
-            completionDate: new Date().toISOString(),
-          });
-        }
-
-        // Обновляем документ пользователя в Firestore
-        await updateDoc(userRef, {
-          tasks: userTasks,
-          points: increment(reward),
-        });
-
-        console.log("Task completed successfully.");
-      } else {
-        console.error("User document not found.");
-      }
-    } catch (error) {
-      console.error("Error completing task:", error);
     }
   }
 

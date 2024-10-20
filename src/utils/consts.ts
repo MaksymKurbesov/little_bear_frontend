@@ -21,6 +21,7 @@ export const SKINS = [
     requiredPoints: 0,
     colorCN: "color-brown",
     points: 1,
+    name: "timber",
   },
   {
     id: 2,
@@ -29,6 +30,7 @@ export const SKINS = [
     requiredPoints: 20000,
     colorCN: "color-red",
     points: 3,
+    name: "brickn",
   },
   {
     id: 3,
@@ -37,6 +39,7 @@ export const SKINS = [
     requiredPoints: 60000,
     colorCN: "color-white",
     points: 5,
+    name: "aztron",
   },
   {
     id: 4,
@@ -45,6 +48,7 @@ export const SKINS = [
     requiredPoints: 120000,
     colorCN: "color-green",
     points: 7,
+    name: "brizzy",
   },
   {
     id: 5,
@@ -53,6 +57,7 @@ export const SKINS = [
     requiredPoints: 200000,
     colorCN: "color-purple",
     points: 10,
+    name: "neyon",
   },
 ];
 

@@ -11,6 +11,8 @@ import { useAppState } from "../../../Stores/AppStateContext.tsx";
 import SkinSlide from "../SkinSlide/SkinSlide.tsx";
 import { SKINS } from "../../../utils/consts.ts";
 import LoadSpinning from "../../../SharedUI/LoadSpinning/LoadSpinning.tsx";
+import { getLevelByPoints } from "../../../utils/helpers.ts";
+import { userApi } from "../../../main.tsx";
 
 const Slider = ({ currentSkin, setCurrentSkin }) => {
   const swiperRef = useRef(null);
@@ -18,8 +20,13 @@ const Slider = ({ currentSkin, setCurrentSkin }) => {
   const [isBeginning, setIsBeginning] = useState(false);
   const [isEnd, setIsEnd] = useState(false);
   const [swiper, setSwiper] = useState<Swiper>();
+  const [userCurrentLevel, setUserCurrentLevel] = useState(0);
 
   useEffect(() => {
+    if (state.user) {
+      setUserCurrentLevel(getLevelByPoints(state.user.points));
+    }
+
     if (!swiper) return;
 
     if (swiper.activeIndex === 0) {
@@ -44,14 +51,9 @@ const Slider = ({ currentSkin, setCurrentSkin }) => {
       swiper.off("reachEnd");
       swiper.off("reachBeginning");
     };
-  }, [swiper]);
+  }, [swiper, state.user]);
 
-  // if (!swiper)
-  //   return (
-  //     <div className={"suspense"}>
-  //       <LoadSpinning />
-  //     </div>
-  //   );
+  console.log(currentSkin, "currentSkin");
 
   return (
     <Swiper
@@ -59,7 +61,7 @@ const Slider = ({ currentSkin, setCurrentSkin }) => {
       modules={[Navigation, Pagination, Scrollbar, A11y]}
       spaceBetween={50}
       slidesPerView={1}
-      initialSlide={state.level}
+      initialSlide={userCurrentLevel}
       onSwiper={(swiper) => {
         setSwiper(swiper);
       }}
@@ -73,8 +75,12 @@ const Slider = ({ currentSkin, setCurrentSkin }) => {
             <SkinSlide
               skin={skin}
               currentPoints={state.user!.points}
-              level={state.level}
-              isActive={currentSkin === index}
+              level={userCurrentLevel}
+              index={index}
+              userSkinName={state.user.skin}
+              onSelectHandler={() => {
+                userApi.setUserSkin(state.user.id, skin.name);
+              }}
             />
           </SwiperSlide>
         );

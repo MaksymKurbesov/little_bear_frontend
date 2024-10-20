@@ -212,7 +212,17 @@
 }
 
 
+.select-button {
+  background: var(--orange);
+  padding: 4px 20px;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 14px;
+}
 
+.selected-button {
+  background: #70ff65;
+}
 
 @keyframes gradientAnimation {
   0% {

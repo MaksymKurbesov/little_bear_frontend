@@ -1,5 +1,5 @@
 import styles from "./LoadingScreen.module.css";
-import LoadingScreenImage from "../../images/loading screen.webp";
+import LoadingScreenImage from "../../images/loading-screen1.png";
 import { useImagePreloader } from "../../hooks/useImagePreloader.ts";
 import { useEffect, useRef, useState } from "react";
 import { simulateLoadingProgress } from "../../utils/helpers.ts";
