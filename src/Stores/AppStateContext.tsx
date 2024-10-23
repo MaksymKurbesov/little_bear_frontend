@@ -16,7 +16,7 @@ interface State {
   // points: number;
   user: IUser | null;
   hasClaimedToday: boolean;
-  currentSkin: number;
+  currentSkin: string;
   level: number;
 }
 
@@ -28,7 +28,7 @@ const initialState: State = {
   // points: 0,
   user: null,
   hasClaimedToday: false,
-  currentSkin: 0,
+  currentSkin: "",
   level: 1,
 };
 
@@ -42,7 +42,7 @@ type Action =
   | { type: "SET_USER_POINTS"; payload: number }
   | { type: "SET_USER"; payload: IUser }
   | { type: "SET_USER_LEVEL"; payload: number }
-  | { type: "SET_SKIN_NUMBER"; payload: number }
+  | { type: "SET_SKIN"; payload: string }
   | {
       type: "HANDLE_CARD_CLICK";
       payload: {
@@ -86,7 +86,7 @@ const reducer = (state: State, action: Action): State => {
         clicks: state.clicks.filter((click) => click.id !== action.payload),
       };
 
-    case "SET_SKIN_NUMBER":
+    case "SET_SKIN":
       return { ...state, currentSkin: action.payload };
     case "SET_USER":
       return {

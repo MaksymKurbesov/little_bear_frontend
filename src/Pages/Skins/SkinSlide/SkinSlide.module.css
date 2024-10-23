@@ -224,6 +224,15 @@
   background: #70ff65;
 }
 
+.buy-button {
+  background: #70ff65;
+  padding: 2px 20px;
+  font-size: 14px;
+  border-radius: 15px;
+}
+
+
+
 @keyframes gradientAnimation {
   0% {
     background-position: 0 0;

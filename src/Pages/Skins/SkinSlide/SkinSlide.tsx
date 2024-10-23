@@ -35,8 +35,11 @@ const SkinSlide = ({
         )}
       </div>
       {/*{isPreviuosSkin && <p className={styles["unpacked"]}>Unpacked!</p>}*/}
-      {isNextSkin && (
+      {isNextSkin && !skin.isPurchasable && (
         <p className={styles["experience"]}>from {skin.requiredPoints}</p>
+      )}
+      {skin.isPurchasable && (
+        <button className={styles["buy-button"]}>Buy</button>
       )}
       {index < level && (
         <button

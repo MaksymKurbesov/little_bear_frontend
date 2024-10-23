@@ -5,27 +5,29 @@ import { NavLink } from "react-router-dom";
 import { dailyReward } from "../../../images";
 import { useAppState } from "../../../Stores/AppStateContext.tsx";
 import { useTranslation } from "react-i18next";
-import { userApi } from "../../../main.tsx";
+import { dailyRewardsApi, userApi } from "../../../main.tsx";
 
 const DailyRewardHeader = () => {
   const { state } = useAppState();
   const [dailyRewardTimeLeft, setDailyRewardTimeLeft] = useState("");
   const { t } = useTranslation();
   const [isClaimedToday, setIsClaimedToday] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const updateCountdowns = () => {
       setDailyRewardTimeLeft(calculateTimeLeft());
     };
 
-    // const fetchClaimedToday = async () => {
-    //   const isClaimed = await userApi.checkIfUserMissedToday(
+    // const fetchIsClaimed = async () => {
+    //   setLoading(true);
+    //   const isClaimed = await dailyRewardsApi.userIsClaimedToday(
     //     String(state.user.id),
-    //     "ticketRewards",
     //   );
-    //
     //   setIsClaimedToday(isClaimed);
     // };
+
+    // fetchIsClaimed().then(() => setLoading(false));
 
     updateCountdowns();
     const interval = setInterval(updateCountdowns, 60000); // Update every minute
@@ -35,12 +37,12 @@ const DailyRewardHeader = () => {
     };
   }, []);
 
-  if (!state.user) return;
+  if (!state.user || loading) return;
 
   return (
     <div className={styles["daily-reward"]}>
       <NavLink to={"/daily-reward"} className={styles["daily-reward-link"]}>
-        {!isClaimedToday && <div className={styles["dot"]}></div>}
+        {!state.user.hasClaimedToday && <div className={styles["dot"]}></div>}
 
         <img
           src={dailyReward}
@@ -49,7 +51,7 @@ const DailyRewardHeader = () => {
         />
         <div className={styles["daily-text"]}>
           <p>{t("DailyReward")}</p>
-          {isClaimedToday ? (
+          {state.user.hasClaimedToday ? (
             <p className={styles["claimed"]}>{t("Reward.Claimed")}!</p>
           ) : (
             <p>{dailyRewardTimeLeft}</p>

@@ -12,6 +12,7 @@ import "./i18n";
 import FortuneWheelApi from "./Api/FortuneWheel.ts";
 import Tasks from "./Pages/Tasks/Tasks.tsx";
 import TasksApi from "./Api/TasksApi.ts";
+import DailyRewardsApi from "./Api/DailyRewardsApi.ts";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -28,6 +29,7 @@ export const db = getFirestore(app);
 export const userApi = new UserApi();
 export const tasksApi = new TasksApi();
 export const fortuneWheelApi = new FortuneWheelApi();
+export const dailyRewardsApi = new DailyRewardsApi();
 
 const tg = window.Telegram.WebApp;
 const telegramUserID = tg.initDataUnsafe.user.id;

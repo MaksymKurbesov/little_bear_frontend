@@ -14,7 +14,8 @@ import RegisteredModal from "./SharedUI/RegisteredModal/RegisteredModal.tsx";
 import UserService from "./Services/UserService.ts";
 import { useTranslation } from "react-i18next";
 import LoadSpinning from "./SharedUI/LoadSpinning/LoadSpinning.tsx";
-import { userApi } from "./main.tsx";
+import { dailyRewardsApi, userApi } from "./main.tsx";
+import { SKINS } from "./utils/consts.ts";
 
 const BACKGROUND_MAP = {
   "/airdrop": "background-image-airdrop",
@@ -27,6 +28,7 @@ const BEAR_BACKGROUNDS = {
   aztron: "background-image-main3",
   brizzy: "background-image-main4",
   neyon: "background-image-main5",
+  mickey: "background-image-main6",
 };
 
 const App = () => {
@@ -34,34 +36,59 @@ const App = () => {
   const { i18n } = useTranslation();
   const { state, dispatch } = useAppState();
   const [showStartPopup, setShowStartPopup] = useState(false);
-  const [currentUserLevel, setCurrentUserLevel] = useState(0);
-  const [currentUserSkin, setCurrentUserSkin] = useState("timber");
 
   const [bgSkin, setbgSkin] = useState("");
   const location = useLocation();
   const backgroundClassName = BACKGROUND_MAP[location.pathname];
-  const bearBackgroundCN = BEAR_BACKGROUNDS[currentUserSkin];
-
-  console.log(state.user?.skin, "state.user.skin");
+  const bearBackgroundCN = BEAR_BACKGROUNDS[state.currentSkin];
 
   const [isLoadingScreen, setIsLoadingScreen] = useState(true);
   // const [videoIsEnd, setVideoIsEnd] = useState(false);
 
   useEffect(() => {
-    if (!user || !state.user) return;
+    if (!state.user) return;
 
     if (state.user.skin) {
-      setCurrentUserSkin(state.user.skin);
-      setbgSkin(BEAR_BACKGROUNDS[state.user.skin]);
+      dispatch({ type: "SET_SKIN", payload: state.user.skin });
+
+      setbgSkin(BEAR_BACKGROUNDS[state.currentSkin]);
     } else {
       const currentLevel = getLevelByPoints(state.user.points);
       const currentBg = Object.values(BEAR_BACKGROUNDS)[currentLevel - 1];
+      dispatch({ type: "SET_SKIN", payload: SKINS[currentLevel - 1].name });
+
       setbgSkin(currentBg);
     }
+  }, [state.user]);
+
+  useEffect(() => {
+    const fetchDailyReward = async () => {
+      if (!user) return;
+
+      const userID = String(user.id);
+
+      const hasClaimedToday = await dailyRewardsApi.userIsClaimedToday(userID);
+
+      const consecutiveDays =
+        await dailyRewardsApi.getConsecutiveClaimedDays(userID);
+
+      dispatch({
+        type: "UPDATE_USER_DATA",
+        payload: {
+          hasClaimedToday,
+          consecutiveDays,
+        },
+      });
+    };
+
+    fetchDailyReward();
+  }, [user]);
+
+  useEffect(() => {
+    if (!user || !state.user) return;
 
     if (state.user) {
       i18n.changeLanguage(state.user.settings.language);
-      setCurrentUserLevel(getLevelByPoints(state.user.points));
     }
 
     const userService = new UserService(dispatch);
@@ -77,9 +104,9 @@ const App = () => {
   }, [user, state.user, dispatch, location.search]);
 
   // COMMENT FOR DEV //
-  // if (isLoadingScreen) {
-  //   return <LoadingScreen setIsLoadingScreen={setIsLoadingScreen} />;
-  // }
+  if (isLoadingScreen) {
+    return <LoadingScreen setIsLoadingScreen={setIsLoadingScreen} />;
+  }
   // COMMENT FOR DEV //
 
   // TROUBLE WITH VIDEO
@@ -103,7 +130,7 @@ const App = () => {
 
   return (
     <div
-      className={`${styles["game-wrapper"]} ${styles[bgSkin]} ${styles[bearBackgroundCN]}`}
+      className={`${styles["game-wrapper"]} ${styles[bgSkin]} ${styles[backgroundClassName]} ${styles[bearBackgroundCN]}`}
     >
       {showStartPopup && (
         <RegisteredModal closeHandler={() => setShowStartPopup(false)} />

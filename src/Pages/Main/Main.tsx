@@ -34,19 +34,7 @@ const Main = () => {
       {/*<Energy />*/}
       <Bear />
 
-      {/*<div*/}
-      {/*  className={styles["promo-button"]}*/}
-      {/*  onClick={() => setPromoIsOpen(true)}*/}
-      {/*>*/}
-      {/*  <p>Lucky Dance</p>*/}
-      {/*  <span>06:12:46</span>*/}
-      {/*</div>*/}
-      <NavLink to={"/fortune-wheel"}>Fortune Wheel</NavLink>
-
-      {/*<LuckyDance*/}
-      {/*  promoIsOpen={promoIsOpen}*/}
-      {/*  closeHandler={() => setPromoIsOpen(false)}*/}
-      {/*/>*/}
+      {/*<NavLink to={"/fortune-wheel"}>Fortune Wheel</NavLink>*/}
 
       {/*<NavLink to={"/market"} className={styles["market-button"]}>*/}
       {/*  <img src={MarketButton} alt={""} width={40} />*/}
@@ -64,7 +52,7 @@ const Main = () => {
           }}
           onAnimationEnd={() => handleAnimationEnd(click.id)}
         >
-          +{POINTS_TO_ADD[state.level - 1]}
+          +{POINTS_TO_ADD[state.currentSkin]}
         </div>
       ))}
       {/*<FPSStats top="10px" right="10px" />*/}

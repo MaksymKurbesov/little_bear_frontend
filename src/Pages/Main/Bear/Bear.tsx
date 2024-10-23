@@ -57,7 +57,6 @@ const Bear = () => {
   const [levelUpModal, setLevelUpModal] = useState(false);
   const controlsRef = useRef();
   const [currentUserLevel, setCurrentUserLevel] = useState(0);
-  const [currentSkin, setCurrentSkin] = useState("");
 
   const clickedPointsRef = useRef(0);
 
@@ -66,14 +65,6 @@ const Bear = () => {
 
     const level = getLevelByPoints(state.user.points);
     setCurrentUserLevel(level);
-    if (state.user.skin) {
-      setCurrentSkin(state.user.skin);
-    } else {
-      const bearComponent = danceBearComponents.find(
-        (item) => item.level === level,
-      );
-      setCurrentSkin(bearComponent.name);
-    }
   }, []);
 
   const handleActionReady = useCallback((action: AnimationAction) => {
@@ -86,16 +77,7 @@ const Bear = () => {
     try {
       if (!action) return;
 
-      const isLitvinBear = Array.isArray(action);
-
-      if (isLitvinBear) {
-        action[0].paused = true;
-        action[1].paused = true;
-        action[2].paused = true;
-        action[3].paused = true;
-      } else {
-        action.paused = true;
-      }
+      action.paused = true;
 
       const currentUserPoints = await userApi.sendPointsToServer(
         user.id,
@@ -133,32 +115,17 @@ const Bear = () => {
   const handleCardClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       if (!action) return;
+      console.log("clicked");
 
       triggerVibration(tg);
 
-      const pointsToAdd = POINTS_TO_ADD[state.level - 1];
+      const pointsToAdd = POINTS_TO_ADD[state.currentSkin];
       clickedPointsRef.current += pointsToAdd;
 
-      const isLitvinBear = Array.isArray(action);
+      action.play();
 
-      if (isLitvinBear) {
-        action[0].play();
-        action[1].play();
-        action[2].play();
-        action[3].play();
-      } else {
-        action.play();
-      }
-
-      if (isLitvinBear) {
-        action[0].paused = false;
-        action[1].paused = false;
-        action[2].paused = false;
-        action[3].paused = false;
-      } else {
-        if (action.paused) {
-          action.paused = false;
-        }
+      if (action.paused) {
+        action.paused = false;
       }
 
       dispatch({
@@ -183,10 +150,6 @@ const Bear = () => {
           onCollectHandler={() => {
             if (!state.user) return;
 
-            // dispatch({
-            //   type: "SET_USER_LEVEL",
-            //   payload: getLevelByPoints(state.user.points),
-            // });
             setLevelUpModal(false);
           }}
           level={getLevelByPoints(state.user.points)}
@@ -210,7 +173,7 @@ const Bear = () => {
                 <group position={[0, -0.1, 0]}>
                   {danceBearComponents.map(
                     ({ level, name, Component, Stand }) => {
-                      if (currentSkin !== name) return;
+                      if (state.currentSkin !== name) return;
 
                       return (
                         <React.Fragment key={level}>

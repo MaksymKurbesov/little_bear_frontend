@@ -3,15 +3,26 @@ import BearSkin2 from "../images/skins/brickn.webp";
 import BearSkin3 from "../images/skins/neyon.webp";
 import BearSkin4 from "../images/skins/brizzy.webp";
 import BearSkin5 from "../images/skins/aztron.webp";
+import MickeySkin from "../images/skins/mickey.png";
+import DimasSkin from "../images/skins/dimas.webp";
 import OpenedBearSkin1 from "../images/skins/timber.webp";
 import OpenedBearSkin2 from "../images/skins/brickn-opened.webp";
 import OpenedBearSkin3 from "../images/skins/neyon-opened.webp";
 import OpenedBearSkin4 from "../images/skins/brizzy-opened.webp";
 import OpenedBearSkin5 from "../images/skins/aztron-opened.webp";
+import OpenedMickeySkin from "../images/skins/mickey-opened.png";
+import OpenedDimasSkin from "../images/skins/dimas-opened.webp";
 import DollarIcon from "../images/dollar-coin2.webp";
 import TicketIcon from "/ticket.webp";
 
-export const POINTS_TO_ADD = [1, 3, 5, 7, 10];
+// export const POINTS_TO_ADD = [1, 3, 5, 7, 10];
+export const POINTS_TO_ADD = {
+  timber: 1,
+  brickn: 3,
+  aztron: 5,
+  brizzy: 7,
+  neyon: 10,
+};
 
 export const SKINS = [
   {
@@ -22,6 +33,7 @@ export const SKINS = [
     colorCN: "color-brown",
     points: 1,
     name: "timber",
+    isPurchasable: false,
   },
   {
     id: 2,
@@ -31,6 +43,7 @@ export const SKINS = [
     colorCN: "color-red",
     points: 3,
     name: "brickn",
+    isPurchasable: false,
   },
   {
     id: 3,
@@ -40,6 +53,7 @@ export const SKINS = [
     colorCN: "color-white",
     points: 5,
     name: "aztron",
+    isPurchasable: false,
   },
   {
     id: 4,
@@ -49,6 +63,7 @@ export const SKINS = [
     colorCN: "color-green",
     points: 7,
     name: "brizzy",
+    isPurchasable: false,
   },
   {
     id: 5,
@@ -58,6 +73,27 @@ export const SKINS = [
     colorCN: "color-purple",
     points: 10,
     name: "neyon",
+    isPurchasable: false,
+  },
+  {
+    id: 6,
+    image: MickeySkin,
+    openedImage: OpenedMickeySkin,
+    requiredPoints: null,
+    colorCN: "color-red",
+    points: 10,
+    name: "mickey",
+    isPurchasable: true,
+  },
+  {
+    id: 7,
+    image: DimasSkin,
+    openedImage: OpenedDimasSkin,
+    requiredPoints: null,
+    colorCN: "color-red",
+    points: 10,
+    name: "dimas",
+    isPurchasable: true,
   },
 ];
 

@@ -9,6 +9,8 @@ const BACKGROUND = [
   "bg-skin-3",
   "bg-skin-4",
   "bg-skin-5",
+  "bg-skin-6",
+  "bg-skin-7",
 ];
 
 const Skins = () => {
