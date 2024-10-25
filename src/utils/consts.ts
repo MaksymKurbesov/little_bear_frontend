@@ -85,16 +85,16 @@ export const SKINS = [
     name: "mickey",
     isPurchasable: true,
   },
-  {
-    id: 7,
-    image: DimasSkin,
-    openedImage: OpenedDimasSkin,
-    requiredPoints: null,
-    colorCN: "color-red",
-    points: 10,
-    name: "dimas",
-    isPurchasable: true,
-  },
+  // {
+  //   id: 7,
+  //   image: DimasSkin,
+  //   openedImage: OpenedDimasSkin,
+  //   requiredPoints: null,
+  //   colorCN: "color-red",
+  //   points: 10,
+  //   name: "dimas",
+  //   isPurchasable: true,
+  // },
 ];
 
 export const DAILY_REWARDS = [

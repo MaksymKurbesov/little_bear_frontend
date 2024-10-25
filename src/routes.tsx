@@ -17,6 +17,7 @@ import News from "./Pages/News/News.tsx";
 import OneNews from "./Pages/OneNews/OneNews.tsx";
 import FortuneWheel from "./Pages/FortuneWheel/FortunePage.tsx";
 import FortuneWheelRules from "./Pages/FortuneWheelRules/FortuneWheelRules.tsx";
+import Complete from "./Pages/CheckoutPage/Complete.tsx";
 
 const routes = createBrowserRouter([
   {

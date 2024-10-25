@@ -4,12 +4,12 @@ import Wheel from "./Wheel/Wheel.tsx";
 import FortuneEnviroment from "./FortuneEnviroment.tsx";
 import BearMafia from "../../Bears3D/MafiaBear.tsx";
 
-const FortuneScene = ({ handleActionReady, animatedRotation }) => {
+const FortuneScene = ({ handleActionReady, animatedRotation, wheelRef }) => {
   return (
     <>
       <FortuneEnviroment />
       <BearMafia handleActionReady={handleActionReady} />
-      <Wheel animatedRotation={animatedRotation} />
+      <Wheel ref={wheelRef} animatedRotation={animatedRotation} />
       <Suspense fallback={null}>
         <EffectComposer disableNormalPass multisampling={0}>
           <Bloom

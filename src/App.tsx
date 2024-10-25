@@ -103,10 +103,27 @@ const App = () => {
     });
   }, [user, state.user, dispatch, location.search]);
 
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    // Check to see if this is a redirect back from Checkout
+    const query = new URLSearchParams(window.location.search);
+
+    if (query.get("success")) {
+      setMessage("Order placed! You will receive an email confirmation.");
+    }
+
+    if (query.get("canceled")) {
+      setMessage(
+        "Order canceled -- continue to shop around and checkout when you're ready.",
+      );
+    }
+  }, []);
+
   // COMMENT FOR DEV //
-  if (isLoadingScreen) {
-    return <LoadingScreen setIsLoadingScreen={setIsLoadingScreen} />;
-  }
+  // if (isLoadingScreen) {
+  //   return <LoadingScreen setIsLoadingScreen={setIsLoadingScreen} />;
+  // }
   // COMMENT FOR DEV //
 
   // TROUBLE WITH VIDEO
@@ -136,6 +153,12 @@ const App = () => {
         <RegisteredModal closeHandler={() => setShowStartPopup(false)} />
       )}
       <Header pathname={location.pathname} />
+      {message && (
+        <section>
+          <p>{message}</p>
+        </section>
+      )}
+
       <Outlet />
       <Menu />
     </div>

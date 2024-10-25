@@ -1,5 +1,5 @@
 import styles from "./FortuneWheel.module.css";
-import { useCallback, useState } from "react";
+import { Suspense, useCallback, useRef, useState } from "react";
 import SilverTicket from "/silver-ticket.webp";
 import GoldTicket from "/gold-ticket.webp";
 import FortuneScene from "./FortuneScene.tsx";
@@ -19,31 +19,30 @@ const FortuneWheel = () => {
   const [action, setAction] = useState<AnimationAction>();
   const [wheelRotation, setWheelRotation] = useState(0);
   const [isSpinning, setIsSpinning] = useState(false);
+  const wheelRef = useRef();
 
   const handleActionReady = useCallback((action: AnimationAction) => {
     setAction(action);
   }, []);
 
   const { rotation } = useSpring({
-    rotation: [0, wheelRotation, 0],
+    rotation: [0, -wheelRotation, 0],
     config: {
-      // duration: 5000,
-      mass: 1,
-      friction: 112,
+      mass: 2,
+      friction: 182,
       tension: 80,
       precision: 0.06,
     },
     onRest: () => {
+      // wheelRef.current.rotation.y = 0;
       setIsSpinning(false);
 
       if (winningSegment.value === "silver_ticket") {
         fortuneWheelApi.addSilverTicket(String(state.user.id));
-        console.log(state.user, "state.user");
       }
 
       if (winningSegment.value === "gold_ticket") {
         fortuneWheelApi.addGoldTicket(String(state.user.id));
-        console.log(state.user, "state.user");
       }
     },
   });
@@ -80,32 +79,41 @@ const FortuneWheel = () => {
         </div>
       </div>
       <div className={styles["fortune-wheel"]}>
-        <Canvas shadows dpr={[1, 2]}>
-          {/*<Perf matrixUpdate deepAnalyze={true} position="top-left" />*/}
-          <CameraHelper />
-          <FortuneScene
-            animatedRotation={rotation}
-            handleActionReady={handleActionReady}
-          />
-        </Canvas>
-        <button
-          onClick={() => {
-            // resetWheelRotation();
-            action.paused = false;
-            setTimeout(() => {
-              spinWheel();
-            }, 850);
-
-            setTimeout(() => {
-              action.stop();
-              action.play();
-              action.paused = true;
-            }, 2000);
-          }}
-          className={styles["spin-button"]}
+        <Suspense fallback={<div>Loading...</div>}>
+          <Canvas shadows dpr={[1, 2]}>
+            {/*<Perf matrixUpdate deepAnalyze={true} position="top-left" />*/}
+            <CameraHelper />
+            <FortuneScene
+              wheelRef={wheelRef}
+              animatedRotation={rotation}
+              handleActionReady={handleActionReady}
+            />
+          </Canvas>
+        </Suspense>
+        <form
+          action="http://localhost:4242/create-checkout-session"
+          method="POST"
         >
-          SPIN
-        </button>
+          <button
+            // onClick={() => {
+            //   // resetWheelRotation();
+            //   action.paused = false;
+            //   setTimeout(() => {
+            //     spinWheel();
+            //   }, 850);
+            //
+            //   setTimeout(() => {
+            //     action.stop();
+            //     action.play();
+            //     action.paused = true;
+            //   }, 2000);
+            // }}
+            type={"submit"}
+            className={styles["spin-button"]}
+          >
+            SPIN
+          </button>
+        </form>
       </div>
       {!isSpinning && winningSegment && (
         <div className={styles["winning-popup"]}>

@@ -34,7 +34,7 @@ const Menu = () => {
             isPending ? styles["pending"] : isActive ? styles["active"] : ""
           }
         >
-          <img src={PlayIcon2} width={25} alt={""} height={32} />
+          <img src={PlayIcon2} width={28} alt={""} height={28} />
           {/*<span>{t("Menu.Bear")}</span>*/}
           <span>Home</span>
         </NavLink>
@@ -66,8 +66,8 @@ const Menu = () => {
         >
           <img
             src={LittleBearGoldenIcon}
-            // width={20}
-            height={32}
+            width={30}
+            height={30}
             alt={""}
             className={`${styles["icon"]} ${styles["frens-icon"]}`}
           />
@@ -84,8 +84,8 @@ const Menu = () => {
         >
           <img
             src={BearsIcon}
-            width={32}
-            height={35}
+            width={30}
+            height={30}
             alt={""}
             className={`${styles["icon"]}`}
           />
@@ -104,8 +104,8 @@ const Menu = () => {
             src={NewsIcon}
             alt="Airdrop"
             className={`${styles["icon"]} ${styles["news-icon"]}`}
-            width={28}
-            height={28}
+            width={30}
+            height={30}
           />
           <span>News</span>
         </NavLink>

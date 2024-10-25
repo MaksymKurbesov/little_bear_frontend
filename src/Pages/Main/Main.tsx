@@ -6,6 +6,7 @@ import { POINTS_TO_ADD } from "../../utils/consts.ts";
 import Points from "./Points/Points.tsx";
 import LoadSpinning from "../../SharedUI/LoadSpinning/LoadSpinning.tsx";
 import { NavLink } from "react-router-dom";
+import FortuneWheelButton from "/fortune-wheel-button.png";
 import MarketButton from "/market.png";
 import Energy from "./Energy/Energy.tsx";
 import LuckyDance from "./LuckyDance/LuckyDance.tsx";
@@ -34,7 +35,10 @@ const Main = () => {
       {/*<Energy />*/}
       <Bear />
 
-      {/*<NavLink to={"/fortune-wheel"}>Fortune Wheel</NavLink>*/}
+      <NavLink className={styles["fortune-wheel-button"]} to={"/fortune-wheel"}>
+        <img src={FortuneWheelButton} alt={""} width={90} />
+        <span>Fortune Wheel</span>
+      </NavLink>
 
       {/*<NavLink to={"/market"} className={styles["market-button"]}>*/}
       {/*  <img src={MarketButton} alt={""} width={40} />*/}
