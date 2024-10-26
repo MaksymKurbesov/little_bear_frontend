@@ -196,6 +196,20 @@ const routes = createBrowserRouter([
           </Suspense>
         ),
       },
+      {
+        path: "/complete",
+        element: (
+          <Suspense
+            fallback={
+              <div className={"suspense"}>
+                <LoadSpinning />
+              </div>
+            }
+          >
+            <Complete />
+          </Suspense>
+        ),
+      },
     ],
   },
 ]);

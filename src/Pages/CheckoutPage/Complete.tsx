@@ -1,5 +1,7 @@
+import styles from "./Complete.module.css";
+
 const Complete = () => {
-  return <div className={"completed"}>completed</div>;
+  return <div className={styles["completed"]}>completed</div>;
 };
 
 export default Complete;

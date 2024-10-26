@@ -1,5 +1,5 @@
 import styles from "./FortuneWheel.module.css";
-import { Suspense, useCallback, useRef, useState } from "react";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import SilverTicket from "/silver-ticket.webp";
 import GoldTicket from "/gold-ticket.webp";
 import FortuneScene from "./FortuneScene.tsx";
@@ -20,6 +20,22 @@ const FortuneWheel = () => {
   const [wheelRotation, setWheelRotation] = useState(0);
   const [isSpinning, setIsSpinning] = useState(false);
   const wheelRef = useRef();
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    // Check to see if this is a redirect back from Checkout
+    const query = new URLSearchParams(window.location.search);
+
+    if (query.get("success")) {
+      setMessage("Order placed! You will receive an email confirmation.");
+    }
+
+    if (query.get("canceled")) {
+      setMessage(
+        "Order canceled -- continue to shop around and checkout when you're ready.",
+      );
+    }
+  }, []);
 
   const handleActionReady = useCallback((action: AnimationAction) => {
     setAction(action);
@@ -78,6 +94,7 @@ const FortuneWheel = () => {
           <span>{state.user.goldTicket || 0}</span>
         </div>
       </div>
+      {message && <div>{message}</div>}
       <div className={styles["fortune-wheel"]}>
         <Suspense fallback={<div>Loading...</div>}>
           <Canvas shadows dpr={[1, 2]}>
@@ -91,7 +108,7 @@ const FortuneWheel = () => {
           </Canvas>
         </Suspense>
         <form
-          action="http://localhost:4242/create-checkout-session"
+          action="https://apate-backend.com/create-checkout-session"
           method="POST"
         >
           <button
