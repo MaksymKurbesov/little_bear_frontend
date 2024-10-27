@@ -32,12 +32,13 @@ const CameraHelper = () => {
       {/*/>*/}
       <PerspectiveCamera
         position={[-1.5, -0.4, 2.5]}
+        rotation={[0.15, -0.5, 0.1]}
         fov={80}
         makeDefault
         near={1}
         // ref={cameraRef}
       />
-      <OrbitControls />
+      {/*<OrbitControls />*/}
     </>
   );
 };

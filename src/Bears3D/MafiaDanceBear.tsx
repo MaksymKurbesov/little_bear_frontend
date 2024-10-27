@@ -32,8 +32,8 @@ const MafiaBearDance6 = (props) => {
       <group name="Scene">
         <group
           name="Null"
-          position={[0.4, -0.067, -0.36]}
-          rotation={[Math.PI / 2, 0, 0]}
+          position={[0.4, 0, 0.5]}
+          rotation={[Math.PI / 2.3, 0, 0.1]}
           scale={0.2}
         >
           <mesh

@@ -22,7 +22,7 @@ export const POINTS_TO_ADD = {
   aztron: 5,
   brizzy: 7,
   neyon: 10,
-  mickey: 15,
+  mickey: 30,
 };
 
 export const SKINS = [
@@ -82,7 +82,7 @@ export const SKINS = [
     openedImage: OpenedMickeySkin,
     requiredPoints: null,
     colorCN: "color-red",
-    points: 10,
+    points: 30,
     name: "mickey",
     isPurchasable: true,
   },

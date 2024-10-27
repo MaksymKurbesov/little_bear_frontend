@@ -40,13 +40,15 @@ const App = () => {
   const [bgSkin, setbgSkin] = useState("");
   const location = useLocation();
   const backgroundClassName = BACKGROUND_MAP[location.pathname];
-  const bearBackgroundCN = BEAR_BACKGROUNDS[state.currentSkin];
+  // const bearBackgroundCN = BEAR_BACKGROUNDS[state.currentSkin];
 
   const [isLoadingScreen, setIsLoadingScreen] = useState(true);
   // const [videoIsEnd, setVideoIsEnd] = useState(false);
 
   useEffect(() => {
     if (!state.user) return;
+
+    console.log(state.user, "state.user");
 
     if (state.user.skin) {
       dispatch({ type: "SET_SKIN", payload: state.user.skin });
@@ -87,7 +89,7 @@ const App = () => {
   useEffect(() => {
     if (!user || !state.user) return;
 
-    if (state.user) {
+    if (state.user.settings && state.user.settings.language) {
       i18n.changeLanguage(state.user.settings.language);
     }
 
@@ -130,7 +132,7 @@ const App = () => {
 
   return (
     <div
-      className={`${styles["game-wrapper"]} ${styles[bgSkin]} ${styles[backgroundClassName]} ${styles[bearBackgroundCN]}`}
+      className={`${styles["game-wrapper"]} ${styles[bgSkin]} ${styles[backgroundClassName]}`}
     >
       {showStartPopup && (
         <RegisteredModal closeHandler={() => setShowStartPopup(false)} />

@@ -11,7 +11,13 @@ import { Perf } from "r3f-perf";
 import { chooseSegment } from "../../utils/helpers.ts";
 import { SEGMENTS } from "../../utils/consts.ts";
 import { useSpring } from "@react-spring/core";
-import { fortuneWheelApi } from "../../main.tsx";
+import { fortuneWheelApi, userApi } from "../../main.tsx";
+import ListIcon from "../../icons/list.svg";
+import { NavLink } from "react-router-dom";
+import CartShopping from "../../icons/cart-shopping-solid.svg";
+import RotateRightSpin from "../../icons/rotate-right-solid.svg";
+import PaymentModal from "./PaymentModal/PaymentModal.tsx";
+import { increment } from "firebase/firestore";
 
 const FortuneWheel = () => {
   const [winningSegment, setWinningSegment] = useState(null);
@@ -27,12 +33,14 @@ const FortuneWheel = () => {
     const query = new URLSearchParams(window.location.search);
 
     if (query.get("success")) {
-      setMessage("Order placed! You will receive an email confirmation.");
+      setMessage(
+        "Поздравляем! Вы успешно приобрели 1 спин для Колеса Фортуны. Удачи в розыгрыше! 🎉",
+      );
     }
 
     if (query.get("canceled")) {
       setMessage(
-        "Order canceled -- continue to shop around and checkout when you're ready.",
+        "Покупка спина для Колеса Фортуны была успешно отменена. Если у вас есть вопросы, пожалуйста, свяжитесь с нашей поддержкой.",
       );
     }
   }, []);
@@ -63,6 +71,24 @@ const FortuneWheel = () => {
     },
   });
 
+  const spinWheelHandler = async () => {
+    // resetWheelRotation();
+    const userID = String(state.user.id);
+    await userApi.updateUser(userID, {
+      spins: increment(-1),
+    });
+    action.paused = false;
+    setTimeout(() => {
+      spinWheel();
+    }, 850);
+
+    setTimeout(() => {
+      action.stop();
+      action.play();
+      action.paused = true;
+    }, 2000);
+  };
+
   const spinWheel = () => {
     const result = chooseSegment();
 
@@ -82,6 +108,8 @@ const FortuneWheel = () => {
     }
   };
 
+  if (!state.user) return;
+
   return (
     <>
       <div className={styles["tickets"]}>
@@ -94,7 +122,13 @@ const FortuneWheel = () => {
           <span>{state.user.goldTicket || 0}</span>
         </div>
       </div>
-      {message && <div>{message}</div>}
+      <NavLink to={"/fortune-wheel-rules"}>
+        <button className={styles["rules-button"]}>
+          <img src={ListIcon} alt={""} width={17} />
+          <span>Rules</span>
+        </button>
+      </NavLink>
+      {message && <PaymentModal setMessage={setMessage} message={message} />}
       <div className={styles["fortune-wheel"]}>
         <Suspense fallback={<div>Loading...</div>}>
           <Canvas shadows dpr={[1, 2]}>
@@ -107,30 +141,37 @@ const FortuneWheel = () => {
             />
           </Canvas>
         </Suspense>
-        <form
-          action="https://apate-backend.com/create-checkout-session"
-          method="POST"
-        >
+        {state.user.spins ? (
           <button
-            // onClick={() => {
-            //   // resetWheelRotation();
-            //   action.paused = false;
-            //   setTimeout(() => {
-            //     spinWheel();
-            //   }, 850);
-            //
-            //   setTimeout(() => {
-            //     action.stop();
-            //     action.play();
-            //     action.paused = true;
-            //   }, 2000);
-            // }}
+            onClick={spinWheelHandler}
             type={"submit"}
             className={styles["spin-button"]}
           >
-            SPIN
+            <img src={RotateRightSpin} alt={""} width={15} />
+            <span>SPIN</span>
           </button>
-        </form>
+        ) : (
+          <form
+            action="http://localhost:8000/create-checkout-session"
+            method="POST"
+          >
+            <input
+              type={"text"}
+              hidden
+              value={state.user.id}
+              id={"userID"}
+              name={"userID"}
+            />
+            <button
+              // onClick={() => createCheckoutSession()}
+              className={styles["buy-spins-button"]}
+              type={"submit"}
+            >
+              <img src={CartShopping} alt={""} width={15} />
+              <span>Buy spins</span>
+            </button>
+          </form>
+        )}
       </div>
       {!isSpinning && winningSegment && (
         <div className={styles["winning-popup"]}>

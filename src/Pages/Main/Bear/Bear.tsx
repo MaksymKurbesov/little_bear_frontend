@@ -125,7 +125,6 @@ const Bear = () => {
   const handleCardClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       if (!action) return;
-      console.log("clicked");
 
       triggerVibration(tg);
 
@@ -190,9 +189,9 @@ const Bear = () => {
           <Canvas shadows camera={{ position: [0, 1.1, 5] }}>
             <Lights>
               <group
-                position={[0, -0.4, 3.2]}
+                position={[0, -0.55, 3.2]}
                 rotation={[0, 0, 0]}
-                scale={0.47}
+                scale={0.42}
               >
                 <group position={[0, -0.1, 0]}>
                   {danceBearComponents.map(

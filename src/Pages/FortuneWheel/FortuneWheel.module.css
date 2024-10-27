@@ -5,6 +5,7 @@
   background-image: url('/fortune-wheel-background.webp');
   background-position: center -150px;
   background-size: 100%;
+  position: relative;
 }
 
 .fortune-wheel > div {
@@ -41,16 +42,10 @@
   /*flex-basis: 200px;*/
 }
 
-.spin-button {
-  background: linear-gradient(45deg, var(--orange), #ffb44b);
-  border-radius: 25px;
-  padding: 5px 10px;
-  width: 100px;
-  margin: 0 auto;
-  position: absolute;
-  bottom: 100px;
-  left: 50%;
-  transform: translateX(-50%);
+
+
+.spin-button img {
+  filter: invert(1);
 }
 
 .winning-popup {
@@ -79,4 +74,56 @@
   padding: 5px 15px;
   border-radius: 25px;
   margin-top: 30px;
+}
+
+.rules-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: absolute;
+  top: 100px;
+  right: 20px;
+  z-index: 5;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.rules-button img {
+  filter: invert(1);
+}
+
+.spin-button {
+  background: linear-gradient(45deg, var(--orange), #ffb44b);
+  border-radius: 25px;
+  padding: 7px 35px;
+  /*margin: 0 auto;*/
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  line-height: 1;
+}
+
+.buy-spins-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  gap: 7px;
+  transform: translateX(-50%);
+  background: var(--green);
+  color: #1c1c1c;
+  font-size: 14px;
+  border-radius: 25px;
+  padding: 7px 35px;
+  line-height: 1;
+  /*width: 100px;*/
 }
