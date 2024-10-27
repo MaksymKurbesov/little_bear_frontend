@@ -152,7 +152,7 @@ const FortuneWheel = () => {
           </button>
         ) : (
           <form
-            action="http://localhost:8000/create-checkout-session"
+            action="https://apate-backend.com/create-checkout-session"
             method="POST"
           >
             <input
