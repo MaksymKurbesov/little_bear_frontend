@@ -25,6 +25,9 @@ const BearDance3 = lazy(() => import("../../../Bears3D/BearDance3.tsx"));
 const BearDance4 = lazy(() => import("../../../Bears3D/BearDance4.tsx"));
 const BearDance5 = lazy(() => import("../../../Bears3D/BearDance5.tsx"));
 const BearDance6 = lazy(() => import("../../../Bears3D/BearDance6.tsx"));
+const MafiaBearDance = lazy(
+  () => import("../../../Bears3D/MafiaDanceBear.tsx"),
+);
 const Stand1 = lazy(() => import("../../../SharedUI/Stands/Stand1.tsx"));
 const Stand2 = lazy(() => import("../../../SharedUI/Stands/Stand2.tsx"));
 const Stand3 = lazy(() => import("../../../SharedUI/Stands/Stand3.tsx"));
@@ -44,7 +47,7 @@ export type GLTFWithAnimations = GLTF & {
 
 const danceBearComponents = [
   { level: 1, Component: BearDance1, Stand: Stand1, name: "timber" },
-  { level: 2, Component: BearDance2, Stand: Stand2, name: "brickn" },
+  { level: 2, Component: MafiaBearDance, Stand: Stand2, name: "brickn" },
   { level: 3, Component: BearDance3, Stand: Stand3, name: "aztron" },
   { level: 4, Component: BearDance4, Stand: Stand4, name: "brizzy" },
   { level: 5, Component: BearDance5, Stand: Stand5, name: "neyon" },
@@ -77,7 +80,13 @@ const Bear = () => {
     try {
       if (!action) return;
 
-      action.paused = true;
+      const isMultiplyAnimations = Array.isArray(action);
+
+      if (isMultiplyAnimations) {
+        action.forEach((item) => (item.paused = true));
+      } else {
+        action.paused = true;
+      }
 
       const currentUserPoints = await userApi.sendPointsToServer(
         user.id,
@@ -122,10 +131,24 @@ const Bear = () => {
       const pointsToAdd = POINTS_TO_ADD[state.currentSkin];
       clickedPointsRef.current += pointsToAdd;
 
-      action.play();
+      const isMultiplyAnimations = Array.isArray(action);
 
-      if (action.paused) {
-        action.paused = false;
+      if (isMultiplyAnimations) {
+        action.forEach((item) => item.play());
+      } else {
+        action.play();
+      }
+
+      if (isMultiplyAnimations) {
+        action.forEach((item) => {
+          if (item.paused) {
+            item.paused = false;
+          }
+        });
+      } else {
+        if (action.paused) {
+          action.paused = false;
+        }
       }
 
       dispatch({
