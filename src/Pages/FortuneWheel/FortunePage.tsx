@@ -50,15 +50,16 @@ const FortuneWheel = () => {
   }, []);
 
   const { rotation } = useSpring({
-    rotation: [0, -wheelRotation, 0],
+    rotation: [0, wheelRotation, 0],
     config: {
-      mass: 2,
-      friction: 182,
+      mass: 1,
+      friction: 112,
       tension: 80,
       precision: 0.06,
     },
+    immediate: wheelRotation === 0,
     onRest: () => {
-      // wheelRef.current.rotation.y = 0;
+      setWheelRotation(0);
       setIsSpinning(false);
 
       if (winningSegment.value === "silver_ticket") {
@@ -93,6 +94,7 @@ const FortuneWheel = () => {
     const result = chooseSegment();
 
     if (result) {
+      console.log(result, "result");
       setIsSpinning(true);
       setWinningSegment(result);
       const segmentIndex = SEGMENTS.findIndex(
@@ -102,7 +104,7 @@ const FortuneWheel = () => {
       const targetAngle = segmentIndex * segmentAngle;
 
       const fullRotation = 360 * 10;
-      const finalRotation = fullRotation + targetAngle;
+      const finalRotation = -fullRotation + targetAngle;
 
       setWheelRotation(finalRotation * (Math.PI / 180));
     }
@@ -141,7 +143,8 @@ const FortuneWheel = () => {
             />
           </Canvas>
         </Suspense>
-        {state.user.spins ? (
+
+        {state.user.spins > 0 ? (
           <button
             onClick={spinWheelHandler}
             type={"submit"}

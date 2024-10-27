@@ -23,6 +23,7 @@ const Wheel = forwardRef(({ animatedRotation }, ref) => {
     current: wheelRef.current,
     resetRotation: () => {
       if (wheelRef.current) {
+        console.log("reset");
         wheelRef.current.rotation.y = 0;
       }
     },
@@ -36,7 +37,7 @@ const Wheel = forwardRef(({ animatedRotation }, ref) => {
         scale={0.01}
       >
         <animated.mesh
-          // ref={wheelRef}
+          ref={wheelRef}
           // onClick={spinWheel}
           castShadow
           receiveShadow
