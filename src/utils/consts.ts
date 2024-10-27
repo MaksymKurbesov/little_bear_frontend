@@ -22,6 +22,7 @@ export const POINTS_TO_ADD = {
   aztron: 5,
   brizzy: 7,
   neyon: 10,
+  mickey: 15,
 };
 
 export const SKINS = [

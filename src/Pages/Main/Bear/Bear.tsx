@@ -47,10 +47,11 @@ export type GLTFWithAnimations = GLTF & {
 
 const danceBearComponents = [
   { level: 1, Component: BearDance1, Stand: Stand1, name: "timber" },
-  { level: 2, Component: MafiaBearDance, Stand: Stand2, name: "brickn" },
+  { level: 2, Component: BearDance2, Stand: Stand2, name: "brickn" },
   { level: 3, Component: BearDance3, Stand: Stand3, name: "aztron" },
   { level: 4, Component: BearDance4, Stand: Stand4, name: "brizzy" },
   { level: 5, Component: BearDance5, Stand: Stand5, name: "neyon" },
+  { level: null, Component: MafiaBearDance, Stand: null, name: "mickey" },
 ];
 
 const Bear = () => {
@@ -201,7 +202,8 @@ const Bear = () => {
                       return (
                         <React.Fragment key={level}>
                           <Component handleActionReady={handleActionReady} />
-                          <Stand />
+                          {Stand && <Stand />}
+                          {/*<Stand />*/}
                         </React.Fragment>
                       );
                     },

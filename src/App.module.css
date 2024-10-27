@@ -40,6 +40,10 @@
   background-size: cover;
 }
 
+.background-mafia-bear {
+  background-image: url("/mafia-background.png");
+  background-size: cover;
+}
 
 
 .background-image-airdrop {
