@@ -1,7 +1,9 @@
 .points {
-  position: relative;
+  position: absolute;
   width: 250px;
   margin: 20px auto 0;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
