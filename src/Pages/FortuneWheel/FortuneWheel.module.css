@@ -2,9 +2,10 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  background-image: url('/fortune-wheel-background.webp');
-  background-position: center -150px;
-  background-size: 100%;
+  background-color: var(--gray);
+  /*background-image: url('/fortune-wheel-background.webp');*/
+  /*background-position: center -150px;*/
+  /*background-size: 100%;*/
   position: relative;
 }
 

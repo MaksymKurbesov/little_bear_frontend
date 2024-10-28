@@ -1,5 +1,5 @@
 import styles from "./FortuneWheel.module.css";
-import { Suspense, useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import SilverTicket from "/silver-ticket.webp";
 import GoldTicket from "/gold-ticket.webp";
 import FortuneScene from "./FortuneScene.tsx";
@@ -132,17 +132,15 @@ const FortuneWheel = () => {
       </NavLink>
       {message && <PaymentModal setMessage={setMessage} message={message} />}
       <div className={styles["fortune-wheel"]}>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Canvas shadows dpr={[1, 2]}>
-            {/*<Perf matrixUpdate deepAnalyze={true} position="top-left" />*/}
-            <CameraHelper />
-            <FortuneScene
-              wheelRef={wheelRef}
-              animatedRotation={rotation}
-              handleActionReady={handleActionReady}
-            />
-          </Canvas>
-        </Suspense>
+        <Canvas shadows dpr={[1, 2]}>
+          {/*<Perf matrixUpdate deepAnalyze={true} position="top-left" />*/}
+          <CameraHelper />
+          <FortuneScene
+            wheelRef={wheelRef}
+            animatedRotation={rotation}
+            handleActionReady={handleActionReady}
+          />
+        </Canvas>
 
         {state.user.spins > 0 ? (
           <button
@@ -154,26 +152,29 @@ const FortuneWheel = () => {
             <span>SPIN</span>
           </button>
         ) : (
-          <form
-            action="https://apate-backend.com/create-checkout-session"
-            method="POST"
-          >
-            <input
-              type={"text"}
-              hidden
-              value={state.user.id}
-              id={"userID"}
-              name={"userID"}
-            />
+          // <form
+          //   action="https://apate-backend.com/create-checkout-session"
+          //   method="POST"
+          // >
+          //   <input
+          //     type={"text"}
+          //     hidden
+          //     value={state.user.id}
+          //     id={"userID"}
+          //     name={"userID"}
+          //     readOnly
+          //   />
+          <NavLink to={"/buy-spins"}>
             <button
               // onClick={() => createCheckoutSession()}
               className={styles["buy-spins-button"]}
-              type={"submit"}
+              // type={"submit"}
             >
               <img src={CartShopping} alt={""} width={15} />
               <span>Buy spins</span>
             </button>
-          </form>
+          </NavLink>
+          // </form>
         )}
       </div>
       {!isSpinning && winningSegment && (

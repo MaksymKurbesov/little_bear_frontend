@@ -17,7 +17,7 @@ import News from "./Pages/News/News.tsx";
 import OneNews from "./Pages/OneNews/OneNews.tsx";
 import FortuneWheel from "./Pages/FortuneWheel/FortunePage.tsx";
 import FortuneWheelRules from "./Pages/FortuneWheelRules/FortuneWheelRules.tsx";
-import Complete from "./Pages/CheckoutPage/Complete.tsx";
+import BuySpins from "./Pages/BuySpins/BuySpins.tsx";
 
 const routes = createBrowserRouter([
   {
@@ -197,7 +197,7 @@ const routes = createBrowserRouter([
         ),
       },
       {
-        path: "/complete",
+        path: "/buy-spins",
         element: (
           <Suspense
             fallback={
@@ -206,7 +206,7 @@ const routes = createBrowserRouter([
               </div>
             }
           >
-            <Complete />
+            <BuySpins />
           </Suspense>
         ),
       },
