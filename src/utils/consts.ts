@@ -144,7 +144,7 @@ export const DAILY_REWARDS = [
 export const SEGMENTS = [
   {
     name: "30000 BEAR TOKEN",
-    value: "30",
+    value: "30000",
     chance: 11,
   },
   {
@@ -154,7 +154,7 @@ export const SEGMENTS = [
   },
   {
     name: "20000 BEAR TOKEN",
-    value: "20",
+    value: "20000",
     chance: 16,
   },
   {
@@ -164,7 +164,7 @@ export const SEGMENTS = [
   },
   {
     name: "10000 BEAR TOKEN",
-    value: "10",
+    value: "10000",
     chance: 11,
   },
   {
@@ -174,7 +174,7 @@ export const SEGMENTS = [
   },
   {
     name: "50000 BEAR TOKEN",
-    value: "50",
+    value: "50000",
     chance: 11,
   },
   {
@@ -184,7 +184,7 @@ export const SEGMENTS = [
   },
   {
     name: "40000 BEAR TOKEN",
-    value: "40",
+    value: "40000",
     chance: 16,
   },
   {

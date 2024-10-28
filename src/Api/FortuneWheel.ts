@@ -1,4 +1,10 @@
-import { collection, doc, increment, updateDoc } from "firebase/firestore";
+import {
+  arrayUnion,
+  collection,
+  doc,
+  increment,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../main.tsx";
 
 class FortuneWheelApi {
@@ -19,6 +25,14 @@ class FortuneWheelApi {
 
     await updateDoc(userRef, {
       goldTicket: increment(1),
+    });
+  }
+
+  async addBear(userId: string) {
+    const userRef = doc(this.userCollection, userId);
+
+    await updateDoc(userRef, {
+      skins: arrayUnion("mickey"),
     });
   }
 }

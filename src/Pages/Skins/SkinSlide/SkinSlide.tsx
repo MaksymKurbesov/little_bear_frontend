@@ -23,7 +23,7 @@ const SkinSlide = ({
       />
 
       <div className={styles["info"]}>
-        {isCurrentSkin && (
+        {isCurrentSkin && !skin.isPurchasable && (
           <>
             <p className={styles["experience"]}>
               {currentPoints} / {skin.requiredPoints}

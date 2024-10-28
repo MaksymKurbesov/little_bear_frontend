@@ -109,6 +109,8 @@
   justify-content: center;
   gap: 5px;
   line-height: 1;
+  box-shadow: 0 0 10px 5px var(--orange);
+  transition: 0.35s ease all;
 }
 
 .buy-spins-button {
@@ -127,4 +129,12 @@
   padding: 7px 35px;
   line-height: 1;
   /*width: 100px;*/
+}
+
+.disabled-button {
+  background: linear-gradient(45deg, gray, #696969);
+  cursor: not-allowed;
+  box-shadow: initial;
+  transition: 0.35s ease all;
+  pointer-events: none;
 }

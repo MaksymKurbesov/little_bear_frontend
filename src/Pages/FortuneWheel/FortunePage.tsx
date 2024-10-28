@@ -16,8 +16,9 @@ import ListIcon from "../../icons/list.svg";
 import { NavLink } from "react-router-dom";
 import CartShopping from "../../icons/cart-shopping-solid.svg";
 import RotateRightSpin from "../../icons/rotate-right-solid.svg";
-import PaymentModal from "./PaymentModal/PaymentModal.tsx";
+import PaymentModalSuccess from "./PaymentModal/PaymentModalSuccess.tsx";
 import { increment } from "firebase/firestore";
+import PaymentModalCanceled from "./PaymentModal/PaymentModalCanceled.tsx";
 
 const FortuneWheel = () => {
   const [winningSegment, setWinningSegment] = useState(null);
@@ -26,22 +27,18 @@ const FortuneWheel = () => {
   const [wheelRotation, setWheelRotation] = useState(0);
   const [isSpinning, setIsSpinning] = useState(false);
   const wheelRef = useRef();
-  const [message, setMessage] = useState("");
+  const [popupType, setPopupType] = useState("");
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
 
     if (query.get("success")) {
-      setMessage(
-        "Поздравляем! Вы успешно приобрели 1 спин для Колеса Фортуны. Удачи в розыгрыше! 🎉",
-      );
+      setPopupType("success");
     }
 
     if (query.get("canceled")) {
-      setMessage(
-        "Покупка спина для Колеса Фортуны была успешно отменена. Если у вас есть вопросы, пожалуйста, свяжитесь с нашей поддержкой.",
-      );
+      setPopupType("canceled");
     }
   }, []);
 
@@ -58,27 +55,48 @@ const FortuneWheel = () => {
       precision: 0.06,
     },
     immediate: wheelRotation === 0,
-    onRest: () => {
+    onRest: (rotation) => {
+      const isAnimationEnded = rotation.value.rotation.every(
+        (element) => element === 0,
+      );
+
+      if (isAnimationEnded) return;
+
       setWheelRotation(0);
       setIsSpinning(false);
+      const userID = String(state.user.id);
+      const numberWiningSegment = Number(winningSegment.value);
+      const isPointWinningSegment = !isNaN(numberWiningSegment);
+
+      if (isPointWinningSegment) {
+        userApi.updateUser(userID, {
+          points: increment(numberWiningSegment),
+        });
+      }
 
       if (winningSegment.value === "silver_ticket") {
-        fortuneWheelApi.addSilverTicket(String(state.user.id));
+        fortuneWheelApi.addSilverTicket(userID);
       }
 
       if (winningSegment.value === "gold_ticket") {
-        fortuneWheelApi.addGoldTicket(String(state.user.id));
+        fortuneWheelApi.addGoldTicket(userID);
+      }
+
+      if (winningSegment.value === "bear") {
+        fortuneWheelApi.addBear(userID);
       }
     },
   });
 
   const spinWheelHandler = async () => {
-    // resetWheelRotation();
+    if (isSpinning) return;
+
     const userID = String(state.user.id);
     await userApi.updateUser(userID, {
       spins: increment(-1),
     });
     action.paused = false;
+    setIsSpinning(true);
     setTimeout(() => {
       spinWheel();
     }, 850);
@@ -94,8 +112,6 @@ const FortuneWheel = () => {
     const result = chooseSegment();
 
     if (result) {
-      console.log(result, "result");
-      setIsSpinning(true);
       setWinningSegment(result);
       const segmentIndex = SEGMENTS.findIndex(
         (seg) => seg.name === result.name,
@@ -130,7 +146,14 @@ const FortuneWheel = () => {
           <span>Rules</span>
         </button>
       </NavLink>
-      {message && <PaymentModal setMessage={setMessage} message={message} />}
+      {popupType === "success" && (
+        <PaymentModalSuccess setPopupType={setPopupType} />
+      )}
+
+      {popupType === "canceled" && (
+        <PaymentModalCanceled setPopupType={setPopupType} />
+      )}
+
       <div className={styles["fortune-wheel"]}>
         <Canvas shadows dpr={[1, 2]}>
           {/*<Perf matrixUpdate deepAnalyze={true} position="top-left" />*/}
@@ -146,35 +169,21 @@ const FortuneWheel = () => {
           <button
             onClick={spinWheelHandler}
             type={"submit"}
-            className={styles["spin-button"]}
+            className={`${styles["spin-button"]} ${isSpinning ? styles["disabled-button"] : ""}`}
           >
             <img src={RotateRightSpin} alt={""} width={15} />
             <span>SPIN</span>
+            <span>{state.user.spins}</span>
           </button>
         ) : (
-          // <form
-          //   action="https://apate-backend.com/create-checkout-session"
-          //   method="POST"
-          // >
-          //   <input
-          //     type={"text"}
-          //     hidden
-          //     value={state.user.id}
-          //     id={"userID"}
-          //     name={"userID"}
-          //     readOnly
-          //   />
           <NavLink to={"/buy-spins"}>
             <button
-              // onClick={() => createCheckoutSession()}
-              className={styles["buy-spins-button"]}
-              // type={"submit"}
+              className={`${styles["buy-spins-button"]} ${isSpinning ? styles["disabled-button"] : ""}`}
             >
               <img src={CartShopping} alt={""} width={15} />
               <span>Buy spins</span>
             </button>
           </NavLink>
-          // </form>
         )}
       </div>
       {!isSpinning && winningSegment && (
