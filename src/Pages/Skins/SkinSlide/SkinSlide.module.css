@@ -119,7 +119,7 @@
 }
 
 
-.slide img {
+.slide > img {
   margin: 0 auto 20px;
   width: 40vh;
 }
@@ -231,6 +231,20 @@
   border-radius: 15px;
 }
 
+.buy-spins-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  /*transform: translateX(-50%);*/
+  background: var(--green);
+  color: #1c1c1c;
+  font-size: 14px;
+  border-radius: 25px;
+  padding: 7px 35px;
+  line-height: 1;
+  /*width: 100px;*/
+}
 
 
 @keyframes gradientAnimation {
@@ -255,7 +269,7 @@
 
 
 @media screen and (max-width: 385px){
-  .slide img {
+  .slide > img {
     width: 34vh;
   }
 

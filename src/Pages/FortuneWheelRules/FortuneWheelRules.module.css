@@ -28,7 +28,7 @@
 
 .content h1 {
   font-size: 22px;
-  margin-bottom: 5px;
+  margin-bottom: 25px;
   text-align: center;
 }
 
@@ -36,10 +36,38 @@
   font-size: 12px;
   font-weight: 500;
   line-height: 1.2;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   opacity: 0.6;
-  text-align: center;
+  /*text-align: center;*/
 }
+
+.purchase-1-spin {
+  font-size: 14px;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.prizes-list {
+  margin-bottom: 30px;
+}
+
+.how-to-win {
+  display: inline-block;
+  margin-bottom: 5px !important;
+}
+
+.on-the-wheel {
+  font-size: 12px !important;
+}
+
+.to-win-car, .after-the-draw {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 15px;
+}
+
+
 
 .content ul li {
   /*overflow: scroll;*/
@@ -62,4 +90,18 @@
 
 .main-prizes, .participate {
   opacity: 0.6;
+}
+
+.back-button {
+  position: absolute;
+  left: 10px;
+  top: 23px;
+  width: 35px;
+  height: 25px;
+  z-index: 55;
+  transform: rotateZ(90deg);
+}
+
+.back-button img {
+  /*filter: invert(1);*/
 }

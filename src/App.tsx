@@ -29,6 +29,7 @@ const BEAR_BACKGROUNDS = {
   brizzy: "background-image-main4",
   neyon: "background-image-main5",
   mickey: "background-mafia-bear",
+  kyberon: "kyberon-bg",
 };
 
 const App = () => {

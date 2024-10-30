@@ -5,6 +5,7 @@ import BearSkin4 from "../images/skins/brizzy.webp";
 import BearSkin5 from "../images/skins/aztron.webp";
 import MickeySkin from "../images/skins/mickey.png";
 import DimasSkin from "../images/skins/dimas.webp";
+import KyberonSkin from "../images/skins/kyberon.webp";
 import OpenedBearSkin1 from "../images/skins/timber.webp";
 import OpenedBearSkin2 from "../images/skins/brickn-opened.webp";
 import OpenedBearSkin3 from "../images/skins/neyon-opened.webp";
@@ -12,6 +13,7 @@ import OpenedBearSkin4 from "../images/skins/brizzy-opened.webp";
 import OpenedBearSkin5 from "../images/skins/aztron-opened.webp";
 import OpenedMickeySkin from "../images/skins/mickey-opened.png";
 import OpenedDimasSkin from "../images/skins/dimas-opened.webp";
+import OpenedKyberonSkin from "../images/skins/kyberon-opened.webp";
 import DollarIcon from "../images/dollar-coin2.webp";
 import TicketIcon from "/ticket.webp";
 
@@ -78,6 +80,16 @@ export const SKINS = [
   },
   {
     id: 6,
+    image: KyberonSkin,
+    openedImage: OpenedKyberonSkin,
+    requiredPoints: 1000000,
+    colorCN: "color-purple",
+    points: 20,
+    name: "kyberon",
+    isPurchasable: false,
+  },
+  {
+    id: 7,
     image: MickeySkin,
     openedImage: OpenedMickeySkin,
     requiredPoints: null,
@@ -85,6 +97,8 @@ export const SKINS = [
     points: 30,
     name: "mickey",
     isPurchasable: true,
+    price: 30,
+    stripeEndpoint: "buy_mafia_bear",
   },
   // {
   //   id: 7,
@@ -143,52 +157,52 @@ export const DAILY_REWARDS = [
 
 export const SEGMENTS = [
   {
-    name: "30000 BEAR TOKEN",
+    name: "30000 Bear Token",
     value: "30000",
     chance: 11,
   },
   {
-    name: "Серебрянный билет",
+    name: "Silver Ticket",
     value: "silver_ticket",
     chance: 15,
   },
   {
-    name: "20000 BEAR TOKEN",
+    name: "20000 Bear Token",
     value: "20000",
     chance: 16,
   },
   {
-    name: "Золотой билет",
+    name: "Golden Ticket",
     value: "gold_ticket",
     chance: 10,
   },
   {
-    name: "10000 BEAR TOKEN",
+    name: "10000 Bear Token",
     value: "10000",
     chance: 11,
   },
   {
-    name: "Скин 'Mafia Little Bear'",
+    name: "Skin 'Mafia Little Bear'",
     value: "bear",
     chance: 5,
   },
   {
-    name: "50000 BEAR TOKEN",
+    name: "50000 Bear Token",
     value: "50000",
     chance: 11,
   },
   {
-    name: "Золотой билет",
+    name: "Golden Ticket",
     value: "gold_ticket",
     chance: 10,
   },
   {
-    name: "40000 BEAR TOKEN",
+    name: "40000 Bear Token",
     value: "40000",
     chance: 16,
   },
   {
-    name: "Серебрянный билет",
+    name: "Silver Ticket",
     value: "silver_ticket",
     chance: 15,
   },

@@ -38,6 +38,10 @@
   background-image: url('/bg7-skin.png');
 }
 
+.kyberon-bg {
+  background-image: url('/kyberon-bg.webp');
+}
+
 .title-wrapper {
   margin-top: 20px;
 }

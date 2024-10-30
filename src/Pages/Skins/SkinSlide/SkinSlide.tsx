@@ -1,5 +1,8 @@
 import styles from "./SkinSlide.module.css";
 import { userApi } from "../../../main.tsx";
+import { NavLink, useNavigate } from "react-router-dom";
+import CartShopping from "../../../icons/cart-shopping-solid.svg";
+import { useAppState } from "../../../Stores/AppStateContext.tsx";
 
 const SkinSlide = ({
   skin,
@@ -10,8 +13,11 @@ const SkinSlide = ({
   userSkinName,
 }) => {
   const progress = (currentPoints / skin.requiredPoints) * 100;
+  const { state } = useAppState();
   const isCurrentSkin = skin.id === level + 1;
   const isNextSkin = skin.id > level + 1;
+  const navigate = useNavigate();
+  const isSkinBought = state.user.skins.includes(skin.name);
 
   return (
     <div className={`${styles["slide"]} ${styles[skin.colorCN]}`}>
@@ -38,10 +44,32 @@ const SkinSlide = ({
       {isNextSkin && !skin.isPurchasable && (
         <p className={styles["experience"]}>from {skin.requiredPoints}</p>
       )}
-      {skin.isPurchasable && (
-        <button className={styles["buy-button"]}>Buy</button>
+      {skin.isPurchasable && !isSkinBought && (
+        <button
+          onClick={() => {
+            navigate("/checkout", {
+              state: {
+                name: skin.name,
+                price: skin.price,
+                stripeEndpoint: skin.stripeEndpoint,
+              },
+            });
+          }}
+          className={styles["buy-spins-button"]}
+        >
+          <img src={CartShopping} alt={""} width={15} />
+          <span>BUY SKIN</span>
+        </button>
       )}
       {index < level && (
+        <button
+          onClick={onSelectHandler}
+          className={`${styles["select-button"]} ${userSkinName === skin.name ? styles["selected-button"] : ""}`}
+        >
+          {userSkinName === skin.name ? "Selected" : "Select"}
+        </button>
+      )}
+      {isSkinBought && (
         <button
           onClick={onSelectHandler}
           className={`${styles["select-button"]} ${userSkinName === skin.name ? styles["selected-button"] : ""}`}

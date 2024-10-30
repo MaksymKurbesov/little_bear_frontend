@@ -19,63 +19,14 @@
   height: 85vh !important;
 }
 
-.tickets {
-  /*display: block !important;*/
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  font-weight: 500;
-  position: absolute;
-  top: 100px;
-  left: 25px;
-  z-index: 55;
-}
-
-.tickets div {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 5px;
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-  border: 1px solid var(--orange);
-  padding: 3px 7px;
-  /*flex-basis: 200px;*/
-}
-
 
 
 .spin-button img {
   filter: invert(1);
 }
 
-.winning-popup {
-  width: 100vw;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 99;
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-.winning-popup-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
 
-.get-reward {
-  background: var(--orange);
-  padding: 5px 15px;
-  border-radius: 25px;
-  margin-top: 30px;
-}
 
 .rules-button {
   display: flex;

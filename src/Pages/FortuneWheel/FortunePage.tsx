@@ -13,16 +13,20 @@ import { SEGMENTS } from "../../utils/consts.ts";
 import { useSpring } from "@react-spring/core";
 import { fortuneWheelApi, userApi } from "../../main.tsx";
 import ListIcon from "../../icons/list.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import CartShopping from "../../icons/cart-shopping-solid.svg";
 import RotateRightSpin from "../../icons/rotate-right-solid.svg";
 import PaymentModalSuccess from "./PaymentModal/PaymentModalSuccess.tsx";
 import { increment } from "firebase/firestore";
 import PaymentModalCanceled from "./PaymentModal/PaymentModalCanceled.tsx";
+import TicketsImage from "../../images/tickets.png";
+import Tickets from "./Tickets/Tickets.tsx";
+import WinPopup from "./WinPopup/WinPopup.tsx";
 
 const FortuneWheel = () => {
   const [winningSegment, setWinningSegment] = useState(null);
   const { state } = useAppState();
+  const navigate = useNavigate();
   const [action, setAction] = useState<AnimationAction>();
   const [wheelRotation, setWheelRotation] = useState(0);
   const [isSpinning, setIsSpinning] = useState(false);
@@ -130,16 +134,10 @@ const FortuneWheel = () => {
 
   return (
     <>
-      <div className={styles["tickets"]}>
-        <div>
-          <img src={SilverTicket} width={35} alt={""} />
-          <span>{state.user.silverTicket || 0}</span>
-        </div>
-        <div>
-          <img src={GoldTicket} width={35} alt={""} />
-          <span>{state.user.goldTicket || 0}</span>
-        </div>
-      </div>
+      <Tickets
+        silverTicketCount={state.user.silverTicket}
+        goldTicketCount={state.user.goldTicket}
+      />
       <NavLink to={"/fortune-wheel-rules"}>
         <button className={styles["rules-button"]}>
           <img src={ListIcon} alt={""} width={17} />
@@ -176,30 +174,32 @@ const FortuneWheel = () => {
             <span>{state.user.spins}</span>
           </button>
         ) : (
-          <NavLink to={"/buy-spins"}>
-            <button
-              className={`${styles["buy-spins-button"]} ${isSpinning ? styles["disabled-button"] : ""}`}
-            >
-              <img src={CartShopping} alt={""} width={15} />
-              <span>Buy spins</span>
-            </button>
-          </NavLink>
+          // <NavLink to={"/buy-spins"}>
+          <button
+            onClick={() => {
+              navigate("/checkout", {
+                state: {
+                  name: "Spins for fortune wheel",
+                  price: 1,
+                  stripeEndpoint: "buy_spins",
+                },
+              });
+            }}
+            className={`${styles["buy-spins-button"]} ${isSpinning ? styles["disabled-button"] : ""}`}
+          >
+            <img src={CartShopping} alt={""} width={15} />
+            <span>BUY SPINS</span>
+          </button>
+          // </NavLink>
         )}
       </div>
-      {!isSpinning && winningSegment && (
-        <div className={styles["winning-popup"]}>
-          <div className={styles["winning-popup-content"]}>
-            <p>Поздравляем!</p>
-            <p>Вы выиграли {winningSegment.name}</p>
-            <button
-              className={styles["get-reward"]}
-              onClick={() => setWinningSegment(null)}
-            >
-              Получить
-            </button>
-          </div>
-        </div>
-      )}
+      {/*{!isSpinning && !winningSegment && (*/}
+      <WinPopup
+        isShow={!isSpinning && winningSegment}
+        name={winningSegment?.name}
+        closeHandler={() => setWinningSegment(null)}
+      />
+      {/*)}*/}
     </>
   );
 };

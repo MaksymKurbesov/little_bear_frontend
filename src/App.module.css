@@ -44,10 +44,15 @@
 }
 
 .background-mafia-bear {
-  background-image: url("/mafia-background2.png");
+  background-image: url("/mafia-background.webp");
   background-size: cover;
 }
 
+
+.kyberon-bg {
+  background-image: url("/kyberon-bg.webp");
+  background-size: cover;
+}
 
 .background-image-airdrop {
   background-image: url('/airdrop-bg.webp');

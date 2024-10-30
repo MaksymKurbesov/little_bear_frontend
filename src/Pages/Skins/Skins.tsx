@@ -9,6 +9,7 @@ const BACKGROUND = [
   "bg-skin-3",
   "bg-skin-4",
   "bg-skin-5",
+  "kyberon-bg",
   "bg-skin-6",
   "bg-skin-7",
 ];
