@@ -19,3 +19,13 @@ export const SettingsPage = lazy(() => import("./Pages/Settings/Settings.tsx"));
 export const SkinsPage = lazy(() => import("./Pages/Skins/Skins.tsx"));
 
 export const MarketPage = lazy(() => import("./Pages/Market/Market.tsx"));
+
+export const FortuneWheelPage = lazy(
+  () => import("./Pages/FortuneWheel/FortunePage.tsx"),
+);
+
+export const FortuneWheelRulesPage = lazy(
+  () => import("./Pages/FortuneWheelRules/FortuneWheelRules.tsx"),
+);
+
+export const CheckoutPage = lazy(() => import("./Pages/Checkout/Checkout.tsx"));

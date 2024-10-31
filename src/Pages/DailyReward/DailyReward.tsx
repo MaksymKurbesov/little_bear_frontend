@@ -2,7 +2,7 @@ import styles from "./DailyReward.module.css";
 import { DAILY_REWARDS } from "../../utils/consts.ts";
 import { dailyRewardsApi, userApi } from "../../main.tsx";
 import { ScrollRestoration } from "react-router-dom";
-import { useAppState } from "../../Stores/AppStateContext.tsx";
+import { useAppState } from "../../Stores/useAppState.ts";
 import { useTranslation } from "react-i18next";
 import RewardModule from "../../SharedUI/RewardModule/RewardModule.tsx";
 

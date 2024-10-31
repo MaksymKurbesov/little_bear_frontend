@@ -8,7 +8,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { useAppState } from "../../../Stores/AppStateContext.tsx";
+import { useAppState } from "../../../Stores/useAppState.ts";
 import LoadSpinning from "../../../SharedUI/LoadSpinning/LoadSpinning.tsx";
 import { useTelegram } from "../../../hooks/useTelegram.ts";
 import { OrbitControls } from "@react-three/drei";
@@ -24,7 +24,7 @@ const BearDance2 = lazy(() => import("../../../Bears3D/BearDance2.tsx"));
 const BearDance3 = lazy(() => import("../../../Bears3D/BearDance3.tsx"));
 const BearDance4 = lazy(() => import("../../../Bears3D/BearDance4.tsx"));
 const BearDance5 = lazy(() => import("../../../Bears3D/BearDance5.tsx"));
-const BearDance6 = lazy(() => import("../../../Bears3D/BearDance6.tsx"));
+const KyberonBear = lazy(() => import("../../../Bears3D/Kyberon.tsx"));
 const MafiaBearDance = lazy(
   () => import("../../../Bears3D/MafiaDanceBear.tsx"),
 );
@@ -33,7 +33,6 @@ const Stand2 = lazy(() => import("../../../SharedUI/Stands/Stand2.tsx"));
 const Stand3 = lazy(() => import("../../../SharedUI/Stands/Stand3.tsx"));
 const Stand4 = lazy(() => import("../../../SharedUI/Stands/Stand4.tsx"));
 const Stand5 = lazy(() => import("../../../SharedUI/Stands/Stand5.tsx"));
-const Stand6 = lazy(() => import("../../../SharedUI/Stands/Stand6.tsx"));
 import { v4 as uuidv4 } from "uuid";
 import LevelUp from "../../../SharedUI/LevelUp/LevelUp.tsx";
 import { POINTS_TO_ADD } from "../../../utils/consts.ts";
@@ -51,6 +50,7 @@ const danceBearComponents = [
   { level: 3, Component: BearDance3, Stand: Stand3, name: "aztron" },
   { level: 4, Component: BearDance4, Stand: Stand4, name: "brizzy" },
   { level: 5, Component: BearDance5, Stand: Stand5, name: "neyon" },
+  { level: 6, Component: KyberonBear, Stand: null, name: "kyberon" },
   { level: null, Component: MafiaBearDance, Stand: null, name: "mickey" },
 ];
 

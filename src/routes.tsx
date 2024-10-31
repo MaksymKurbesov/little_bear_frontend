@@ -11,6 +11,9 @@ import {
   SettingsPage,
   SkinsPage,
   TasksPage,
+  FortuneWheelPage,
+  FortuneWheelRulesPage,
+  CheckoutPage,
 } from "./lazyImports.ts";
 import LoadSpinning from "./SharedUI/LoadSpinning/LoadSpinning.tsx";
 import News from "./Pages/News/News.tsx";
@@ -178,7 +181,7 @@ const routes = createBrowserRouter([
               </div>
             }
           >
-            <FortuneWheel />
+            <FortuneWheelPage />
           </Suspense>
         ),
       },
@@ -192,7 +195,7 @@ const routes = createBrowserRouter([
               </div>
             }
           >
-            <FortuneWheelRules />
+            <FortuneWheelRulesPage />
           </Suspense>
         ),
       },
@@ -206,7 +209,7 @@ const routes = createBrowserRouter([
               </div>
             }
           >
-            <Checkout />
+            <CheckoutPage />
           </Suspense>
         ),
       },

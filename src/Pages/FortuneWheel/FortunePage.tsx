@@ -4,7 +4,7 @@ import SilverTicket from "/silver-ticket.webp";
 import GoldTicket from "/gold-ticket.webp";
 import FortuneScene from "./FortuneScene.tsx";
 import { Canvas } from "@react-three/fiber";
-import { useAppState } from "../../Stores/AppStateContext.tsx";
+import { useAppState } from "../../Stores/useAppState.ts";
 import { AnimationAction } from "three";
 import CameraHelper from "./CameraHelper.tsx";
 import { Perf } from "r3f-perf";
@@ -66,7 +66,9 @@ const FortuneWheel = () => {
 
       if (isAnimationEnded) return;
 
-      setWheelRotation(0);
+      setTimeout(() => {
+        setWheelRotation(0);
+      }, 1000);
       setIsSpinning(false);
       const userID = String(state.user.id);
       const numberWiningSegment = Number(winningSegment.value);

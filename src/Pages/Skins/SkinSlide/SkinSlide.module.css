@@ -213,15 +213,36 @@
 
 
 .select-button {
-  background: var(--orange);
+  background: rgba(255, 217, 161, 0.16);
+  /*background: none;*/
+  border: 1px solid var(--orange);
   padding: 4px 20px;
-  border-radius: 20px;
-  font-weight: 500;
+  /*border-radius: 20px;*/
+  /*font-weight: 500;*/
+  /*font-size: 14px;*/
+
+  width: 170px;
   font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  /*margin: 20px;*/
+  height: 30px;
+  text-align:center;
+  /*border: none;*/
+  background-size: 300% 100%;
+
+  border-radius: 50px;
+  moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
 }
 
 .selected-button {
   background: #70ff65;
+  border: none;
+  color: black;
 }
 
 .buy-button {

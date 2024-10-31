@@ -1,6 +1,6 @@
 import styles from "./Main.module.css";
 import { useCallback, useState } from "react";
-import { useAppState } from "../../Stores/AppStateContext.tsx";
+import { useAppState } from "../../Stores/useAppState.ts";
 import Bear from "./Bear/Bear.tsx";
 import { POINTS_TO_ADD } from "../../utils/consts.ts";
 import Points from "./Points/Points.tsx";

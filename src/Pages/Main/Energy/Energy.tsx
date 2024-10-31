@@ -1,6 +1,6 @@
 import styles from "./Energy.module.css";
 import { useCallback, useEffect, useState } from "react";
-import { useAppState } from "../../../Stores/AppStateContext.tsx";
+import { useAppState } from "../../../Stores/useAppState.ts";
 import {
   doc,
   increment,

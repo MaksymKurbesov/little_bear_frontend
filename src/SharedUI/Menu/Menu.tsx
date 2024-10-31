@@ -33,6 +33,7 @@ const Menu = () => {
           className={({ isActive, isPending }) =>
             isPending ? styles["pending"] : isActive ? styles["active"] : ""
           }
+          // reloadDocument
         >
           <img src={PlayIcon2} width={28} alt={""} height={28} />
           {/*<span>{t("Menu.Bear")}</span>*/}

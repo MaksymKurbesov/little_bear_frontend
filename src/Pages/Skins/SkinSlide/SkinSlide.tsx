@@ -2,7 +2,8 @@ import styles from "./SkinSlide.module.css";
 import { userApi } from "../../../main.tsx";
 import { NavLink, useNavigate } from "react-router-dom";
 import CartShopping from "../../../icons/cart-shopping-solid.svg";
-import { useAppState } from "../../../Stores/AppStateContext.tsx";
+import { useAppState } from "../../../Stores/useAppState.ts";
+import { useEffect, useState } from "react";
 
 const SkinSlide = ({
   skin,
@@ -12,17 +13,23 @@ const SkinSlide = ({
   onSelectHandler,
   userSkinName,
 }) => {
+  const [isSkinBought, setIsSkinBought] = useState(false);
   const progress = (currentPoints / skin.requiredPoints) * 100;
   const { state } = useAppState();
   const isCurrentSkin = skin.id === level + 1;
   const isNextSkin = skin.id > level + 1;
   const navigate = useNavigate();
-  const isSkinBought = state.user.skins.includes(skin.name);
+
+  useEffect(() => {
+    if (state.user.skins) {
+      setIsSkinBought(state.user.skins.includes(skin.name));
+    }
+  }, []);
 
   return (
     <div className={`${styles["slide"]} ${styles[skin.colorCN]}`}>
       <img
-        src={index < level ? skin.openedImage : skin.image}
+        src={index < level || isSkinBought ? skin.openedImage : skin.image}
         alt={""}
         width={220}
         loading="lazy"

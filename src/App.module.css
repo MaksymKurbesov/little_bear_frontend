@@ -57,20 +57,11 @@
 .background-image-airdrop {
   background-image: url('/airdrop-bg.webp');
   background-size: cover;
-  /*background-size: contain;*/
-  /*background-repeat: no-repeat;*/
-  /*background-position: center;*/
 }
-
-/*.background-image-skins {*/
-/*  background-image: none;*/
-/*}*/
-
 
 .top-glow {
   box-shadow: 0 -26px 20px rgba(243, 186, 47, 0.3);
 }
-
 
 .point {
   position: relative;

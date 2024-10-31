@@ -2,7 +2,7 @@ import styles from "./Checkout.module.css";
 import FortuneWheelButton from "/fortune-wheel-button.png";
 import CartShopping from "../../icons/cart-shopping-solid.svg";
 import { useState } from "react";
-import { useAppState } from "../../Stores/AppStateContext.tsx";
+import { useAppState } from "../../Stores/useAppState.ts";
 import { useLocation } from "react-router-dom";
 import MickeyCohenImage from "../../images/skins/mickey.png";
 

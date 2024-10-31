@@ -7,7 +7,7 @@ import { RouterProvider } from "react-router-dom";
 import UserApi from "./Api/UserApi.ts";
 import { Provider } from "react-redux";
 import store from "./Stores/store.ts";
-import { AppStateProvider } from "./Stores/AppStateContext.tsx";
+import { AppStateProvider } from "./Stores/AppStateProvider.tsx";
 import "./i18n";
 import FortuneWheelApi from "./Api/FortuneWheel.ts";
 import Tasks from "./Pages/Tasks/Tasks.tsx";

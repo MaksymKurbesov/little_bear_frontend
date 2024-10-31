@@ -4,8 +4,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import Menu from "./SharedUI/Menu/Menu";
 import { useEffect, useState } from "react";
 import { useTelegram } from "./hooks/useTelegram";
-import { useGetUserQuery } from "./Stores/slices/apiSlice.ts";
-import { useAppState } from "./Stores/AppStateContext.tsx";
+import { useAppState } from "./Stores/useAppState.ts";
 import StartBearVideo from "./Pages/StartBearVideo/StartBearVideo.tsx";
 import LoadingScreen from "./Pages/LoadingScreen/LoadingScreen.tsx";
 import { getLevelByPoints, getLittleBearId } from "./utils/helpers.ts";
@@ -19,7 +18,6 @@ import { SKINS } from "./utils/consts.ts";
 
 const BACKGROUND_MAP = {
   "/airdrop": "background-image-airdrop",
-  "/skins": "background-image-skins",
 };
 
 const BEAR_BACKGROUNDS = {
@@ -49,12 +47,11 @@ const App = () => {
   useEffect(() => {
     if (!state.user) return;
 
-    console.log(state.user, "state.user");
-
     if (state.user.skin) {
       dispatch({ type: "SET_SKIN", payload: state.user.skin });
 
-      setbgSkin(BEAR_BACKGROUNDS[state.currentSkin]);
+      setbgSkin(BEAR_BACKGROUNDS[state.user.skin]);
+      console.log(state.currentSkin, state.currentSkin);
     } else {
       const currentLevel = getLevelByPoints(state.user.points);
       const currentBg = Object.values(BEAR_BACKGROUNDS)[currentLevel - 1];
@@ -130,6 +127,8 @@ const App = () => {
       </div>
     );
   }
+
+  console.log(bgSkin, "bgSkin");
 
   return (
     <div

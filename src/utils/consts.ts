@@ -24,6 +24,7 @@ export const POINTS_TO_ADD = {
   aztron: 5,
   brizzy: 7,
   neyon: 10,
+  kyberon: 20,
   mickey: 30,
 };
 
@@ -82,7 +83,7 @@ export const SKINS = [
     id: 6,
     image: KyberonSkin,
     openedImage: OpenedKyberonSkin,
-    requiredPoints: 1000000,
+    requiredPoints: 750000,
     colorCN: "color-purple",
     points: 20,
     name: "kyberon",
@@ -182,7 +183,7 @@ export const SEGMENTS = [
     chance: 11,
   },
   {
-    name: "Skin 'Mafia Little Bear'",
+    name: "Mafia Bear",
     value: "bear",
     chance: 5,
   },
@@ -208,8 +209,6 @@ export const SEGMENTS = [
   },
 ];
 
-export const TICKET_REWARDS = [];
-
 export const DAILY_REWARDS_BY_DAY: { [key: string]: number } = {
   0: 10,
   1: 50,
@@ -223,4 +222,4 @@ export const DAILY_REWARDS_BY_DAY: { [key: string]: number } = {
   9: 10000,
 };
 
-export const levelThresholds = [0, 20000, 60000, 120000, 200000];
+export const levelThresholds = [0, 20000, 60000, 120000, 200000, 750000];

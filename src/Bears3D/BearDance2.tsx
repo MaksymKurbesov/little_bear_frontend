@@ -5,7 +5,7 @@ import { GLTFWithAnimations } from "../Pages/Main/Bear/Bear.tsx";
 const BearDance2 = (props) => {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF<GLTFWithAnimations>(
-    "/new_bear_model/2/optimized.glb",
+    "/new_bear_model/2/final.glb",
   );
 
   const { actions } = useAnimations(animations, group);
@@ -83,4 +83,4 @@ const BearDance2 = (props) => {
 
 export default BearDance2;
 
-useGLTF.preload("/new_bear_model/2/optimized.glb");
+useGLTF.preload("/new_bear_model/2/final.glb");

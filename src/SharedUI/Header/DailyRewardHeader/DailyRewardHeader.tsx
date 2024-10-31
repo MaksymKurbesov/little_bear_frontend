@@ -3,7 +3,7 @@ import { calculateTimeLeft } from "../../../utils/helpers.ts";
 import styles from "./DailyRewardHeader.module.css";
 import { NavLink } from "react-router-dom";
 import { dailyReward } from "../../../images";
-import { useAppState } from "../../../Stores/AppStateContext.tsx";
+import { useAppState } from "../../../Stores/useAppState.ts";
 import { useTranslation } from "react-i18next";
 import { dailyRewardsApi, userApi } from "../../../main.tsx";
 

@@ -3,7 +3,7 @@ import Settings from "../../icons/Settings";
 import LittleBearIcon from "../../images/little-bear-icon.png";
 import { NavLink } from "react-router-dom";
 import ProgressBar from "./ProgressBar/ProgressBar.tsx";
-import { useAppState } from "../../Stores/AppStateContext.tsx";
+import { useAppState } from "../../Stores/useAppState.ts";
 import { useTranslation } from "react-i18next";
 import NewsIcon from "../../icons/news-icon.svg?react";
 import News from "../../Pages/News/News.tsx";

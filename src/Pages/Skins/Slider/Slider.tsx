@@ -7,7 +7,7 @@ import "swiper/css/scrollbar";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useEffect, useRef, useState } from "react";
 import ArrowIcon from "../../../icons/arrow.svg";
-import { useAppState } from "../../../Stores/AppStateContext.tsx";
+import { useAppState } from "../../../Stores/useAppState.ts";
 import SkinSlide from "../SkinSlide/SkinSlide.tsx";
 import { SKINS } from "../../../utils/consts.ts";
 import LoadSpinning from "../../../SharedUI/LoadSpinning/LoadSpinning.tsx";
@@ -52,8 +52,6 @@ const Slider = ({ currentSkin, setCurrentSkin }) => {
       swiper.off("reachBeginning");
     };
   }, [swiper, state.user]);
-
-  console.log(currentSkin, "currentSkin");
 
   return (
     <Swiper

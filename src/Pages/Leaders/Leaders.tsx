@@ -11,7 +11,7 @@ import { useImagePreloader } from "../../hooks/useImagePreloader.ts";
 import LoadSpinning from "../../SharedUI/LoadSpinning/LoadSpinning.tsx";
 import { useTranslation } from "react-i18next";
 import { useGetLeaderboardQuery } from "../../Stores/slices/apiSlice.ts";
-import { useAppState } from "../../Stores/AppStateContext.tsx";
+import { useAppState } from "../../Stores/useAppState.ts";
 
 const imageUrls = [
   BronzeMedal,

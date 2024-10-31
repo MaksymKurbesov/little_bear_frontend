@@ -18,8 +18,6 @@ const Skins = () => {
   const [currentSkin, setCurrentSkin] = useState(0);
   const { t } = useTranslation();
 
-  console.log(currentSkin, "currentSkin");
-
   return (
     <div
       className={`${styles["system-levels"]} ${styles[BACKGROUND[currentSkin]]}`}

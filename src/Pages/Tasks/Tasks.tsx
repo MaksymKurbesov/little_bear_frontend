@@ -5,7 +5,7 @@ import {
   useGetUserQuery,
 } from "../../Stores/slices/apiSlice.ts";
 import LoadSpinning from "../../SharedUI/LoadSpinning/LoadSpinning.tsx";
-import { useAppState } from "../../Stores/AppStateContext.tsx";
+import { useAppState } from "../../Stores/useAppState.ts";
 import CoinIcon from "../../images/default-coin-small.webp";
 import TelegramIcon from "../../images/telegram-icon.webp";
 import XIcon from "../../images/x-icon.webp";
