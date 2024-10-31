@@ -16,6 +16,24 @@ const BACKGROUND = [
   "bg-skin-7",
 ];
 
+const preloadImages = (urls) => {
+  urls.forEach((url) => {
+    const img = new Image();
+    img.src = url;
+  });
+};
+
+const BACKGROUND_PATHS = [
+  "/bg1-skin.png",
+  "/bg2-skin.png",
+  "/bg3-skin.png",
+  "/bg4-skin.png",
+  "/bg5-skin.png",
+  "/kyberon-bg.webp",
+  "/bg6-skin.png",
+  "/bg7-skin.png",
+];
+
 const Skins = () => {
   const [currentSkin, setCurrentSkin] = useState(0);
   const [popupType, setPopupType] = useState("");
@@ -34,6 +52,8 @@ const Skins = () => {
       setPopupType("canceled");
       document.body.style.overflow = "hidden";
     }
+
+    preloadImages(BACKGROUND_PATHS);
   }, []);
 
   return (
