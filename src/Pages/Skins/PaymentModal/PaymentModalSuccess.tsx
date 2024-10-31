@@ -6,14 +6,16 @@ const PaymentModalSuccess = ({ setPopupType }) => {
       <div className={styles["payment-modal-content"]}>
         <h2>Congratulations!</h2>
         <p>
-          You have successfully purchased your spin(s) for the Wheel of Fortune.
+          Your purchase of the bear skin was successful! 🧸✨ <br />
+          <br />
+          Now you can choose a skin that makes your bear look even cooler and
+          brighter! <br />
+          <br />
+          To start using the new skin, simply select it in the "Bears" section.
         </p>
-        <p>Good luck in the draw! 🎉</p>
+        <p>Enjoy and have a great game! 🕹️💥</p>
         <button
-          onClick={() => {
-            setPopupType("");
-            document.body.style.overflow = "visible";
-          }}
+          onClick={() => setPopupType("")}
           className={styles["close-button"]}
         >
           Close
