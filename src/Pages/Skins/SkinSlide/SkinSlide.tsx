@@ -34,7 +34,6 @@ const SkinSlide = ({
         width={220}
         loading="lazy"
       />
-
       <div className={styles["info"]}>
         {isCurrentSkin && !skin.isPurchasable && (
           <>

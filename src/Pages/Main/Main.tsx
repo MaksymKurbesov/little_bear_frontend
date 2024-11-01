@@ -22,11 +22,7 @@ const Main = () => {
   }, []);
 
   if (!state.user) {
-    return (
-      <div className={"suspense"}>
-        <LoadSpinning />
-      </div>
-    );
+    return <LoadSpinning />;
   }
 
   return (

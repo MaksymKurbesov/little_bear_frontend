@@ -16,6 +16,13 @@ import OpenedDimasSkin from "../images/skins/dimas-opened.webp";
 import OpenedKyberonSkin from "../images/skins/kyberon-opened.webp";
 import DollarIcon from "../images/dollar-coin2.webp";
 import TicketIcon from "/ticket.webp";
+import BGBear1 from "/bg1-skin.png";
+import BGBear2 from "/bg2-skin.png";
+import BGBear3 from "/bg3-skin.webp";
+import BGBear4 from "/bg4-skin.webp";
+import BGBear5 from "/bg5-skin.png";
+import BGBear6 from "/bg6-skin.png";
+import BGKyberon from "/kyberon-bg.webp";
 
 // export const POINTS_TO_ADD = [1, 3, 5, 7, 10];
 export const POINTS_TO_ADD = {
@@ -38,6 +45,7 @@ export const SKINS = [
     points: 1,
     name: "timber",
     isPurchasable: false,
+    backgroundImage: BGBear1,
   },
   {
     id: 2,
@@ -48,6 +56,7 @@ export const SKINS = [
     points: 3,
     name: "brickn",
     isPurchasable: false,
+    backgroundImage: BGBear2,
   },
   {
     id: 3,
@@ -58,6 +67,7 @@ export const SKINS = [
     points: 5,
     name: "aztron",
     isPurchasable: false,
+    backgroundImage: BGBear3,
   },
   {
     id: 4,
@@ -68,6 +78,7 @@ export const SKINS = [
     points: 7,
     name: "brizzy",
     isPurchasable: false,
+    backgroundImage: BGBear4,
   },
   {
     id: 5,
@@ -78,6 +89,7 @@ export const SKINS = [
     points: 10,
     name: "neyon",
     isPurchasable: false,
+    backgroundImage: BGBear5,
   },
   {
     id: 6,
@@ -88,6 +100,7 @@ export const SKINS = [
     points: 20,
     name: "kyberon",
     isPurchasable: false,
+    backgroundImage: BGKyberon,
   },
   {
     id: 7,
@@ -100,6 +113,7 @@ export const SKINS = [
     isPurchasable: true,
     price: 30,
     stripeEndpoint: "buy_mafia_bear",
+    backgroundImage: BGBear6,
   },
   // {
   //   id: 7,

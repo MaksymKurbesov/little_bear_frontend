@@ -5,6 +5,9 @@ import mkcert from "vite-plugin-mkcert";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  esbuild: {
+    treeShaking: true,
+  },
   // server: {
   //   port: 443,
   //   host: "0.0.0.0",

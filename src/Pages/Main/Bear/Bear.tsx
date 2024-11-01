@@ -5,6 +5,7 @@ import React, {
   Suspense,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -19,12 +20,24 @@ import {
 } from "../../../utils/helpers.ts";
 import Lights from "../../../SharedUI/Lights/Lights.tsx";
 import { userApi } from "../../../main.tsx";
-const BearDance1 = lazy(() => import("../../../Bears3D/BearDance1.tsx"));
-const BearDance2 = lazy(() => import("../../../Bears3D/BearDance2.tsx"));
-const BearDance3 = lazy(() => import("../../../Bears3D/BearDance3.tsx"));
-const BearDance4 = lazy(() => import("../../../Bears3D/BearDance4.tsx"));
-const BearDance5 = lazy(() => import("../../../Bears3D/BearDance5.tsx"));
-const KyberonBear = lazy(() => import("../../../Bears3D/Kyberon.tsx"));
+const BearDance1 = React.memo(
+  lazy(() => import("../../../Bears3D/BearDance1.tsx")),
+);
+const BearDance2 = React.memo(
+  lazy(() => import("../../../Bears3D/BearDance2.tsx")),
+);
+const BearDance3 = React.memo(
+  lazy(() => import("../../../Bears3D/BearDance3.tsx")),
+);
+const BearDance4 = React.memo(
+  lazy(() => import("../../../Bears3D/BearDance4.tsx")),
+);
+const BearDance5 = React.memo(
+  lazy(() => import("../../../Bears3D/BearDance5.tsx")),
+);
+const KyberonBear = React.memo(
+  lazy(() => import("../../../Bears3D/Kyberon.tsx")),
+);
 const MafiaBearDance = lazy(
   () => import("../../../Bears3D/MafiaDanceBear.tsx"),
 );
@@ -179,13 +192,7 @@ const Bear = () => {
         />
       ) : null}
       <div className={styles["main-image-wrapper"]} onClick={handleCardClick}>
-        <Suspense
-          fallback={
-            <div className={"suspense"}>
-              <LoadSpinning />
-            </div>
-          }
-        >
+        <Suspense fallback={<LoadSpinning />}>
           <Canvas shadows camera={{ position: [0, 1.1, 5] }}>
             <Lights>
               <group

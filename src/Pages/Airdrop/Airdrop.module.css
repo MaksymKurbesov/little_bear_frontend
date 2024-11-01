@@ -42,7 +42,7 @@
   /*top: -100PX;*/
   mask-image: url('/wave.svg'), url("/circle.svg");
   mask-repeat: repeat-x, no-repeat;
-  mask-size: 200% 60%, 100% 100%;
+  mask-size: 200% 110%, 100% 120%;
   /*mask-position: 0 20px, 0 0;*/
   animation: wave-animation 6s linear infinite;
 }

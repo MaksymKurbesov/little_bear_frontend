@@ -22,7 +22,13 @@ const Kyberon = (props) => {
   }, []);
 
   return (
-    <group ref={group} {...props} dispose={null} scale={0.8}>
+    <group
+      ref={group}
+      {...props}
+      dispose={null}
+      scale={1.1}
+      position={[0, -2.5, 0]}
+    >
       <group name="Scene">
         <mesh
           name="Moon_Sphere_001"

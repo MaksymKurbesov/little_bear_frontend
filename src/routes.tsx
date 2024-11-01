@@ -14,6 +14,7 @@ import {
   FortuneWheelPage,
   FortuneWheelRulesPage,
   CheckoutPage,
+  NewsPage,
 } from "./lazyImports.ts";
 import LoadSpinning from "./SharedUI/LoadSpinning/LoadSpinning.tsx";
 import News from "./Pages/News/News.tsx";
@@ -32,7 +33,7 @@ const routes = createBrowserRouter([
         element: (
           <Suspense
             fallback={
-              <div className={"suspense"}>
+              <div style={{ flexGrow: 1 }}>
                 <LoadSpinning />
               </div>
             }
@@ -93,7 +94,7 @@ const routes = createBrowserRouter([
               </div>
             }
           >
-            <News />
+            <NewsPage />
           </Suspense>
         ),
       },

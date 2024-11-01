@@ -29,3 +29,5 @@ export const FortuneWheelRulesPage = lazy(
 );
 
 export const CheckoutPage = lazy(() => import("./Pages/Checkout/Checkout.tsx"));
+
+export const NewsPage = lazy(() => import("./Pages/News/News.tsx"));

@@ -14,7 +14,7 @@ import LoadSpinning from "../../../SharedUI/LoadSpinning/LoadSpinning.tsx";
 import { getLevelByPoints } from "../../../utils/helpers.ts";
 import { userApi } from "../../../main.tsx";
 
-const Slider = ({ currentSkin, setCurrentSkin }) => {
+const Slider = ({ currentSkin, setCurrentSkin, isImageLoaded }) => {
   const swiperRef = useRef(null);
   const { state, dispatch } = useAppState();
   const [isBeginning, setIsBeginning] = useState(false);

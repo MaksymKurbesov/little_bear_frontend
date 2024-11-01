@@ -6,13 +6,41 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  background-image: url('/bg1-skin.png');
+  background-color: black;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center top;
   transition: 0.35s ease all;
 }
 
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100vw;
+  transition: 0.35s ease all;
+}
+
+.background-image-enter {
+  opacity: 0;
+}
+.background-image-enter-active {
+  opacity: 1;
+  transition: opacity 0.35s ease-in;
+}
+.background-image-exit {
+  opacity: 1;
+}
+.background-image-exit-active {
+  opacity: 0;
+  transition: opacity 0.35s ease-out;
+}
+
+.bg-skin-1 {
+  background-image: url('/bg1-skin.png');
+}
 
 .bg-skin-2 {
   background-image: url('/bg2-skin.png');
@@ -39,7 +67,7 @@
 }
 
 .kyberon-bg {
-  background-image: url('/kyberon-bg.webp');
+  background-image: url('/kyberon-bg-skin.webp');
 }
 
 .title-wrapper {

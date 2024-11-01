@@ -46,7 +46,7 @@
 @font-face {
   font-family: "Bunya";
   src:
-          url("./assets/BunyaPersonalLight.ttf") format("truetype")
+          url("./assets/BunyaPersonalLight.woff2") format("woff2")
 }
 
 

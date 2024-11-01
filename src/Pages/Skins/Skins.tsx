@@ -1,43 +1,33 @@
 import styles from "./Skins.module.css";
 import Slider from "./Slider/Slider.tsx";
-import { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import PaymentModalSuccess from "./PaymentModal/PaymentModalSuccess.tsx";
 import PaymentModalCanceled from "./PaymentModal/PaymentModalCanceled.tsx";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
-const BACKGROUND = [
-  "bg-skin-1",
-  "bg-skin-2",
-  "bg-skin-3",
-  "bg-skin-4",
-  "bg-skin-5",
-  "kyberon-bg",
-  "bg-skin-6",
-  "bg-skin-7",
-];
-
-const preloadImages = (urls) => {
-  urls.forEach((url) => {
-    const img = new Image();
-    img.src = url;
-  });
+const BACKGROUND_PATHS = {
+  0: "/bg1-skin.png",
+  1: "/bg2-skin.png",
+  2: "/bg3-skin.webp",
+  3: "/bg4-skin.webp",
+  4: "/bg5-skin.png",
+  5: "/kyberon-bg-skin.webp",
+  6: "/bg6-skin.png",
 };
-
-const BACKGROUND_PATHS = [
-  "/bg1-skin.png",
-  "/bg2-skin.png",
-  "/bg3-skin.png",
-  "/bg4-skin.png",
-  "/bg5-skin.png",
-  "/kyberon-bg.webp",
-  "/bg6-skin.png",
-  "/bg7-skin.png",
-];
 
 const Skins = () => {
   const [currentSkin, setCurrentSkin] = useState(0);
   const [popupType, setPopupType] = useState("");
   const { t } = useTranslation();
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsImageLoaded(false); // Reset loading state
+    const img = new Image();
+    img.src = BACKGROUND_PATHS[currentSkin];
+    img.onload = () => setIsImageLoaded(true);
+  }, [currentSkin]);
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
@@ -52,14 +42,12 @@ const Skins = () => {
       setPopupType("canceled");
       document.body.style.overflow = "hidden";
     }
-
-    preloadImages(BACKGROUND_PATHS);
   }, []);
 
+  const nodeRef = useRef(null);
+
   return (
-    <div
-      className={`${styles["system-levels"]} ${styles[BACKGROUND[currentSkin]]}`}
-    >
+    <div className={`${styles["system-levels"]}`}>
       {popupType === "success" && (
         <PaymentModalSuccess setPopupType={setPopupType} />
       )}
@@ -74,8 +62,30 @@ const Skins = () => {
       </div>
 
       <div className={styles["slider-wrapper"]}>
-        <Slider setCurrentSkin={setCurrentSkin} currentSkin={currentSkin} />
+        <Slider
+          setCurrentSkin={setCurrentSkin}
+          currentSkin={currentSkin}
+          isImageLoaded={isImageLoaded}
+        />
       </div>
+      <TransitionGroup>
+        <CSSTransition
+          key={currentSkin} // уникальный ключ для обновления компонента
+          timeout={500} // время в миллисекундах
+          classNames={{
+            enter: styles["background-image-enter"],
+            enterActive: styles["background-image-enter-active"],
+            exit: styles["background-image-exit"],
+            exitActive: styles["background-image-exit-active"],
+          }}
+        >
+          <img
+            src={BACKGROUND_PATHS[currentSkin]}
+            className={styles["background-image"]}
+            alt={""}
+          />
+        </CSSTransition>
+      </TransitionGroup>
     </div>
   );
 };
