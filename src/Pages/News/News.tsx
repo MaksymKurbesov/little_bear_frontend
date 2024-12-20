@@ -41,7 +41,7 @@ const News = () => {
 
   return (
     <div className={styles["news"]}>
-      <h1>Новости</h1>
+      <h1>News</h1>
       <ul className={styles["news-list"]}>
         {sortByFirebaseTimestamp(news).map((oneNews) => {
           return (
@@ -52,7 +52,7 @@ const News = () => {
               <div className={styles["footer"]}>
                 <span>{formatFirebaseTimestamp(oneNews.date)}</span>
                 <NavLink to={oneNews.link} state={{ currentNews: oneNews }}>
-                  Читать новость
+                  Read more
                 </NavLink>
               </div>
             </li>

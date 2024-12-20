@@ -17,13 +17,28 @@ const Checkout = () => {
 
   if (!state.user) return;
 
+  const handleSubmit = async () => {
+    fetch("http://localhost:3008/send_invoice", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json", // Указываем тип содержимого
+      },
+      body: JSON.stringify({
+        chatId: String(state.user?.id),
+        quantity: quantity,
+      }),
+    })
+      .then((data) => console.log(data, "data"))
+      .catch((e) => console.log(e, "error"));
+  };
+
   return (
     <div className={styles["checkout"]}>
       <h1>Checkout</h1>
-      <form
-        action={`https://apate-backend.com/${location.state.stripeEndpoint}`}
-        // action={`http://localhost:8000/${location.state.stripeEndpoint}`}
-        method="POST"
+      <div
+        // action={`https://apate-backend.com/${location.state.stripeEndpoint}`}
+        // action={`http://localhost:3008/send_invoice`}
+        // method="POST"
         className={styles["buy-spins-form"]}
       >
         <div className={styles["order-item"]}>
@@ -78,11 +93,11 @@ const Checkout = () => {
           name={"userID"}
           readOnly
         />
-        <button className={styles["buy-spin-button"]}>
+        <button className={styles["buy-spin-button"]} onClick={handleSubmit}>
           <img src={CartShopping} alt={""} width={15} />
           <span>BUY</span>
         </button>
-      </form>
+      </div>
     </div>
   );
 };
