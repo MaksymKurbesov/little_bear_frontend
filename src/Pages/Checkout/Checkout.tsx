@@ -18,7 +18,7 @@ const Checkout = () => {
   if (!state.user) return;
 
   const handleSubmit = async () => {
-    fetch("http://localhost:3008/send_invoice", {
+    fetch("https://apate-backend.com/littlebear/send_invoice", {
       method: "POST",
       headers: {
         "Content-Type": "application/json", // Указываем тип содержимого
