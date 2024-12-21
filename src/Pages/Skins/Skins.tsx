@@ -14,6 +14,7 @@ const BACKGROUND_PATHS = {
   4: "/bg5-skin.png",
   5: "/kyberon-bg-skin.webp",
   6: "/bg6-skin.png",
+  7: "/bg-intelion.png",
 };
 
 const Skins = () => {

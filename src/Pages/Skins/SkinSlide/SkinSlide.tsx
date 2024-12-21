@@ -1,6 +1,5 @@
 import styles from "./SkinSlide.module.css";
-import { userApi } from "../../../main.tsx";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CartShopping from "../../../icons/cart-shopping-solid.svg";
 import { useAppState } from "../../../Stores/useAppState.ts";
 import { useEffect, useState } from "react";
@@ -29,7 +28,7 @@ const SkinSlide = ({
   return (
     <div className={`${styles["slide"]} ${styles[skin.colorCN]}`}>
       <img
-        src={index < level || isSkinBought ? skin.openedImage : skin.image}
+        src={index < level && !isSkinBought ? skin.openedImage : skin.image}
         alt={""}
         width={220}
         loading="lazy"
@@ -50,7 +49,15 @@ const SkinSlide = ({
       {isNextSkin && !skin.isPurchasable && (
         <p className={styles["experience"]}>from {skin.requiredPoints}</p>
       )}
-      {skin.isPurchasable && !isSkinBought && (
+
+      {level >= skin.requiredLevel && !skin.isPurchasable ? (
+        <button
+          onClick={onSelectHandler}
+          className={`${styles["select-button"]} ${userSkinName === skin.name ? styles["selected-button"] : ""}`}
+        >
+          {userSkinName === skin.name ? "Selected" : "Select"}
+        </button>
+      ) : (
         <button
           onClick={() => {
             navigate("/checkout", {
@@ -67,22 +74,14 @@ const SkinSlide = ({
           <span>BUY SKIN</span>
         </button>
       )}
-      {index < level && (
-        <button
-          onClick={onSelectHandler}
-          className={`${styles["select-button"]} ${userSkinName === skin.name ? styles["selected-button"] : ""}`}
-        >
-          {userSkinName === skin.name ? "Selected" : "Select"}
-        </button>
-      )}
-      {isSkinBought && (
-        <button
-          onClick={onSelectHandler}
-          className={`${styles["select-button"]} ${userSkinName === skin.name ? styles["selected-button"] : ""}`}
-        >
-          {userSkinName === skin.name ? "Selected" : "Select"}
-        </button>
-      )}
+      {/*{isSkinBought && (*/}
+      {/*  <button*/}
+      {/*    onClick={onSelectHandler}*/}
+      {/*    className={`${styles["select-button"]} ${userSkinName === skin.name ? styles["selected-button"] : ""}`}*/}
+      {/*  >*/}
+      {/*    {userSkinName === skin.name ? "Selected" : "Select"}*/}
+      {/*  </button>*/}
+      {/*)}*/}
       {/*<div className="swiper-lazy-preloader"></div>*/}
     </div>
   );

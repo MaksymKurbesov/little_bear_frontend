@@ -70,6 +70,10 @@
   background-image: url('/kyberon-bg-skin.webp');
 }
 
+.intelion-bg {
+    background-image: url("/bg-intelion.png")
+}
+
 .title-wrapper {
   margin-top: 20px;
 }

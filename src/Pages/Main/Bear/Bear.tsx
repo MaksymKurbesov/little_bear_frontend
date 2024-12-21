@@ -38,6 +38,11 @@ const BearDance5 = React.memo(
 const KyberonBear = React.memo(
   lazy(() => import("../../../Bears3D/Kyberon.tsx")),
 );
+
+const IntelionBear = React.memo(
+  lazy(() => import("../../../Bears3D/IntelionBear.tsx")),
+);
+
 const MafiaBearDance = lazy(
   () => import("../../../Bears3D/MafiaDanceBear.tsx"),
 );
@@ -46,6 +51,9 @@ const Stand2 = lazy(() => import("../../../SharedUI/Stands/Stand2.tsx"));
 const Stand3 = lazy(() => import("../../../SharedUI/Stands/Stand3.tsx"));
 const Stand4 = lazy(() => import("../../../SharedUI/Stands/Stand4.tsx"));
 const Stand5 = lazy(() => import("../../../SharedUI/Stands/Stand5.tsx"));
+const StandIntelion = lazy(
+  () => import("../../../SharedUI/Stands/StandIntelion.tsx"),
+);
 import { v4 as uuidv4 } from "uuid";
 import LevelUp from "../../../SharedUI/LevelUp/LevelUp.tsx";
 import { POINTS_TO_ADD } from "../../../utils/consts.ts";
@@ -64,6 +72,7 @@ const danceBearComponents = [
   { level: 4, Component: BearDance4, Stand: Stand4, name: "brizzy" },
   { level: 5, Component: BearDance5, Stand: Stand5, name: "neyon" },
   { level: 6, Component: KyberonBear, Stand: null, name: "kyberon" },
+  { level: 7, Component: IntelionBear, Stand: StandIntelion, name: "intelion" },
   { level: null, Component: MafiaBearDance, Stand: null, name: "mickey" },
 ];
 

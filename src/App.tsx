@@ -28,6 +28,7 @@ const BEAR_BACKGROUNDS = {
   neyon: "background-image-main5",
   mickey: "background-mafia-bear",
   kyberon: "kyberon-bg",
+  intelion: "intelion-bg",
 };
 
 const App = () => {
@@ -127,8 +128,6 @@ const App = () => {
       </div>
     );
   }
-
-  console.log(bgSkin, "bgSkin");
 
   return (
     <div

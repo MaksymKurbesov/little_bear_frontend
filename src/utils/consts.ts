@@ -6,6 +6,7 @@ import BearSkin5 from "../images/skins/aztron.webp";
 import MickeySkin from "../images/skins/mickey.png";
 import DimasSkin from "../images/skins/dimas.webp";
 import KyberonSkin from "../images/skins/kyberon.webp";
+import IntelionSkin from "../images/skins/intelion.webp";
 import OpenedBearSkin1 from "../images/skins/timber.webp";
 import OpenedBearSkin2 from "../images/skins/brickn-opened.webp";
 import OpenedBearSkin3 from "../images/skins/neyon-opened.webp";
@@ -14,6 +15,7 @@ import OpenedBearSkin5 from "../images/skins/aztron-opened.webp";
 import OpenedMickeySkin from "../images/skins/mickey-opened.png";
 import OpenedDimasSkin from "../images/skins/dimas-opened.webp";
 import OpenedKyberonSkin from "../images/skins/kyberon-opened.webp";
+import OpenedIntelionSkin from "../images/skins/intelion-opened.webp";
 import DollarIcon from "../images/dollar-coin2.webp";
 import TicketIcon from "/ticket.webp";
 import BGBear1 from "/bg1-skin.png";
@@ -33,6 +35,7 @@ export const POINTS_TO_ADD = {
   neyon: 10,
   kyberon: 20,
   mickey: 30,
+  intelion: 50,
 };
 
 export const SKINS = [
@@ -46,6 +49,7 @@ export const SKINS = [
     name: "timber",
     isPurchasable: false,
     backgroundImage: BGBear1,
+    requiredLevel: 1,
   },
   {
     id: 2,
@@ -57,6 +61,7 @@ export const SKINS = [
     name: "brickn",
     isPurchasable: false,
     backgroundImage: BGBear2,
+    requiredLevel: 2,
   },
   {
     id: 3,
@@ -68,6 +73,7 @@ export const SKINS = [
     name: "aztron",
     isPurchasable: false,
     backgroundImage: BGBear3,
+    requiredLevel: 3,
   },
   {
     id: 4,
@@ -79,6 +85,7 @@ export const SKINS = [
     name: "brizzy",
     isPurchasable: false,
     backgroundImage: BGBear4,
+    requiredLevel: 4,
   },
   {
     id: 5,
@@ -90,6 +97,7 @@ export const SKINS = [
     name: "neyon",
     isPurchasable: false,
     backgroundImage: BGBear5,
+    requiredLevel: 5,
   },
   {
     id: 6,
@@ -101,6 +109,7 @@ export const SKINS = [
     name: "kyberon",
     isPurchasable: false,
     backgroundImage: BGKyberon,
+    requiredLevel: 6,
   },
   {
     id: 7,
@@ -110,21 +119,23 @@ export const SKINS = [
     colorCN: "color-red",
     points: 30,
     name: "mickey",
-    isPurchasable: true,
     price: 30,
-    stripeEndpoint: "buy_mafia_bear",
+    isPurchasable: true,
     backgroundImage: BGBear6,
+    requiredLevel: null,
   },
-  // {
-  //   id: 7,
-  //   image: DimasSkin,
-  //   openedImage: OpenedDimasSkin,
-  //   requiredPoints: null,
-  //   colorCN: "color-red",
-  //   points: 10,
-  //   name: "dimas",
-  //   isPurchasable: true,
-  // },
+  {
+    id: 8,
+    image: IntelionSkin,
+    openedImage: OpenedIntelionSkin,
+    requiredPoints: 2000000,
+    colorCN: "color-red",
+    points: 50,
+    name: "intelion",
+    isPurchasable: false,
+    backgroundImage: BGBear6,
+    requiredLevel: 7,
+  },
 ];
 
 export const DAILY_REWARDS = [
@@ -236,4 +247,6 @@ export const DAILY_REWARDS_BY_DAY: { [key: string]: number } = {
   9: 10000,
 };
 
-export const levelThresholds = [0, 20000, 60000, 120000, 200000, 750000];
+export const levelThresholds = [
+  0, 20000, 60000, 120000, 200000, 750000, 2000000,
+];

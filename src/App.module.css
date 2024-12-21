@@ -54,6 +54,11 @@
   background-size: cover;
 }
 
+.intelion-bg {
+    background-image: url("/intelion-bg.jpg");
+    background-size: cover;
+}
+
 .background-image-airdrop {
   background-image: url('/airdrop-bg.webp');
   background-size: cover;

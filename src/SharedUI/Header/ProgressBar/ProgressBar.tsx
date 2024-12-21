@@ -16,7 +16,7 @@ const ProgressBar = ({ points }) => {
         <div style={{ width: `${progressPercentage}%` }}></div>
       </div>
       <p className={styles["level-span"]}>
-        Level: {getLevelByPoints(points)}/6
+        Level: {getLevelByPoints(points)}/7
       </p>
       <img
         className={styles["arrow-icon"]}
