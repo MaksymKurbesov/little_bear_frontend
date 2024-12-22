@@ -18,7 +18,6 @@ const SkinSlide = ({
   const isCurrentSkin = skin.id === level + 1;
   const isNextSkin = skin.id > level + 1;
   const navigate = useNavigate();
-
   useEffect(() => {
     if (state.user.skins) {
       setIsSkinBought(state.user.skins.includes(skin.name));
@@ -49,15 +48,25 @@ const SkinSlide = ({
       {isNextSkin && !skin.isPurchasable && (
         <p className={styles["experience"]}>from {skin.requiredPoints}</p>
       )}
-
-      {level >= skin.requiredLevel && !skin.isPurchasable ? (
+      {level >= skin.requiredLevel && !skin.isPurchasable && (
         <button
           onClick={onSelectHandler}
           className={`${styles["select-button"]} ${userSkinName === skin.name ? styles["selected-button"] : ""}`}
         >
           {userSkinName === skin.name ? "Selected" : "Select"}
         </button>
-      ) : (
+      )}
+
+      {skin.isPurchasable && isSkinBought && (
+        <button
+          onClick={onSelectHandler}
+          className={`${styles["select-button"]} ${userSkinName === skin.name ? styles["selected-button"] : ""}`}
+        >
+          {userSkinName === skin.name ? "Selected" : "Select"}
+        </button>
+      )}
+
+      {skin.isPurchasable && !isSkinBought && (
         <button
           onClick={() => {
             navigate("/checkout", {
@@ -74,15 +83,6 @@ const SkinSlide = ({
           <span>BUY SKIN</span>
         </button>
       )}
-      {/*{isSkinBought && (*/}
-      {/*  <button*/}
-      {/*    onClick={onSelectHandler}*/}
-      {/*    className={`${styles["select-button"]} ${userSkinName === skin.name ? styles["selected-button"] : ""}`}*/}
-      {/*  >*/}
-      {/*    {userSkinName === skin.name ? "Selected" : "Select"}*/}
-      {/*  </button>*/}
-      {/*)}*/}
-      {/*<div className="swiper-lazy-preloader"></div>*/}
     </div>
   );
 };

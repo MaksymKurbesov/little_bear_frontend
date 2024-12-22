@@ -17,46 +17,46 @@
   background-repeat: no-repeat;
 }
 
-.background-image-main {
-  background-image: url("/bg-light.webp");
+.timber {
+  background-image: url('./images/bears/timber/game-background.webp');
   background-size: cover;
 }
 
-.background-image-main2 {
-  background-image: url("/bg2.webp");
+.brickn {
+  background-image: url('./images/bears/brickn/game-background.webp');
   background-size: cover;
 }
 
-.background-image-main3 {
-  background-image: url("/bg3.webp");
+.aztron {
+  background-image: url('./images/bears/aztron/game-background.webp');
   background-size: cover;
 }
 
-.background-image-main4 {
-  background-image: url("/bg4.webp");
+.brizzy {
+  background-image: url('./images/bears/brizzy/game-background.webp');
   background-size: cover;
   background-position: top;
 }
 
-.background-image-main5 {
-  background-image: url("/bg5.webp");
+.neyon {
+  background-image: url('./images/bears/neyon/game-background.webp');
   background-size: cover;
 }
 
-.background-mafia-bear {
-  background-image: url("/mafia-background.webp");
+.mickey {
+  background-image: url('./images/bears/mickey/game-background.webp');
   background-size: cover;
 }
 
 
-.kyberon-bg {
-  background-image: url("/kyberon-bg.webp");
+.kyberon {
+  background-image: url('./images/bears/kyberon/game-background.webp');
   background-size: cover;
 }
 
-.intelion-bg {
-    background-image: url("/intelion-bg.jpg");
-    background-size: cover;
+.intelion {
+  background-image: url('./images/bears/intelion/game-background.webp');
+  background-size: cover;
 }
 
 .background-image-airdrop {

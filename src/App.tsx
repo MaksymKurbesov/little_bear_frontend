@@ -131,7 +131,7 @@ const App = () => {
 
   return (
     <div
-      className={`${styles["game-wrapper"]} ${styles[bgSkin]} ${styles[backgroundClassName]}`}
+      className={`${styles["game-wrapper"]} ${styles[state.currentSkin]} ${styles[backgroundClassName]}`}
     >
       {showStartPopup && (
         <RegisteredModal closeHandler={() => setShowStartPopup(false)} />

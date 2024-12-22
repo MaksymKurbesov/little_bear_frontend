@@ -56,7 +56,7 @@ const StandIntelion = lazy(
 );
 import { v4 as uuidv4 } from "uuid";
 import LevelUp from "../../../SharedUI/LevelUp/LevelUp.tsx";
-import { POINTS_TO_ADD } from "../../../utils/consts.ts";
+import { SKINS } from "../../../utils/consts.ts";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { AnimationAction, AnimationClip } from "three";
 import eventEmitter from "../../../utils/eventEmitter.ts";
@@ -148,9 +148,14 @@ const Bear = () => {
     (e: React.MouseEvent<HTMLDivElement>) => {
       if (!action) return;
 
+      console.log(state.currentSkin, "state.currentSkin");
+
       triggerVibration(tg);
 
-      const pointsToAdd = POINTS_TO_ADD[state.currentSkin];
+      // const pointsToAdd = POINTS_TO_ADD[state.currentSkin];
+      const pointsToAdd = SKINS.find(
+        (skin) => skin.name === state.currentSkin,
+      ).points;
       clickedPointsRef.current += pointsToAdd;
 
       const isMultiplyAnimations = Array.isArray(action);

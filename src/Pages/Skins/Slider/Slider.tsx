@@ -64,7 +64,10 @@ const Slider = ({ currentSkin, setCurrentSkin, isImageLoaded }) => {
         setSwiper(swiper);
       }}
       onSlideChange={(e) => {
-        setCurrentSkin(e.activeIndex);
+        setCurrentSkin({
+          name: SKINS[e.activeIndex].name,
+          index: e.activeIndex,
+        });
       }}
     >
       {SKINS.map((skin, index) => {

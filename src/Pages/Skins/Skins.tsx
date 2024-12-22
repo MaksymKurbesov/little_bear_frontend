@@ -5,20 +5,21 @@ import { useTranslation } from "react-i18next";
 import PaymentModalSuccess from "./PaymentModal/PaymentModalSuccess.tsx";
 import PaymentModalCanceled from "./PaymentModal/PaymentModalCanceled.tsx";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { SKINS } from "../../utils/consts.ts";
 
 const BACKGROUND_PATHS = {
-  0: "/bg1-skin.png",
-  1: "/bg2-skin.png",
-  2: "/bg3-skin.webp",
-  3: "/bg4-skin.webp",
-  4: "/bg5-skin.png",
-  5: "/kyberon-bg-skin.webp",
-  6: "/bg6-skin.png",
-  7: "/bg-intelion.png",
+  timber: "/timber-bg-skin.png",
+  brickn: "/brickn-bg-skin.png",
+  aztron: "/aztron-bg-skin.webp",
+  brizzy: "/brizzy-bg-skin.webp",
+  neyon: "/neyon-bg-skin.png",
+  kyberon: "/kyberon-bg-skin.webp",
+  mickey: "/mickey-bg-skin.png",
+  intelion: "/intelion-bg-skin.png",
 };
 
 const Skins = () => {
-  const [currentSkin, setCurrentSkin] = useState(0);
+  const [currentSkin, setCurrentSkin] = useState({ name: "timber", index: 0 });
   const [popupType, setPopupType] = useState("");
   const { t } = useTranslation();
   const [isImageLoaded, setIsImageLoaded] = useState(false);
@@ -26,7 +27,7 @@ const Skins = () => {
   useEffect(() => {
     setIsImageLoaded(false); // Reset loading state
     const img = new Image();
-    img.src = BACKGROUND_PATHS[currentSkin];
+    img.src = BACKGROUND_PATHS[currentSkin.name];
     img.onload = () => setIsImageLoaded(true);
   }, [currentSkin]);
 
@@ -44,8 +45,6 @@ const Skins = () => {
       document.body.style.overflow = "hidden";
     }
   }, []);
-
-  const nodeRef = useRef(null);
 
   return (
     <div className={`${styles["system-levels"]}`}>
@@ -81,7 +80,7 @@ const Skins = () => {
           }}
         >
           <img
-            src={BACKGROUND_PATHS[currentSkin]}
+            src={BACKGROUND_PATHS[currentSkin.name]}
             className={styles["background-image"]}
             alt={""}
           />

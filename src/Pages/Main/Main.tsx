@@ -2,7 +2,7 @@ import styles from "./Main.module.css";
 import { useCallback, useState } from "react";
 import { useAppState } from "../../Stores/useAppState.ts";
 import Bear from "./Bear/Bear.tsx";
-import { POINTS_TO_ADD } from "../../utils/consts.ts";
+import { SKINS } from "../../utils/consts.ts";
 import Points from "./Points/Points.tsx";
 import LoadSpinning from "../../SharedUI/LoadSpinning/LoadSpinning.tsx";
 import { NavLink } from "react-router-dom";
@@ -52,7 +52,8 @@ const Main = () => {
           }}
           onAnimationEnd={() => handleAnimationEnd(click.id)}
         >
-          +{POINTS_TO_ADD[state.currentSkin]}
+          {/*+{POINTS_TO_ADD[state.currentSkin]}*/}+
+          {SKINS.find((skin) => skin.name === state.currentSkin).points}
         </div>
       ))}
       {/*<FPSStats top="10px" right="10px" />*/}

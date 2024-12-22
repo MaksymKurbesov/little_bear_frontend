@@ -118,6 +118,25 @@
   animation: animateGlow 4.25s linear infinite;
 }
 
+.color-aqua::after {
+    top: 45%;
+    height: 81%;
+    background: linear-gradient(
+            to left,
+            #2feaad,
+            #57efc0,
+            #20d3a0,
+            #10ba8a,
+            #2feaad,
+            #76f6d4,
+            #1bbd94,
+            #20d3a0,
+            #2feaad
+    );
+    background-size: 200% 200%;
+    animation: animateGlow 4.25s linear infinite;
+}
+
 
 .slide > img {
   margin: 0 auto 20px;
@@ -197,7 +216,6 @@
   background-size: 200% 200%;
   animation: gradientAnimation 5s linear infinite;
   box-shadow: 0 0 7px 5px rgb(185, 60, 248);
-
 }
 
 .color-white .progress-bar > div{
@@ -211,6 +229,16 @@
   box-shadow: 0 0 7px 5px rgb(231, 231, 231);
 }
 
+.color-white .progress-bar > div{
+    --fill:
+            linear-gradient(rgb(17, 96, 72), transparent),
+            repeating-linear-gradient(135deg, #1eaf80 10px, #57efc0 15px);
+
+    background: var(--fill);
+    background-size: 200% 200%;
+    animation: gradientAnimation 5s linear infinite;
+    box-shadow: 0 0 7px 5px rgb(87, 239, 192);
+}
 
 .select-button {
   background: rgba(255, 217, 161, 0.16);
