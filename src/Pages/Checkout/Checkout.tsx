@@ -4,7 +4,7 @@ import CartShopping from "../../icons/cart-shopping-solid.svg";
 import { useState } from "react";
 import { useAppState } from "../../Stores/useAppState.ts";
 import { useLocation } from "react-router-dom";
-import MickeyCohenImage from "../../images/skins/mickey.png";
+import MickeyCohenImage from "../../images/bears/mickey/mickey.png";
 
 const SKINS_NAME_MAP = {
   mickey: "Mickey Cohen",
@@ -18,7 +18,7 @@ const Checkout = () => {
   if (!state.user) return;
 
   const handleSubmit = async () => {
-    fetch("https://apate-backend.com/littlebear/send_invoice", {
+    fetch("https://apate-backend.com/littlebear/send_spin_invoice", {
       method: "POST",
       headers: {
         "Content-Type": "application/json", // Указываем тип содержимого
