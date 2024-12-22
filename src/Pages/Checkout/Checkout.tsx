@@ -35,12 +35,7 @@ const Checkout = () => {
   return (
     <div className={styles["checkout"]}>
       <h1>Checkout</h1>
-      <div
-        // action={`https://apate-backend.com/${location.state.stripeEndpoint}`}
-        // action={`http://localhost:3008/send_invoice`}
-        // method="POST"
-        className={styles["buy-spins-form"]}
-      >
+      <div className={styles["buy-spins-form"]}>
         <div className={styles["order-item"]}>
           {location.state.name === "mickey" ? (
             <img src={MickeyCohenImage} alt={""} width={60} />

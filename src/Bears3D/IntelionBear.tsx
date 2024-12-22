@@ -22,7 +22,7 @@ const BearIntelion = (props) => {
 
   return (
     <group ref={group} {...props} dispose={null}>
-      <group name="Scene" scale={25} position={[0, -3.3, 0]}>
+      <group name="Scene" scale={30} position={[0, -5.3, -1]}>
         <mesh
           name="Extrude_5"
           castShadow

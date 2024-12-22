@@ -229,7 +229,7 @@
   box-shadow: 0 0 7px 5px rgb(231, 231, 231);
 }
 
-.color-white .progress-bar > div{
+.color-aqua .progress-bar > div{
     --fill:
             linear-gradient(rgb(17, 96, 72), transparent),
             repeating-linear-gradient(135deg, #1eaf80 10px, #57efc0 15px);

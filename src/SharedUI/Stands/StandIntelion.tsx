@@ -6,9 +6,9 @@ const StandIntelion = (props) => {
   return (
     <group {...props} dispose={null}>
       <group
-        position={[0, -1.5, 0.018]}
+        position={[0, -3, 0.018]}
         rotation={[Math.PI / 2, 0, 0]}
-        scale={[0.2, 0.2, 0.2]}
+        scale={[0.27, 0.27, 0.27]}
       >
         <group position={[0, -14.365, -17.135]} scale={[1.37, 1, 1.149]}>
           <mesh
