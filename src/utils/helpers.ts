@@ -57,16 +57,6 @@ export const chooseSegment = () => {
   return null;
 };
 
-export const getWinningSegment = (rotationAngle) => {
-  const numSegments = 10;
-  const segmentAngle = 360 / numSegments;
-
-  const rotationAngleInDegrees = (rotationAngle * 180) / Math.PI;
-  const adjustedAngle = ((rotationAngleInDegrees % 360) + 360) % 360; // Нормализуем угол в пределах 0-360
-  const segmentIndex = Math.floor(adjustedAngle / segmentAngle);
-  return SEGMENTS[segmentIndex];
-};
-
 export const throttle = (func, limit) => {
   let inThrottle;
   return function () {

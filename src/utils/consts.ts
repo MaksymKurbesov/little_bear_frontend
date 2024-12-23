@@ -94,7 +94,7 @@ export const SKINS = [
     openedImage: IntelionOpenedImage,
     requiredPoints: 2000000,
     colorCN: "color-aqua",
-    points: 50,
+    points: 25,
     name: "intelion",
     isPurchasable: false,
     // backgroundImage: BGBear6,
