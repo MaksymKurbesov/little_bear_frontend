@@ -110,6 +110,7 @@ export const SKINS = [
     name: "mickey",
     price: 30,
     isPurchasable: true,
+    endpoint: "send_mickey_invoice",
     // backgroundImage: BGBear6,
     requiredLevel: null,
   },

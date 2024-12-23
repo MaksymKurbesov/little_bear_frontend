@@ -183,7 +183,7 @@ const FortuneWheel = () => {
                 state: {
                   name: "Spins for fortune wheel",
                   price: 1,
-                  stripeEndpoint: "buy_spins",
+                  endpoint: "send_spin_invoice",
                 },
               });
             }}

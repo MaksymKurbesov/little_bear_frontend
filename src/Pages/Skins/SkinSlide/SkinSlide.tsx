@@ -73,7 +73,7 @@ const SkinSlide = ({
               state: {
                 name: skin.name,
                 price: skin.price,
-                stripeEndpoint: skin.stripeEndpoint,
+                endpoint: skin.endpoint,
               },
             });
           }}

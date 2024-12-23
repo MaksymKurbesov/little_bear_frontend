@@ -15,10 +15,12 @@ const Checkout = () => {
   const { state } = useAppState();
   const location = useLocation();
 
+  console.log(location.state.endpoint, "location.state.endpoint");
+
   if (!state.user) return;
 
   const handleSubmit = async () => {
-    fetch("https://apate-backend.com/littlebear/send_spin_invoice", {
+    fetch(`https://apate-backend.com/littlebear/${location.state.endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json", // Указываем тип содержимого
