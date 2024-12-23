@@ -7,6 +7,13 @@ import LeadersIcon from "../../icons/leadership.webp";
 import TasksIcon from "../../icons/tasks.webp";
 import { useTranslation } from "react-i18next";
 
+import TasksIcon2 from "../../icons/new_icons/tasks.png";
+import PlayIcon2 from "../../icons/new_icons/home.png";
+import BearsIcon from "../../icons/new_icons/bears.png";
+import LeadersIcon2 from "../../icons/new_icons/leadership.png";
+import FrensIcon2 from "../../icons/new_icons/friends.png";
+import NewsIcon from "../../icons/news-icon.svg";
+
 const Menu = () => {
   const location = useLocation();
   const isPlayPage = location.pathname === "/";
@@ -26,9 +33,11 @@ const Menu = () => {
           className={({ isActive, isPending }) =>
             isPending ? styles["pending"] : isActive ? styles["active"] : ""
           }
+          // reloadDocument
         >
-          <img src={PlayIcon} width={22} alt={""} height={32} />
-          <span>{t("Menu.Bear")}</span>
+          <img src={PlayIcon2} width={28} alt={""} height={28} />
+          {/*<span>{t("Menu.Bear")}</span>*/}
+          <span>Home</span>
         </NavLink>
       </li>
       <li>
@@ -39,46 +48,14 @@ const Menu = () => {
           }
         >
           <img
-            src={TasksIcon}
-            width={16}
-            height={32}
+            src={TasksIcon2}
+            width={30}
+            // height={32}
             alt={""}
             className={`${styles["icon"]}`}
           />
-          <span>{t("Menu.Tasks")}</span>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to={"/referrals"}
-          className={({ isActive, isPending }) =>
-            isPending ? styles["pending"] : isActive ? styles["active"] : ""
-          }
-        >
-          <img
-            src={FrensIcon}
-            width={24}
-            alt={""}
-            className={`${styles["icon"]} ${styles["frens-icon"]}`}
-          />
-          <span>{t("Menu.Frens")}</span>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to={"/leaders"}
-          className={({ isActive, isPending }) =>
-            isPending ? styles["pending"] : isActive ? styles["active"] : ""
-          }
-        >
-          <img
-            src={LeadersIcon}
-            width={20}
-            height={32}
-            alt={""}
-            className={`${styles["icon"]}`}
-          />
-          <span>{t("Menu.Leaders")}</span>
+          {/*<span>{t("Menu.Tasks")}</span>*/}
+          <span>Tasks</span>
         </NavLink>
       </li>
       <li>
@@ -90,11 +67,48 @@ const Menu = () => {
         >
           <img
             src={LittleBearGoldenIcon}
-            alt="Airdrop"
-            className={`${styles["icon"]} ${styles["airdrop-icon"]}`}
-            width={24}
+            width={30}
+            height={30}
+            alt={""}
+            className={`${styles["icon"]} ${styles["frens-icon"]}`}
           />
           <span>Airdrop</span>
+          {/*<span>{t("Menu.Frens")}</span>*/}
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to={"/skins"}
+          className={({ isActive, isPending }) =>
+            isPending ? styles["pending"] : isActive ? styles["active"] : ""
+          }
+        >
+          <img
+            src={BearsIcon}
+            width={30}
+            height={30}
+            alt={""}
+            className={`${styles["icon"]}`}
+          />
+          {/*<span>{t("Menu.Leaders")}</span>*/}
+          <span>Bears</span>
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to={"/news"}
+          className={({ isActive, isPending }) =>
+            isPending ? styles["pending"] : isActive ? styles["active"] : ""
+          }
+        >
+          <img
+            src={NewsIcon}
+            alt="Airdrop"
+            className={`${styles["icon"]} ${styles["news-icon"]}`}
+            width={30}
+            height={30}
+          />
+          <span>News</span>
         </NavLink>
       </li>
     </ul>

@@ -37,14 +37,6 @@ const Lights = ({ children }) => {
         // ref={lightRef4}
       />
 
-      {/*<directionalLight*/}
-      {/*  castShadow*/}
-      {/*  intensity={1.5}*/}
-      {/*  position={[0, 5, 4]}*/}
-      {/*  shadow-mapSize-width={1024}*/}
-      {/*  shadow-mapSize-height={1024}*/}
-      {/*  ref={lightRef1}*/}
-      {/*/>*/}
       <directionalLight
         castShadow
         intensity={0.5}

@@ -118,8 +118,27 @@
   animation: animateGlow 4.25s linear infinite;
 }
 
+.color-aqua::after {
+    top: 45%;
+    height: 81%;
+    background: linear-gradient(
+            to left,
+            #2feaad,
+            #57efc0,
+            #20d3a0,
+            #10ba8a,
+            #2feaad,
+            #76f6d4,
+            #1bbd94,
+            #20d3a0,
+            #2feaad
+    );
+    background-size: 200% 200%;
+    animation: animateGlow 4.25s linear infinite;
+}
 
-.slide img {
+
+.slide > img {
   margin: 0 auto 20px;
   width: 40vh;
 }
@@ -197,7 +216,6 @@
   background-size: 200% 200%;
   animation: gradientAnimation 5s linear infinite;
   box-shadow: 0 0 7px 5px rgb(185, 60, 248);
-
 }
 
 .color-white .progress-bar > div{
@@ -211,7 +229,71 @@
   box-shadow: 0 0 7px 5px rgb(231, 231, 231);
 }
 
+.color-aqua .progress-bar > div{
+    --fill:
+            linear-gradient(rgb(17, 96, 72), transparent),
+            repeating-linear-gradient(135deg, #1eaf80 10px, #57efc0 15px);
 
+    background: var(--fill);
+    background-size: 200% 200%;
+    animation: gradientAnimation 5s linear infinite;
+    box-shadow: 0 0 7px 5px rgb(87, 239, 192);
+}
+
+.select-button {
+  background: rgba(255, 217, 161, 0.16);
+  /*background: none;*/
+  border: 1px solid var(--orange);
+  padding: 4px 20px;
+  /*border-radius: 20px;*/
+  /*font-weight: 500;*/
+  /*font-size: 14px;*/
+
+  width: 170px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  /*margin: 20px;*/
+  height: 30px;
+  text-align:center;
+  /*border: none;*/
+  background-size: 300% 100%;
+
+  border-radius: 50px;
+  moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+
+.selected-button {
+  background: #70ff65;
+  border: none;
+  color: black;
+}
+
+.buy-button {
+  background: #70ff65;
+  padding: 2px 20px;
+  font-size: 14px;
+  border-radius: 15px;
+}
+
+.buy-spins-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  /*transform: translateX(-50%);*/
+  background: var(--green);
+  color: #1c1c1c;
+  font-size: 14px;
+  border-radius: 25px;
+  padding: 7px 35px;
+  line-height: 1;
+  /*width: 100px;*/
+}
 
 
 @keyframes gradientAnimation {
@@ -236,7 +318,7 @@
 
 
 @media screen and (max-width: 385px){
-  .slide img {
+  .slide > img {
     width: 34vh;
   }
 

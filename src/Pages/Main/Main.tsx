@@ -1,14 +1,20 @@
 import styles from "./Main.module.css";
-import { useCallback } from "react";
-import { useAppState } from "../../Stores/AppStateContext.tsx";
+import { useCallback, useState } from "react";
+import { useAppState } from "../../Stores/useAppState.ts";
 import Bear from "./Bear/Bear.tsx";
-import { POINTS_TO_ADD } from "../../utils/consts.ts";
+import { SKINS } from "../../utils/consts.ts";
 import Points from "./Points/Points.tsx";
 import LoadSpinning from "../../SharedUI/LoadSpinning/LoadSpinning.tsx";
+import { NavLink } from "react-router-dom";
+import FortuneWheelButton from "/fortune-wheel-button.png";
+import MarketButton from "/market.png";
+import Energy from "./Energy/Energy.tsx";
+import LuckyDance from "./LuckyDance/LuckyDance.tsx";
 // import FPSStats from "react-fps-stats";
 
 const Main = () => {
   const { state, dispatch } = useAppState();
+  const [promoIsOpen, setPromoIsOpen] = useState(false);
   // const imagesLoaded = useImagePreloader([BackgroundImage, BearIcon]);
 
   const handleAnimationEnd = useCallback((id: number) => {
@@ -16,17 +22,24 @@ const Main = () => {
   }, []);
 
   if (!state.user) {
-    return (
-      <div className={"suspense"}>
-        <LoadSpinning />
-      </div>
-    );
+    return <LoadSpinning />;
   }
 
   return (
     <div className={styles["main"]}>
       <Points points={state.user.points} />
+      {/*<Energy />*/}
       <Bear />
+
+      <NavLink className={styles["fortune-wheel-button"]} to={"/fortune-wheel"}>
+        <img src={FortuneWheelButton} alt={""} width={90} />
+        <span>Fortune Wheel</span>
+      </NavLink>
+
+      {/*<NavLink to={"/market"} className={styles["market-button"]}>*/}
+      {/*  <img src={MarketButton} alt={""} width={40} />*/}
+      {/*  <span>Магазин</span>*/}
+      {/*</NavLink>*/}
 
       {state.clicks.map((click) => (
         <div
@@ -39,7 +52,8 @@ const Main = () => {
           }}
           onAnimationEnd={() => handleAnimationEnd(click.id)}
         >
-          +{POINTS_TO_ADD[state.level - 1]}
+          {/*+{POINTS_TO_ADD[state.currentSkin]}*/}+
+          {SKINS.find((skin) => skin.name === state.currentSkin).points}
         </div>
       ))}
       {/*<FPSStats top="10px" right="10px" />*/}

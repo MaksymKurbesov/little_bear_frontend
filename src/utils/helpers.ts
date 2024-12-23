@@ -1,4 +1,4 @@
-import { levelThresholds } from "./consts.ts";
+import { levelThresholds, SEGMENTS } from "./consts.ts";
 import { IUser } from "../Api/UserApi.ts";
 
 export const calculateTimeLeft = () => {
@@ -43,6 +43,20 @@ export const debounce = (func, delay) => {
   };
 };
 
+export const chooseSegment = () => {
+  const random = Math.random() * 100;
+  let accumulatedChance = 0;
+
+  for (const segment of SEGMENTS) {
+    accumulatedChance += segment.chance;
+    if (random < accumulatedChance) {
+      return segment;
+    }
+  }
+
+  return null;
+};
+
 export const throttle = (func, limit) => {
   let inThrottle;
   return function () {
@@ -54,6 +68,15 @@ export const throttle = (func, limit) => {
       setTimeout(() => (inThrottle = false), limit);
     }
   };
+};
+
+export function isObject(value) {
+  const type = typeof value;
+  return value != null && (type === "object" || type === "function");
+}
+
+export const randomIntFromInterval = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
 export const getLevelByPoints = (points: number) => {

@@ -7,7 +7,7 @@ import LowGiftIcon from "../../images/gift-icon-low.webp";
 import { useTelegram } from "../../hooks/useTelegram.ts";
 import { ScrollRestoration } from "react-router-dom";
 import { getLevelByPoints } from "../../utils/helpers.ts";
-import { useAppState } from "../../Stores/AppStateContext.tsx";
+import { useAppState } from "../../Stores/useAppState.ts";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 

@@ -46,7 +46,9 @@ const Airdrop = () => {
         />
       </div>
       <div className={styles["countdown-wrapper"]}>
-        <p className={styles["soon"]}>SOON!</p>
+        <p>
+          <span className={styles["soon"]}>SOON!</span>
+        </p>
       </div>
     </div>
   );

@@ -6,7 +6,7 @@
   --orange-opacity: rgba(255, 218, 141, 0.1);
   --gray: #1c1f24;
   --orange: #ff9700;
-
+  --green: #cfef00;
   --violet: violet;
   --cyan: #0ff;
   --red: rgba(255, 0, 0, 0.91);
@@ -42,6 +42,14 @@
           url("./assets/RobotoCondensed-Black.woff2") format("woff2")
 }
 
+
+@font-face {
+  font-family: "Bunya";
+  src:
+          url("./assets/BunyaPersonalLight.woff2") format("woff2")
+}
+
+
 body {
     font-family: "RobotoCondensed", sans-serif;
 }
@@ -55,7 +63,10 @@ body {
   line-height: 1.2;
 }
 
-.suspense { flex-grow: 1}
+.suspense {
+  flex-grow: 1;
+  background: var(--gray)
+}
 
 @keyframes float {
     0% {

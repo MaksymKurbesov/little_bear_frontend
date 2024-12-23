@@ -7,8 +7,12 @@ import { RouterProvider } from "react-router-dom";
 import UserApi from "./Api/UserApi.ts";
 import { Provider } from "react-redux";
 import store from "./Stores/store.ts";
-import { AppStateProvider } from "./Stores/AppStateContext.tsx";
+import { AppStateProvider } from "./Stores/AppStateProvider.tsx";
 import "./i18n";
+import FortuneWheelApi from "./Api/FortuneWheel.ts";
+import Tasks from "./Pages/Tasks/Tasks.tsx";
+import TasksApi from "./Api/TasksApi.ts";
+import DailyRewardsApi from "./Api/DailyRewardsApi.ts";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -23,11 +27,17 @@ const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app);
 export const userApi = new UserApi();
+export const tasksApi = new TasksApi();
+export const fortuneWheelApi = new FortuneWheelApi();
+export const dailyRewardsApi = new DailyRewardsApi();
+
+const tg = window.Telegram.WebApp;
+const telegramUserID = tg.initDataUnsafe.user.id;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   // <React.StrictMode>
   <Provider store={store}>
-    <AppStateProvider>
+    <AppStateProvider userId={telegramUserID}>
       <RouterProvider router={routes} />
     </AppStateProvider>
   </Provider>,

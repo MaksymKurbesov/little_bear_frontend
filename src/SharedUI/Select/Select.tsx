@@ -5,7 +5,7 @@ import RuFlag from "../../icons/ru.svg";
 import EnFlag from "../../icons/en.svg";
 import { useTranslation } from "react-i18next";
 import { userApi } from "../../main.tsx";
-import { useAppState } from "../../Stores/AppStateContext.tsx";
+import { useAppState } from "../../Stores/useAppState.ts";
 import { getSelectOptionByLanguage } from "../../utils/helpers.ts";
 
 const options = [

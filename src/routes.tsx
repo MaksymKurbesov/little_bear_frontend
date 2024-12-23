@@ -7,13 +7,21 @@ import {
   FriendsPage,
   LeadersPage,
   MainPage,
+  MarketPage,
   SettingsPage,
   SkinsPage,
   TasksPage,
+  FortuneWheelPage,
+  FortuneWheelRulesPage,
+  CheckoutPage,
+  NewsPage,
 } from "./lazyImports.ts";
 import LoadSpinning from "./SharedUI/LoadSpinning/LoadSpinning.tsx";
 import News from "./Pages/News/News.tsx";
 import OneNews from "./Pages/OneNews/OneNews.tsx";
+import FortuneWheel from "./Pages/FortuneWheel/FortunePage.tsx";
+import FortuneWheelRules from "./Pages/FortuneWheelRules/FortuneWheelRules.tsx";
+import Checkout from "./Pages/Checkout/Checkout.tsx";
 
 const routes = createBrowserRouter([
   {
@@ -25,7 +33,7 @@ const routes = createBrowserRouter([
         element: (
           <Suspense
             fallback={
-              <div className={"suspense"}>
+              <div style={{ flexGrow: 1 }}>
                 <LoadSpinning />
               </div>
             }
@@ -86,7 +94,7 @@ const routes = createBrowserRouter([
               </div>
             }
           >
-            <News />
+            <NewsPage />
           </Suspense>
         ),
       },
@@ -147,6 +155,62 @@ const routes = createBrowserRouter([
             }
           >
             <SkinsPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/market",
+        element: (
+          <Suspense
+            fallback={
+              <div className={"suspense"}>
+                <LoadSpinning />
+              </div>
+            }
+          >
+            <MarketPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/fortune-wheel",
+        element: (
+          <Suspense
+            fallback={
+              <div className={"suspense"}>
+                <LoadSpinning />
+              </div>
+            }
+          >
+            <FortuneWheelPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/fortune-wheel-rules",
+        element: (
+          <Suspense
+            fallback={
+              <div className={"suspense"}>
+                <LoadSpinning />
+              </div>
+            }
+          >
+            <FortuneWheelRulesPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/checkout",
+        element: (
+          <Suspense
+            fallback={
+              <div className={"suspense"}>
+                <LoadSpinning />
+              </div>
+            }
+          >
+            <CheckoutPage />
           </Suspense>
         ),
       },
