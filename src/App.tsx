@@ -105,9 +105,9 @@ const App = () => {
   }, [user, state.user, dispatch, location.search]);
 
   // COMMENT FOR DEV //
-  // if (isLoadingScreen) {
-  //   return <LoadingScreen setIsLoadingScreen={setIsLoadingScreen} />;
-  // }
+  if (isLoadingScreen) {
+    return <LoadingScreen setIsLoadingScreen={setIsLoadingScreen} />;
+  }
   // COMMENT FOR DEV //
 
   // TROUBLE WITH VIDEO
